@@ -250,6 +250,19 @@ function App() {
             </div>
 
             <div className="section-card">
+              <div className="section-title">現在地の状況（デモ）</div>
+              <div className="notice-card">
+                現在地を確認しました。
+                <br />
+                この場所は洪水リスク区域の想定です。
+                <br />
+                浸水の可能性があります。
+                <br />
+                避難行動を優先してください。
+              </div>
+            </div>
+
+            <div className="section-card">
               <div className="section-title">行政からのお知らせ（モック）</div>
               <div className="notice-card">
                 {selectedLevel.label} 相当の状況です。
