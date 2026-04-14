@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { ALERT_LEVEL_OPTIONS, ALERT_LEVELS } from './data/alertLevels'
 import { DISASTER_TYPES, getDisasterType } from './data/disasterTypes'
 import { getShelterCards, judgeAction } from './utils/judgeAction'
@@ -13,6 +13,26 @@ function App() {
   const [homeRisk, setHomeRisk] = useState('medium')
   const [canMoveUpstairs, setCanMoveUpstairs] = useState(true)
   const [outsideTooDangerous, setOutsideTooDangerous] = useState(false)
+  const [location, setLocation] = useState(null)
+
+  useEffect(() => {
+  if (!navigator.geolocation) {
+    console.log('GPS未対応')
+    return
+  }
+
+  navigator.geolocation.getCurrentPosition(
+    (position) => {
+      setLocation({
+        lat: position.coords.latitude,
+        lng: position.coords.longitude,
+      })
+    },
+    (error) => {
+      console.log('GPS取得失敗', error)
+    }
+  )
+}, [])
 
   const selectedLevel = ALERT_LEVELS[alertLevel]
   const disasterType = getDisasterType(disasterTypeKey)
@@ -93,7 +113,11 @@ function App() {
               <button className="ghost-button" onClick={() => setStarted(false)}>
                 ← 戻る
               </button>
-              <div className="location-pill">現在地：観音寺市付近（デモ）</div>
+              <div className="location-pill">
+                {location
+                  ? `現在地：緯度 ${location.lat.toFixed(3)} / 経度 ${location.lng.toFixed(3)}`
+                  : '現在地を取得中...'}
+              </div>
             </div>
 
             <div className={`level-banner level-${alertLevel}`}>
