@@ -82,72 +82,188 @@ input {
   overflow: hidden;
 }
 
-.cloud {
+.disaster-hero {
+  border: 1px solid #dbe7f3;
+}
+
+.sky-cloud {
   position: absolute;
   background: rgba(255, 255, 255, 0.95);
   border-radius: 999px;
-}
-
-.cloud-1 {
-  width: 90px;
-  height: 34px;
-  top: 36px;
-  left: 32px;
-  animation: sway 3.5s ease-in-out infinite;
-}
-
-.cloud-2 {
-  width: 72px;
-  height: 28px;
-  top: 58px;
-  right: 42px;
-  animation: sway 4s ease-in-out infinite;
-}
-
-.hill {
-  position: absolute;
-  bottom: 0;
-  border-radius: 999px 999px 0 0;
-}
-
-.hill-1 {
-  left: -20px;
-  width: 190px;
-  height: 88px;
-  background: #8ed081;
-}
-
-.hill-2 {
-  right: -20px;
-  width: 220px;
-  height: 106px;
-  background: #6fc96a;
-}
-
-.person-head {
-  position: absolute;
-  width: 54px;
-  height: 54px;
-  border-radius: 50%;
-  background: #ffd5b5;
-  left: 50%;
-  top: 62px;
-  transform: translateX(-50%);
-  z-index: 2;
-  animation: sway 3s ease-in-out infinite;
-}
-
-.person-body {
-  position: absolute;
-  width: 86px;
-  height: 92px;
-  border-radius: 26px 26px 12px 12px;
-  background: #58cc5d;
-  left: 50%;
-  top: 106px;
-  transform: translateX(-50%);
   z-index: 1;
-  animation: sway 3s ease-in-out infinite;
+}
+
+.cloud-left {
+  width: 88px;
+  height: 30px;
+  top: 26px;
+  left: 24px;
+}
+
+.cloud-right {
+  width: 76px;
+  height: 28px;
+  top: 42px;
+  right: 34px;
+}
+
+.rain {
+  position: absolute;
+  width: 4px;
+  height: 20px;
+  border-radius: 999px;
+  background: #5bbcff;
+  opacity: 0.8;
+  animation: rainFall 1.6s linear infinite;
+  z-index: 2;
+}
+
+.rain-1 {
+  left: 54px;
+  top: 52px;
+  animation-delay: 0s;
+}
+
+.rain-2 {
+  left: 82px;
+  top: 48px;
+  animation-delay: 0.4s;
+}
+
+.rain-3 {
+  left: 110px;
+  top: 56px;
+  animation-delay: 0.8s;
+}
+
+.rain-4 {
+  right: 120px;
+  top: 66px;
+  animation-delay: 0.2s;
+}
+
+.rain-5 {
+  right: 92px;
+  top: 52px;
+  animation-delay: 1s;
+}
+
+.rain-6 {
+  right: 64px;
+  top: 58px;
+  animation-delay: 0.6s;
+}
+
+.ground {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 48px;
+  background: #85cf7b;
+  z-index: 1;
+}
+
+.house {
+  position: absolute;
+  left: 50%;
+  bottom: 40px;
+  transform: translateX(-50%);
+  z-index: 4;
+}
+
+.house-roof {
+  width: 88px;
+  height: 88px;
+  background: #ff8f6b;
+  transform: rotate(45deg);
+  border-radius: 14px;
+  position: absolute;
+  left: 16px;
+  top: -34px;
+}
+
+.house-body {
+  position: relative;
+  width: 120px;
+  height: 86px;
+  background: #fff7ef;
+  border-radius: 12px;
+  border: 3px solid #e8dccf;
+}
+
+.house-window {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  background: #bfe5ff;
+  border-radius: 6px;
+  left: 22px;
+  top: 22px;
+  border: 2px solid #8fc7ea;
+}
+
+.house-door {
+  position: absolute;
+  width: 24px;
+  height: 40px;
+  background: #9c6b43;
+  border-radius: 8px 8px 0 0;
+  right: 22px;
+  bottom: 0;
+}
+
+.water {
+  position: absolute;
+  left: -10px;
+  right: -10px;
+  bottom: 0;
+  height: 58px;
+  background: linear-gradient(
+    180deg,
+    rgba(95, 191, 255, 0.92) 0%,
+    rgba(55, 162, 235, 0.96) 100%
+  );
+  z-index: 5;
+  animation: waterRise 3.2s ease-in-out infinite;
+}
+
+.water-wave {
+  position: absolute;
+  top: -10px;
+  width: 120px;
+  height: 22px;
+  background: rgba(255, 255, 255, 0.28);
+  border-radius: 999px;
+}
+
+.wave-1 {
+  left: 18px;
+}
+
+.wave-2 {
+  right: 30px;
+}
+
+.evac-arrow {
+  position: absolute;
+  color: #ffffff;
+  font-size: 28px;
+  font-weight: 900;
+  z-index: 6;
+  animation: arrowFloat 1.8s ease-in-out infinite;
+  text-shadow: 0 3px 8px rgba(0, 0, 0, 0.16);
+}
+
+.evac-arrow-1 {
+  right: 84px;
+  bottom: 72px;
+}
+
+.evac-arrow-2 {
+  right: 54px;
+  bottom: 98px;
+  animation-delay: 0.5s;
 }
 
 .intro-title {
@@ -425,14 +541,128 @@ input {
   font-weight: 700;
 }
 
-@keyframes sway {
+@keyframes rainFall {
   0% {
-    transform: translateX(0px);
+    transform: translateY(-8px);
+    opacity: 0;
   }
-  50% {
-    transform: translateX(5px);
+  20% {
+    opacity: 0.8;
   }
   100% {
-    transform: translateX(0px);
+    transform: translateY(36px);
+    opacity: 0;
   }
+}
+
+@keyframes waterRise {
+  0% {
+    height: 50px;
+  }
+  50% {
+    height: 62px;
+  }
+  100% {
+    height: 50px;
+  }
+}
+
+@keyframes arrowFloat {
+  0% {
+    transform: translateY(0);
+    opacity: 0.65;
+  }
+  50% {
+    transform: translateY(-8px);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 0.65;
+  }
+}
+
+.house-person {
+  position: absolute;
+  width: 13px;
+  height: 13px;
+  background: #17324d;
+  border-radius: 50%;
+  left: 50%;
+  top: 4px;
+  transform: translateX(-50%);
+}
+
+.house-person::after {
+  content: '';
+  position: absolute;
+  width: 18px;
+  height: 12px;
+  background: #17324d;
+  border-radius: 10px 10px 4px 4px;
+  left: 50%;
+  top: 12px;
+  transform: translateX(-50%);
+}
+
+.flow-visual {
+  background: linear-gradient(180deg, #eaf6ff 0%, #f8fbff 100%);
+  border: 1px solid #dbe7f3;
+  border-radius: 28px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  box-shadow: 0 14px 30px rgba(23, 50, 77, 0.08);
+}
+
+.flow-step {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #ffffff;
+  border: 1px solid #dfe7f1;
+  border-radius: 18px;
+  padding: 13px 14px;
+}
+
+.flow-step.important {
+  border-color: #58cc5d;
+  background: #f1fff4;
+}
+
+.flow-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 14px;
+  background: #eef7ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.flow-title {
+  font-size: 16px;
+  font-weight: 900;
+  color: #17324d;
+}
+
+.flow-text {
+  margin-top: 3px;
+  font-size: 12px;
+  line-height: 1.5;
+  color: #6b7a8c;
+  font-weight: 700;
+}
+
+.flow-arrow {
+  text-align: center;
+  color: #8aa0b8;
+  font-size: 18px;
+  font-weight: 900;
+  line-height: 1;
+}
+
 }

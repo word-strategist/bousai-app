@@ -4,35 +4,37 @@ import { DISASTER_TYPES, getDisasterType } from './data/disasterTypes'
 import { getShelterCards, judgeAction } from './utils/judgeAction'
 import './index.css'
 
+const MOCK_LOCATION_LABEL = '岡山県真庭市付近'
+
 function App() {
   const [started, setStarted] = useState(false)
 
-  const [alertLevel, setAlertLevel] = useState(3)
+  const [alertLevel, setAlertLevel] = useState(4)
   const [disasterTypeKey, setDisasterTypeKey] = useState('flood')
-  const [isVulnerable, setIsVulnerable] = useState(false)
-  const [homeRisk, setHomeRisk] = useState('medium')
+  const [isVulnerable, setIsVulnerable] = useState(true)
+  const [homeRisk, setHomeRisk] = useState('high')
   const [canMoveUpstairs, setCanMoveUpstairs] = useState(true)
   const [outsideTooDangerous, setOutsideTooDangerous] = useState(false)
   const [location, setLocation] = useState(null)
 
   useEffect(() => {
-  if (!navigator.geolocation) {
-    console.log('GPS未対応')
-    return
-  }
-
-  navigator.geolocation.getCurrentPosition(
-    (position) => {
-      setLocation({
-        lat: position.coords.latitude,
-        lng: position.coords.longitude,
-      })
-    },
-    (error) => {
-      console.log('GPS取得失敗', error)
+    if (!navigator.geolocation) {
+      console.log('GPS未対応')
+      return
     }
-  )
-}, [])
+
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        setLocation({
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        })
+      },
+      (error) => {
+        console.log('GPS取得失敗', error)
+      }
+    )
+  }, [])
 
   const selectedLevel = ALERT_LEVELS[alertLevel]
   const disasterType = getDisasterType(disasterTypeKey)
@@ -66,30 +68,43 @@ function App() {
           <section className="screen intro-screen">
             <div className="hero-badge">LINEミニアプリ想定デモ</div>
 
-            <div className="illustration-wrap">
-              <div className="cloud cloud-1" />
-              <div className="cloud cloud-2" />
-              <div className="hill hill-1" />
-              <div className="hill hill-2" />
-              <div className="person-head" />
-              <div className="person-body" />
-            </div>
+    <div className="flow-visual">
+      <div className="flow-step">
+        <div className="flow-icon">📍</div>
+        <div>
+          <div className="flow-title">現在地を確認</div>
+          <div className="flow-text">GPSで今いる場所を取得</div>
+        </div>
+      </div>
+
+      <div className="flow-arrow">↓</div>
+
+      <div className="flow-step">
+        <div className="flow-icon">⚠️</div>
+        <div>
+          <div className="flow-title">危険度を判定</div>
+          <div className="flow-text">警戒レベル・災害種別を確認</div>
+        </div>
+      </div>
+
+      <div className="flow-arrow">↓</div>
+
+      <div className="flow-step important">
+        <div className="flow-icon">👉</div>
+        <div>
+          <div className="flow-title">今する行動を案内</div>
+          <div className="flow-text">避難・屋内安全確保を表示</div>
+        </div>
+      </div>
+    </div>
 
             <h1 className="intro-title">防災ナビ</h1>
+
             <p className="intro-lead">
               今いる場所で、
               <br />
               今どう動くかを案内します。
             </p>
-
-            <div className="intro-card">
-              <div className="intro-card-title">このデモで見るもの</div>
-              <ul className="intro-list">
-                <li>現在地ベースの判断イメージ</li>
-                <li>警戒レベルごとの行動表示</li>
-                <li>避難 / 屋内安全確保の分岐</li>
-              </ul>
-            </div>
 
             <label className="toggle-card">
               <div>
@@ -104,7 +119,7 @@ function App() {
             </label>
 
             <button className="primary-button" onClick={() => setStarted(true)}>
-              判定画面へ進む
+              判定を開始する
             </button>
           </section>
         ) : (
@@ -113,10 +128,11 @@ function App() {
               <button className="ghost-button" onClick={() => setStarted(false)}>
                 ← 戻る
               </button>
+
               <div className="location-pill">
                 {location
-                  ? `現在地：緯度 ${location.lat.toFixed(3)} / 経度 ${location.lng.toFixed(3)}`
-                  : '現在地を取得中...'}
+                  ? `現在地：${MOCK_LOCATION_LABEL}（GPS取得）`
+                  : `現在地：${MOCK_LOCATION_LABEL}（取得中）`}
               </div>
             </div>
 
@@ -141,6 +157,28 @@ function App() {
               >
                 {result.cta}
               </button>
+            </div>
+
+            {isVulnerable && (
+              <div className="section-card">
+                <div className="section-title">要配慮者向け案内</div>
+                <div className="notice-card">
+                  高齢者・介助が必要な方は、通常より早めの避難判断が必要です。
+                  <br />
+                  危険な場所にいる場合は、避難を優先してください。
+                </div>
+              </div>
+            )}
+
+            <div className="section-card">
+              <div className="section-title">現在地の状況（デモ）</div>
+              <div className="notice-card">
+                現在地を確認しました。
+                <br />
+                {MOCK_LOCATION_LABEL} は浸水の可能性があるエリアとして表示しています。
+                <br />
+                避難行動を優先してください。
+              </div>
             </div>
 
             <div className="section-card">
@@ -246,19 +284,6 @@ function App() {
                     <div className="mini-card-text">{item.description}</div>
                   </div>
                 ))}
-              </div>
-            </div>
-
-            <div className="section-card">
-              <div className="section-title">現在地の状況（デモ）</div>
-              <div className="notice-card">
-                現在地を確認しました。
-                <br />
-                この場所は洪水リスク区域の想定です。
-                <br />
-                浸水の可能性があります。
-                <br />
-                避難行動を優先してください。
               </div>
             </div>
 
