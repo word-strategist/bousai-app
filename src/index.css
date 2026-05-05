@@ -715,4 +715,46 @@ input {
   margin-bottom: 6px;
 }
 
+/* スタンプUI */
+
+.stamp-section {
+  margin-bottom: 20px;
+  padding: 12px;
+  border-radius: 12px;
+}
+
+.stamp-section.ng {
+  background: #fff5f5;
+}
+
+.stamp-section.ok {
+  background: #f3fff3;
+}
+
+.stamp-title {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.stamp-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.stamp-item {
+  text-align: center;
+}
+
+.stamp-item img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.stamp-item p {
+  font-size: 13px;
+  margin-top: 5px;
+  font-weight: bold;
+}
+
 }

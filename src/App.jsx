@@ -4,6 +4,15 @@ import { DISASTER_TYPES, getDisasterType } from './data/disasterTypes'
 import { getShelterCards, judgeAction } from './utils/judgeAction'
 import './index.css'
 
+// 画像
+import ngOutside from "./assets/stamps/ng-outside.png"
+import ngWindow from "./assets/stamps/ng-window.png"
+import ngElevator from "./assets/stamps/ng-elevator.png"
+
+import okTable from "./assets/stamps/ok-table.png"
+import okHead from "./assets/stamps/ok-head.png"
+import okWait from "./assets/stamps/ok-wait.png"
+
 const MOCK_LOCATION_LABEL = '岡山県真庭市付近'
 
 function App() {
@@ -18,10 +27,7 @@ function App() {
   const [location, setLocation] = useState(null)
 
   useEffect(() => {
-    if (!navigator.geolocation) {
-      console.log('GPS未対応')
-      return
-    }
+    if (!navigator.geolocation) return
 
     navigator.geolocation.getCurrentPosition(
       (position) => {
@@ -30,9 +36,7 @@ function App() {
           lng: position.coords.longitude,
         })
       },
-      (error) => {
-        console.log('GPS取得失敗', error)
-      }
+      () => {}
     )
   }, [])
 
@@ -66,37 +70,6 @@ function App() {
       <div className="phone-frame">
         {!started ? (
           <section className="screen intro-screen">
-            <div className="hero-badge">LINEミニアプリ想定デモ</div>
-
-    <div className="flow-visual">
-      <div className="flow-step">
-        <div className="flow-icon">📍</div>
-        <div>
-          <div className="flow-title">現在地を確認</div>
-          <div className="flow-text">GPSで今いる場所を取得</div>
-        </div>
-      </div>
-
-      <div className="flow-arrow">↓</div>
-
-      <div className="flow-step">
-        <div className="flow-icon">⚠️</div>
-        <div>
-          <div className="flow-title">危険度を判定</div>
-          <div className="flow-text">警戒レベル・災害種別を確認</div>
-        </div>
-      </div>
-
-      <div className="flow-arrow">↓</div>
-
-      <div className="flow-step important">
-        <div className="flow-icon">👉</div>
-        <div>
-          <div className="flow-title">今する行動を案内</div>
-          <div className="flow-text">避難・屋内安全確保を表示</div>
-        </div>
-      </div>
-    </div>
 
             <h1 className="intro-title">防災ナビ</h1>
 
@@ -106,215 +79,96 @@ function App() {
               今どう動くかを案内します。
             </p>
 
-            <label className="toggle-card">
-              <div>
-                <div className="toggle-title">高齢者・介助が必要</div>
-                <div className="toggle-sub">要配慮者として優先行動を表示</div>
-              </div>
-              <input
-                type="checkbox"
-                checked={isVulnerable}
-                onChange={(e) => setIsVulnerable(e.target.checked)}
-              />
-            </label>
-
             <button className="primary-button" onClick={() => setStarted(true)}>
               判定を開始する
             </button>
+
           </section>
         ) : (
           <section className="screen main-screen">
-            <div className="topbar">
-              <button className="ghost-button" onClick={() => setStarted(false)}>
-                ← 戻る
-              </button>
 
-              <div className="location-pill">
-                {location
-                  ? `現在地：${MOCK_LOCATION_LABEL}（GPS取得）`
-                  : `現在地：${MOCK_LOCATION_LABEL}（取得中）`}
-              </div>
-            </div>
-
+            {/* レベル */}
             <div className={`level-banner level-${alertLevel}`}>
-              <div className="level-banner-left">
-                <div className="level-number">{selectedLevel.shortLabel}</div>
-                <div className="level-title">{selectedLevel.title}</div>
-              </div>
-              <div className="disaster-chip">
-                <span>{disasterType.icon}</span>
-                <span>{disasterType.label}</span>
-              </div>
+              <div>{selectedLevel.title}</div>
+              <div>{disasterType.label}</div>
             </div>
 
+            {/* ===== スタンプUI ===== */}
             <div className="action-card">
 
-              <div className="danger-block">
-                <div className="danger-title">🚫 やってはいけない</div>
-                <ul>
-                  <li>外に飛び出さない</li>
-                  <li>窓に近づかない</li>
-                  <li>エレベーターを使わない</li>
-                </ul>
+              {/* NG */}
+              <div className="stamp-section ng">
+                <div className="stamp-title">🚫 やってはいけない</div>
+                <div className="stamp-grid">
+
+                  <div className="stamp-item">
+                    <img src={ngOutside} alt="外に出ない" />
+                    <p>外に出ない</p>
+                  </div>
+
+                  <div className="stamp-item">
+                    <img src={ngWindow} alt="窓に近づかない" />
+                    <p>窓に近づかない</p>
+                  </div>
+
+                  <div className="stamp-item">
+                    <img src={ngElevator} alt="エレベーター使わない" />
+                    <p>エレベーター使わない</p>
+                  </div>
+
+                </div>
               </div>
 
-                {/* ② 今すること */}
-                <div className="action-block">
-                  <div className="action-title">⭕ 今すること</div>
-                  <ul>
-                    <li>机の下に入る</li>
-                    <li>頭を守る</li>
-                    <li>揺れが収まるまで待つ</li>
-                  </ul>
-                </div>
+              {/* OK */}
+              <div className="stamp-section ok">
+                <div className="stamp-title">⭕ 今すること</div>
+                <div className="stamp-grid">
 
+                  <div className="stamp-item">
+                    <img src={okTable} alt="机の下に入る" />
+                    <p>机の下に入る</p>
+                  </div>
+
+                  <div className="stamp-item">
+                    <img src={okHead} alt="頭を守る" />
+                    <p>頭を守る</p>
+                  </div>
+
+                  <div className="stamp-item">
+                    <img src={okWait} alt="待つ" />
+                    <p>待つ</p>
+                  </div>
+
+                </div>
+              </div>
+
+              {/* CTA */}
               <div className="card-label">今すること</div>
               <h2 className="action-title">{result.action}</h2>
               <p className="action-sub">{result.subAction}</p>
+
               <button
                 className="primary-button"
-                onClick={() => alert(`${result.cta}\n\n※ 現在はデモ表示です`)}
+                onClick={() => alert(`${result.cta}\n\n※ デモ表示`)}
               >
                 {result.cta}
               </button>
+
             </div>
 
-            {isVulnerable && (
-              <div className="section-card">
-                <div className="section-title">要配慮者向け案内</div>
-                <div className="notice-card">
-                  高齢者・介助が必要な方は、通常より早めの避難判断が必要です。
-                  <br />
-                  危険な場所にいる場合は、避難を優先してください。
-                </div>
-              </div>
-            )}
-
-            <div className="section-card">
-              <div className="section-title">現在地の状況（デモ）</div>
-              <div className="notice-card">
-                現在地を確認しました。
-                <br />
-                {MOCK_LOCATION_LABEL} は浸水の可能性があるエリアとして表示しています。
-                <br />
-                避難行動を優先してください。
-              </div>
-            </div>
-
-            <div className="section-card">
-              <div className="section-title">判定条件（デモ操作）</div>
-
-              <div className="field-group">
-                <label className="field-label">警戒レベル</label>
-                <select
-                  className="field-select"
-                  value={alertLevel}
-                  onChange={(e) => setAlertLevel(Number(e.target.value))}
-                >
-                  {ALERT_LEVEL_OPTIONS.map((item) => (
-                    <option key={item.level} value={item.level}>
-                      {item.label}｜{item.title}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              <div className="field-group">
-                <label className="field-label">災害種別</label>
-                <div className="chip-row">
-                  {DISASTER_TYPES.map((item) => (
-                    <button
-                      key={item.key}
-                      className={`choice-chip ${disasterTypeKey === item.key ? 'active' : ''}`}
-                      onClick={() => setDisasterTypeKey(item.key)}
-                    >
-                      {item.icon} {item.label}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              <div className="field-group">
-                <label className="field-label">自宅の危険性</label>
-                <div className="chip-row">
-                  <button
-                    className={`choice-chip ${homeRisk === 'low' ? 'active' : ''}`}
-                    onClick={() => setHomeRisk('low')}
-                  >
-                    低い
-                  </button>
-                  <button
-                    className={`choice-chip ${homeRisk === 'medium' ? 'active' : ''}`}
-                    onClick={() => setHomeRisk('medium')}
-                  >
-                    中くらい
-                  </button>
-                  <button
-                    className={`choice-chip ${homeRisk === 'high' ? 'active' : ''}`}
-                    onClick={() => setHomeRisk('high')}
-                  >
-                    高い
-                  </button>
-                </div>
-              </div>
-
-              <label className="toggle-card compact">
-                <div>
-                  <div className="toggle-title">建物の上階へ移動できる</div>
-                  <div className="toggle-sub">屋内安全確保の分岐に使用</div>
-                </div>
-                <input
-                  type="checkbox"
-                  checked={canMoveUpstairs}
-                  onChange={(e) => setCanMoveUpstairs(e.target.checked)}
-                />
-              </label>
-
-              <label className="toggle-card compact">
-                <div>
-                  <div className="toggle-title">外へ出る方が危険</div>
-                  <div className="toggle-sub">レベル4・5で屋内安全確保を優先</div>
-                </div>
-                <input
-                  type="checkbox"
-                  checked={outsideTooDangerous}
-                  onChange={(e) => setOutsideTooDangerous(e.target.checked)}
-                />
-              </label>
-
-              <label className="toggle-card compact">
-                <div>
-                  <div className="toggle-title">高齢者・介助が必要</div>
-                  <div className="toggle-sub">要配慮者導線を確認</div>
-                </div>
-                <input
-                  type="checkbox"
-                  checked={isVulnerable}
-                  onChange={(e) => setIsVulnerable(e.target.checked)}
-                />
-              </label>
-            </div>
-
+            {/* 避難先 */}
             <div className="section-card">
               <div className="section-title">避難先 / 安全行動</div>
               <div className="shelter-list">
                 {shelterCards.map((item) => (
-                  <div className="mini-card" key={item.title}>
-                    <div className="mini-card-title">{item.title}</div>
-                    <div className="mini-card-text">{item.description}</div>
+                  <div key={item.title}>
+                    <div>{item.title}</div>
+                    <div>{item.description}</div>
                   </div>
                 ))}
               </div>
             </div>
 
-            <div className="section-card">
-              <div className="section-title">行政からのお知らせ（モック）</div>
-              <div className="notice-card">
-                {selectedLevel.label} 相当の状況です。
-                <br />
-                危険な場所にいる場合は、自治体の避難情報を確認してください。
-              </div>
-            </div>
           </section>
         )}
       </div>
