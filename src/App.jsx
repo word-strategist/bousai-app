@@ -148,6 +148,26 @@ function App() {
             </div>
 
             <div className="action-card">
+
+              <div className="danger-block">
+                <div className="danger-title">🚫 やってはいけない</div>
+                <ul>
+                  <li>外に飛び出さない</li>
+                  <li>窓に近づかない</li>
+                  <li>エレベーターを使わない</li>
+                </ul>
+              </div>
+
+                {/* ② 今すること */}
+                <div className="action-block">
+                  <div className="action-title">⭕ 今すること</div>
+                  <ul>
+                    <li>机の下に入る</li>
+                    <li>頭を守る</li>
+                    <li>揺れが収まるまで待つ</li>
+                  </ul>
+                </div>
+
               <div className="card-label">今すること</div>
               <h2 className="action-title">{result.action}</h2>
               <p className="action-sub">{result.subAction}</p>

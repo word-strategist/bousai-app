@@ -665,4 +665,54 @@ input {
   line-height: 1;
 }
 
+.danger-block {
+  background: #fff5f5;
+  border: 2px solid #ff6b6b;
+  border-radius: 18px;
+  padding: 14px;
+  margin-top: 14px;
+}
+
+.danger-title {
+  color: #d90429;
+  font-size: 16px;
+  font-weight: 900;
+  margin-bottom: 8px;
+}
+
+.danger-block ul {
+  padding-left: 18px;
+}
+
+.danger-block li {
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.action-block {
+  background: #f1fff4;
+  border: 2px solid #58cc5d;
+  border-radius: 18px;
+  padding: 14px;
+  margin-top: 12px;
+}
+
+.action-title {
+  color: #2b9348;
+  font-size: 16px;
+  font-weight: 900;
+  margin-bottom: 8px;
+}
+
+.action-block ul {
+  padding-left: 18px;
+}
+
+.action-block li {
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
 }
