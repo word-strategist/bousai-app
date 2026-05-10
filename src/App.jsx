@@ -1,177 +1,152 @@
-import { useEffect, useMemo, useState } from 'react'
-import { ALERT_LEVEL_OPTIONS, ALERT_LEVELS } from './data/alertLevels'
-import { DISASTER_TYPES, getDisasterType } from './data/disasterTypes'
-import { getShelterCards, judgeAction } from './utils/judgeAction'
-import './index.css'
+import { useState } from 'react'
+import './App.css'
 
-// 画像
-import ngOutside from "./assets/stamps/ng-outside.png"
-import ngWindow from "./assets/stamps/ng-window.png"
-import ngElevator from "./assets/stamps/ng-elevator.png"
-
-import okTable from "./assets/stamps/ok-table.png"
-import okHead from "./assets/stamps/ok-head.png"
-import okWait from "./assets/stamps/ok-wait.png"
-
-const MOCK_LOCATION_LABEL = '岡山県真庭市付近'
+const disasters = [
+  {
+    key: 'earthquake',
+    label: '地震',
+    icon: '🏚️',
+    level: 4,
+    title: '避難指示',
+    color: 'orange',
+    message: '強い揺れや建物倒壊に注意してください',
+  },
+  {
+    key: 'flood',
+    label: '洪水',
+    icon: '🌊',
+    level: 4,
+    title: '避難指示',
+    color: 'blue',
+    message: '浸水のおそれがある場所から離れてください',
+  },
+  {
+    key: 'fire',
+    label: '火災',
+    icon: '🔥',
+    level: 4,
+    title: '避難指示',
+    color: 'red',
+    message: '煙や炎からすぐに離れてください',
+  },
+]
 
 function App() {
-  const [started, setStarted] = useState(false)
-
-  const [alertLevel, setAlertLevel] = useState(4)
-  const [disasterTypeKey, setDisasterTypeKey] = useState('flood')
-  const [isVulnerable, setIsVulnerable] = useState(true)
-  const [homeRisk, setHomeRisk] = useState('high')
-  const [canMoveUpstairs, setCanMoveUpstairs] = useState(true)
-  const [outsideTooDangerous, setOutsideTooDangerous] = useState(false)
-  const [location, setLocation] = useState(null)
-
-  useEffect(() => {
-    if (!navigator.geolocation) return
-
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        setLocation({
-          lat: position.coords.latitude,
-          lng: position.coords.longitude,
-        })
-      },
-      () => {}
-    )
-  }, [])
-
-  const selectedLevel = ALERT_LEVELS[alertLevel]
-  const disasterType = getDisasterType(disasterTypeKey)
-
-  const result = useMemo(() => {
-    return judgeAction({
-      alertLevel,
-      disasterType: disasterType.label,
-      isVulnerable,
-      homeRisk,
-      canMoveUpstairs,
-      outsideTooDangerous,
-    })
-  }, [
-    alertLevel,
-    disasterType,
-    isVulnerable,
-    homeRisk,
-    canMoveUpstairs,
-    outsideTooDangerous,
-  ])
-
-  const shelterCards = useMemo(() => {
-    return getShelterCards(result.actionMode)
-  }, [result.actionMode])
+  const [selectedDisaster, setSelectedDisaster] = useState(disasters[0])
 
   return (
-    <div className="page">
-      <div className="phone-frame">
-        {!started ? (
-          <section className="screen intro-screen">
+    <div className="app">
+      <header className="top-header">
+        <div className="brand">
+          <div className="shield">✥</div>
+          <div>
+            <h1>防災ナビ</h1>
+            <p>いざという時、命を守る行動を。</p>
+          </div>
+        </div>
 
-            <h1 className="intro-title">防災ナビ</h1>
+        <button className="help-button">
+          <span>?</span>
+          使い方
+        </button>
+      </header>
 
-            <p className="intro-lead">
-              今いる場所で、
-              <br />
-              今どう動くかを案内します。
-            </p>
+      <main className="main">
+        <section className="location-card">
+          <div className="pin">📍</div>
+          <div>
+            <p>現在地（GPS）</p>
+            <h2>岡山県真庭市付近</h2>
+          </div>
+          <button>再取得</button>
+        </section>
 
-            <button className="primary-button" onClick={() => setStarted(true)}>
-              判定を開始する
-            </button>
+        <section className={`alert-card ${selectedDisaster.color}`}>
+          <div className="alert-left">
+            <span>⚠️</span>
+            <p>警戒レベル</p>
+            <strong>{selectedDisaster.level}</strong>
+          </div>
 
-          </section>
-        ) : (
-          <section className="screen main-screen">
+          <div className="alert-right">
+            <h2>{selectedDisaster.title}</h2>
+            <p className="alert-label">危険な場所から全員避難</p>
+            <small>市町村からの避難情報に基づいています</small>
+          </div>
+        </section>
 
-            {/* レベル */}
-            <div className={`level-banner level-${alertLevel}`}>
-              <div>{selectedLevel.title}</div>
-              <div>{disasterType.label}</div>
+        <section className="hero-copy">
+          <h2>
+            その場で、<br />
+            <span>正しい行動</span>ができますか？
+          </h2>
+          <p>
+            災害時に必要なのは、長い説明ではなく
+            <br />
+            <strong>「今やること」</strong>
+          </p>
+        </section>
+
+        <section className="feature-box">
+          <h3>このアプリでわかること</h3>
+
+          <div className="feature-grid">
+            <div className="feature-card ng">
+              <div className="feature-icon">🚫</div>
+              <h4>やってはいけないこと</h4>
+              <p>危険な行動を回避</p>
             </div>
 
-            {/* ===== スタンプUI ===== */}
-            <div className="action-card">
+            <div className="feature-card ok">
+              <div className="feature-icon">⭕</div>
+              <h4>今すること</h4>
+              <p>安全を守る行動</p>
+            </div>
 
-              {/* NG */}
-              <div className="stamp-section ng">
-                <div className="stamp-title">🚫 やってはいけない</div>
-                <div className="stamp-grid">
+            <div className="feature-card safe">
+              <div className="feature-icon">📍</div>
+              <h4>避難先・安全情報</h4>
+              <p>避難場所や注意点</p>
+            </div>
+          </div>
+        </section>
 
-                  <div className="stamp-item">
-                    <img src={ngOutside} alt="外に出ない" />
-                    <p>外に出ない</p>
-                  </div>
+        <section className="disaster-section">
+          <h3>選べる災害の種類</h3>
 
-                  <div className="stamp-item">
-                    <img src={ngWindow} alt="窓に近づかない" />
-                    <p>窓に近づかない</p>
-                  </div>
-
-                  <div className="stamp-item">
-                    <img src={ngElevator} alt="エレベーター使わない" />
-                    <p>エレベーター使わない</p>
-                  </div>
-
-                </div>
-              </div>
-
-              {/* OK */}
-              <div className="stamp-section ok">
-                <div className="stamp-title">⭕ 今すること</div>
-                <div className="stamp-grid">
-
-                  <div className="stamp-item">
-                    <img src={okTable} alt="机の下に入る" />
-                    <p>机の下に入る</p>
-                  </div>
-
-                  <div className="stamp-item">
-                    <img src={okHead} alt="頭を守る" />
-                    <p>頭を守る</p>
-                  </div>
-
-                  <div className="stamp-item">
-                    <img src={okWait} alt="待つ" />
-                    <p>待つ</p>
-                  </div>
-
-                </div>
-              </div>
-
-              {/* CTA */}
-              <div className="card-label">今すること</div>
-              <h2 className="action-title">{result.action}</h2>
-              <p className="action-sub">{result.subAction}</p>
-
+          <div className="disaster-grid">
+            {disasters.map((disaster) => (
               <button
-                className="primary-button"
-                onClick={() => alert(`${result.cta}\n\n※ デモ表示`)}
+                key={disaster.key}
+                className={`disaster-button ${disaster.color} ${
+                  selectedDisaster.key === disaster.key ? 'active' : ''
+                }`}
+                onClick={() => setSelectedDisaster(disaster)}
               >
-                {result.cta}
+                <span>{disaster.icon}</span>
+                {disaster.label}
               </button>
+            ))}
+          </div>
+        </section>
 
-            </div>
+        <section className="selected-guide">
+          <p>現在選択中</p>
+          <h3>{selectedDisaster.label}の行動ガイド</h3>
+          <span>{selectedDisaster.message}</span>
+        </section>
 
-            {/* 避難先 */}
-            <div className="section-card">
-              <div className="section-title">避難先 / 安全行動</div>
-              <div className="shelter-list">
-                {shelterCards.map((item) => (
-                  <div key={item.title}>
-                    <div>{item.title}</div>
-                    <div>{item.description}</div>
-                  </div>
-                ))}
-              </div>
-            </div>
+        <button className="primary-cta">
+          <span>▶</span>
+          今すぐ確認する
+          <small>タップして行動ガイドを見る</small>
+        </button>
 
-          </section>
-        )}
-      </div>
+        <footer className="notice">
+          <p>※ 国の避難情報に関するガイドラインに基づき表示しています</p>
+          <p>※ 実際の避難情報は自治体・気象庁等の発表を確認してください</p>
+        </footer>
+      </main>
     </div>
   )
 }
