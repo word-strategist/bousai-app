@@ -1,17 +1,26 @@
-function ActionGuide({ disaster, onBack }) {
+import ngOutside from '../assets/stamps/ng-outside.png'
+import ngElevator from '../assets/stamps/ng-elevator.png'
+import ngWindow from '../assets/stamps/ng-window.png'
+import okTable from '../assets/stamps/ok-table.png'
+import okHead from '../assets/stamps/ok-head.png'
+import okWait from '../assets/stamps/ok-wait.png'
+
+function ActionGuide({ disaster, onBack, onNext }) {
   const guides = {
     earthquake: {
       title: '地震',
       color: 'orange',
       ng: {
-        icon: '🚫',
-        title: '外へ飛び出す',
+        image: ngOutside,
+        label: 'NG',
+        title: '外へ飛び出さない',
         text: '落下物で危険です',
       },
       ok: {
-        icon: '⭕',
-        title: '机の下へ',
-        text: '頭を守ってください',
+        image: okTable,
+        label: 'OK',
+        title: '机の下で頭を守る',
+        text: 'まずは身を守ってください',
       },
     },
 
@@ -19,14 +28,16 @@ function ActionGuide({ disaster, onBack }) {
       title: '洪水',
       color: 'blue',
       ng: {
-        icon: '🚫',
-        title: '用水路を見に行く',
-        text: '増水で流されます',
+        image: ngElevator,
+        label: 'NG',
+        title: '地下・低い場所へ行かない',
+        text: '浸水すると逃げ遅れます',
       },
       ok: {
-        icon: '⭕',
-        title: '高い場所へ',
-        text: '浸水から離れてください',
+        image: okHead,
+        label: 'OK',
+        title: '高い場所へ移動する',
+        text: '水が来る前に離れてください',
       },
     },
 
@@ -34,14 +45,16 @@ function ActionGuide({ disaster, onBack }) {
       title: '火災',
       color: 'red',
       ng: {
-        icon: '🚫',
-        title: '荷物を取りに戻る',
-        text: '逃げ遅れます',
+        image: ngWindow,
+        label: 'NG',
+        title: '煙の中を無理に進まない',
+        text: '煙を吸うと危険です',
       },
       ok: {
-        icon: '⭕',
-        title: '煙から離れる',
-        text: '低い姿勢で避難',
+        image: okWait,
+        label: 'OK',
+        title: '低い姿勢で避難する',
+        text: '煙を避けて移動してください',
       },
     },
   }
@@ -49,52 +62,49 @@ function ActionGuide({ disaster, onBack }) {
   const current = guides[disaster]
 
   return (
-    <div className="action-screen">
+    <div className="app action-screen">
       <div className={`action-header ${current.color}`}>
         <button className="back-button" onClick={onBack}>
           ← 戻る
         </button>
 
         <h1>{current.title}の行動ガイド</h1>
-
-        <p>迷わず行動してください</p>
+        <p>迷わず、まず命を守る行動をしてください</p>
       </div>
 
       <div className="action-content">
-        <div className="big-alert">
-          ⚠️ 今すぐ確認してください
-        </div>
+        <div className="big-alert">⚠️ 今すぐ確認してください</div>
 
         <div className="stamp-grid">
           <div className="stamp-card ng">
-            <div className="stamp-icon">
-              {current.ng.icon}
-            </div>
+            <div className="stamp-label ng-label">{current.ng.label}</div>
+
+            <img
+              src={current.ng.image}
+              alt={current.ng.title}
+              className="stamp-image"
+            />
 
             <h2>{current.ng.title}</h2>
-
             <p>{current.ng.text}</p>
           </div>
 
           <div className="stamp-card ok">
-            <div className="stamp-icon">
-              {current.ok.icon}
-            </div>
+            <div className="stamp-label ok-label">{current.ok.label}</div>
+
+            <img
+              src={current.ok.image}
+              alt={current.ok.title}
+              className="stamp-image"
+            />
 
             <h2>{current.ok.title}</h2>
-
             <p>{current.ok.text}</p>
           </div>
         </div>
 
-        <div className="next-guide">
-          次に、
-          <strong>避難場所・安全情報</strong>
-          を確認してください
-        </div>
-
-        <button className="safe-button">
-          避難場所を確認する
+        <button className="safe-button" onClick={onNext}>
+          次にやることを見る
         </button>
       </div>
     </div>

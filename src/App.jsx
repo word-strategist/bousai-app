@@ -1,5 +1,9 @@
 import { useState } from 'react'
 import './App.css'
+import ActionGuide from './components/ActionGuide'
+import NextAction from './components/NextAction'
+import ShelterGuide from './components/ShelterGuide'
+import SafetyCheck from './components/SafetyCheck'
 
 const disasters = [
   {
@@ -33,6 +37,47 @@ const disasters = [
 
 function App() {
   const [selectedDisaster, setSelectedDisaster] = useState(disasters[0])
+  const [screen, setScreen] = useState('top')
+
+  if (screen === 'action') {
+    return (
+      <ActionGuide
+        disaster={selectedDisaster.key}
+        onBack={() => setScreen('top')}
+        onNext={() => setScreen('next')}
+      />
+    )
+  }
+
+  if (screen === 'next') {
+    return (
+      <NextAction
+        disaster={selectedDisaster.key}
+        onBack={() => setScreen('action')}
+        onShelter={() => setScreen('shelter')}
+      />
+    )
+  }
+
+  if (screen === 'shelter') {
+    return (
+      <ShelterGuide
+        disaster={selectedDisaster.key}
+        onBack={() => setScreen('next')}
+        onTop={() => setScreen('top')}
+      />
+    )
+  }
+
+  if (screen === 'check') {
+  return (
+    <SafetyCheck
+      disaster={selectedDisaster.key}
+      onBack={() => setScreen('shelter')}
+      onTop={() => setScreen('top')}
+    />
+  )
+}
 
   return (
     <div className="app">
@@ -54,10 +99,12 @@ function App() {
       <main className="main">
         <section className="location-card">
           <div className="pin">📍</div>
+
           <div>
             <p>現在地（GPS）</p>
             <h2>岡山県真庭市付近</h2>
           </div>
+
           <button>再取得</button>
         </section>
 
@@ -77,9 +124,11 @@ function App() {
 
         <section className="hero-copy">
           <h2>
-            その場で、<br />
+            その場で、
+            <br />
             <span>正しい行動</span>ができますか？
           </h2>
+
           <p>
             災害時に必要なのは、長い説明ではなく
             <br />
@@ -136,7 +185,7 @@ function App() {
           <span>{selectedDisaster.message}</span>
         </section>
 
-        <button className="primary-cta">
+        <button className="primary-cta" onClick={() => setScreen('action')}>
           <span>▶</span>
           今すぐ確認する
           <small>タップして行動ガイドを見る</small>
