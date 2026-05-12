@@ -4,6 +4,17 @@ import ActionGuide from './components/ActionGuide'
 import NextAction from './components/NextAction'
 import ShelterGuide from './components/ShelterGuide'
 import SafetyCheck from './components/SafetyCheck'
+import FamilyContact from './components/FamilyContact'
+import LocationCheck from './components/LocationCheck'
+
+const MOCK_LOCATION_RISK = {
+  disaster: {
+    key: 'flood',
+    name: '洪水',
+  },
+  areaName: '大阪市付近',
+  riskLevel: 'やや高い',
+}
 
 const disasters = [
   {
@@ -39,6 +50,19 @@ function App() {
   const [selectedDisaster, setSelectedDisaster] = useState(disasters[0])
   const [screen, setScreen] = useState('top')
 
+  if (screen === 'location') {
+    return (
+      <LocationCheck
+        riskData={MOCK_LOCATION_RISK}
+        onBack={() => setScreen('top')}
+        onNext={() => {
+          setSelectedDisaster(MOCK_LOCATION_RISK.disaster)
+          setScreen('action')
+        }}
+      />
+    )
+  }
+  
   if (screen === 'action') {
     return (
       <ActionGuide
@@ -53,7 +77,7 @@ function App() {
     return (
       <NextAction
         disaster={selectedDisaster.key}
-        onBack={() => setScreen('action')}
+        onBack={() => setScreen('location')}
         onShelter={() => setScreen('shelter')}
       />
     )
@@ -64,7 +88,13 @@ function App() {
       <ShelterGuide
         disaster={selectedDisaster.key}
         onBack={() => setScreen('next')}
-        onTop={() => setScreen('top')}
+        onTop={(next) => {
+          if (next === 'contact') {
+            setScreen('contact')
+          } else {
+            setScreen('top')
+          }
+        }}
       />
     )
   }
@@ -74,9 +104,26 @@ function App() {
     <SafetyCheck
       disaster={selectedDisaster.key}
       onBack={() => setScreen('shelter')}
+      onTop={(next) => {
+        if (next === 'check') {
+          setScreen('check')
+        } else {
+          setScreen('top')
+        }
+      }}
+    />
+  )
+
+  if (screen === 'contact') {
+  return (
+    <FamilyContact
+      disaster={selectedDisaster.key}
+      onBack={() => setScreen('check')}
       onTop={() => setScreen('top')}
     />
   )
+}
+
 }
 
   return (
@@ -185,9 +232,9 @@ function App() {
           <span>{selectedDisaster.message}</span>
         </section>
 
-        <button className="primary-cta" onClick={() => setScreen('action')}>
+        <button className="primary-cta" onClick={() => setScreen('location')}>
           <span>▶</span>
-          今すぐ確認する
+          現在地から確認する
           <small>タップして行動ガイドを見る</small>
         </button>
 

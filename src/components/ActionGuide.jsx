@@ -61,16 +61,21 @@ function ActionGuide({ disaster, onBack, onNext }) {
 
   const current = guides[disaster]
 
-  return (
-    <div className="app action-screen">
-      <div className={`action-header ${current.color}`}>
-        <button className="back-button" onClick={onBack}>
-          ← 戻る
-        </button>
+return (
+  <div className="app action-screen">
+    <div className={`action-header ${current.color}`}>
+      <button className="back-button" onClick={onBack}>
+        ← 戻る
+      </button>
 
-        <h1>{current.title}の行動ガイド</h1>
-        <p>迷わず、まず命を守る行動をしてください</p>
-      </div>
+        <div className="risk-detected-banner">
+            📍 現在地判定：
+            {current.title}のリスクが高い地域です
+        </div>
+
+      <h1>{current.title}の行動ガイド</h1>
+      <p>迷わず、まず命を守る行動をしてください</p>
+    </div>
 
       <div className="action-content">
         <div className="big-alert">⚠️ 今すぐ確認してください</div>

@@ -729,3 +729,228 @@ button {
   font-size: 20px;
   font-weight: 900;
 }
+
+/* =========================
+   LocationCheck
+========================= */
+
+.location-screen {
+  min-height: 100vh;
+  padding: 24px 16px;
+  background: #f5f7fb;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.location-card {
+  width: 100%;
+  max-width: 420px;
+  margin: 0 auto;
+  background: #ffffff;
+  border-radius: 24px;
+  padding: 28px 20px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.location-icon {
+  font-size: 72px;
+  margin-bottom: 18px;
+}
+
+.location-label {
+  display: inline-block;
+  width: auto;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: #e8f3ff;
+  color: #1d6fb8;
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 14px;
+}
+
+.location-title {
+  font-size: 24px;
+  line-height: 1.45;
+  margin: 0 0 14px;
+  color: #1f2937;
+}
+
+.location-text {
+  font-size: 16px;
+  line-height: 1.8;
+  color: #4b5563;
+  margin: 0 0 22px;
+  text-align: left;
+}
+
+.risk-box {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+.risk-row {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 16px;
+  border-radius: 16px;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.risk-row.warning {
+  background: #fff7d6;
+  color: #8a5a00;
+}
+
+.risk-row.danger {
+  background: #ffe4e4;
+  color: #b42318;
+}
+
+.risk-row.normal {
+  background: #e9f8ef;
+  color: #16703c;
+}
+
+.location-card .primary-button {
+  width: 100%;
+}
+
+.location-back-button {
+  display: block;
+
+  border: 2px solid #1d6fea;
+  border-radius: 18px;
+
+  padding: 12px 18px;
+  margin-bottom: 28px;
+  margin-right: auto;
+
+  background: #ffffff;
+  color: #12304a;
+
+  font-size: 16px;
+  font-weight: 800;
+
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.location-back-area {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 28px;
+}
+
+/* =========================
+   LocationCheck 戻るボタン位置 修正
+========================= */
+
+.location-back-area {
+  width: 100%;
+  align-self: stretch;
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 28px;
+}
+
+.location-back-button {
+  margin: 0;
+}
+
+/* =========================
+   GPS Loading
+========================= */
+
+.loading-card {
+  min-height: 420px;
+  justify-content: center;
+}
+
+.gps-loader {
+  font-size: 84px;
+  animation: gpsFloat 1.4s ease-in-out infinite;
+}
+
+.gps-loading-title {
+  margin-top: 24px;
+  font-size: 28px;
+  font-weight: 800;
+  color: #12304a;
+}
+
+.gps-loading-text {
+  margin-top: 12px;
+  font-size: 18px;
+  color: #5b6470;
+}
+
+@keyframes gpsFloat {
+  0% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.reason-box {
+  width: 100%;
+  background: #f3f7ff;
+  border: 2px solid #d8e7ff;
+  border-radius: 18px;
+  padding: 16px;
+  margin: 0 0 18px;
+  text-align: left;
+}
+
+.reason-title {
+  margin: 0 0 6px;
+  font-size: 15px;
+  font-weight: 900;
+  color: #1d6fea;
+}
+
+.reason-text {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.7;
+  font-weight: 700;
+  color: #12304a;
+}
+
+/* =========================
+   Risk Banner
+========================= */
+
+.risk-detected-banner {
+  margin: 18px 0;
+
+  background: #ffe4e4;
+  border: 2px solid #ffb3b3;
+  border-radius: 16px;
+
+  padding: 14px 16px;
+
+  color: #b42318;
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 1.6;
+}
