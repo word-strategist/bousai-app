@@ -8,20 +8,20 @@ import okWait from '../assets/stamps/ok-wait.png'
 function ActionGuide({ disaster, onBack, onNext }) {
   const guides = {
     earthquake: {
-      title: '地震',
-      color: 'orange',
-      ng: {
+    title: '地震',
+    color: 'orange',
+    ng: {
         image: ngOutside,
         label: 'NG',
-        title: '外へ飛び出さない',
-        text: '落下物で危険です',
-      },
-      ok: {
+        title: '外へ出ない',
+        text: '落下物が危険',
+    },
+    ok: {
         image: okTable,
         label: 'OK',
-        title: '机の下で頭を守る',
-        text: 'まずは身を守ってください',
-      },
+        title: '頭を守る',
+        text: '机の下・腕・カバン',
+    },
     },
 
     flood: {
@@ -73,12 +73,11 @@ return (
             {current.title}のリスクが高い地域です
         </div>
 
-      <h1>{current.title}の行動ガイド</h1>
-      <p>迷わず、まず命を守る行動をしてください</p>
+        <h1>{current.title}発生</h1>
     </div>
 
       <div className="action-content">
-        <div className="big-alert">⚠️ 今すぐ確認してください</div>
+        <div className="big-alert">⚠️ 今すぐ行動</div>
 
         <div className="stamp-grid">
           <div className="stamp-card ng">
@@ -109,7 +108,7 @@ return (
         </div>
 
         <button className="safe-button" onClick={onNext}>
-          次にやることを見る
+          次へ進む
         </button>
       </div>
     </div>

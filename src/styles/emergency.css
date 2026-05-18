@@ -1,0 +1,89 @@
+.emergency-screen {
+  min-height: 100vh;
+  background: #d90000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.emergency-content {
+  width: 100%;
+  max-width: 420px;
+  text-align: center;
+  color: white;
+}
+
+.emergency-alert {
+  display: inline-block;
+  background: rgba(255,255,255,0.18);
+  border: 2px solid rgba(255,255,255,0.3);
+  padding: 10px 18px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 32px;
+  letter-spacing: 0.08em;
+}
+
+.emergency-visual {
+  margin-bottom: 36px;
+}
+
+.emergency-person {
+  font-size: 110px;
+  line-height: 1;
+  margin-bottom: 16px;
+}
+
+.emergency-action {
+  font-size: 28px;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+}
+
+.emergency-title {
+  font-size: 56px;
+  font-weight: 900;
+  line-height: 1.1;
+  margin-bottom: 28px;
+}
+
+.emergency-text {
+  font-size: 24px;
+  line-height: 1.7;
+  font-weight: 700;
+  margin-bottom: 48px;
+}
+
+.emergency-button {
+  width: 100%;
+  border: none;
+  border-radius: 999px;
+  background: white;
+  color: #d90000;
+  font-size: 28px;
+  font-weight: 900;
+  padding: 24px;
+  cursor: pointer;
+  box-shadow: 0 12px 32px rgba(0,0,0,0.25);
+}
+
+.emergency-button:active {
+  transform: scale(0.98);
+}
+
+@media (max-width: 480px) {
+  .emergency-title {
+    font-size: 44px;
+  }
+
+  .emergency-text {
+    font-size: 20px;
+  }
+
+  .emergency-button {
+    font-size: 24px;
+    padding: 22px;
+  }
+}
