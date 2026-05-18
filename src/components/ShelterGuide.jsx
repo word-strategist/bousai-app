@@ -1,7 +1,7 @@
 function ShelterGuide({ disaster, onBack, onTop }) {
   const guides = {
     earthquake: {
-      title: '地震の避難場所・安全情報',
+      title: '避難先を確認',
       color: 'orange',
       locationAdvice: '倒壊・落下物の危険がある場所から離れてください',
       shelters: [
@@ -114,7 +114,7 @@ function ShelterGuide({ disaster, onBack, onTop }) {
                 className="primary-return"
                 onClick={() => onTop('check')}
             >
-            安全確認チェックへ進む
+            安全確認へ進む
             </button>
       </div>
     </div>

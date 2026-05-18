@@ -37,13 +37,15 @@ function SafetyCheck({ disaster, onBack, onTop }) {
         <h1>安全確認チェック</h1>
 
         <p>
-          落ち着いて、順番に確認してください
+            <p>
+            1つずつ確認してください
+            </p>
         </p>
       </div>
 
       <div className="shelter-content">
         <div className="warning-box">
-          ⚠️ 1つずつ確認してください
+          ⚠️ 確認できたらチェック
         </div>
 
         <div className="check-list">

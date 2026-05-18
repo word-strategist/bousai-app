@@ -12,8 +12,8 @@ function FamilyContact({ disaster, onBack, onTop }) {
           ← 戻る
         </button>
 
-        <h1>家族・周囲へ連絡</h1>
-        <p>無事を伝え、必要な人に知らせてください</p>
+        <h1>無事を知らせる</h1>
+        <p>家族や周囲へ状況を伝えてください</p>
       </div>
 
       <div className="shelter-content">
@@ -22,7 +22,7 @@ function FamilyContact({ disaster, onBack, onTop }) {
           <p className="contact-message">
             {messages[disaster]}
             <br />
-            今いる場所と安全状況を確認してください。
+            今いる場所と安全状況を伝えます。
           </p>
         </section>
 
@@ -46,7 +46,7 @@ function FamilyContact({ disaster, onBack, onTop }) {
         </section>
 
         <button className="primary-return" onClick={onTop}>
-          TOPへ戻る
+          ホームへ戻る
         </button>
       </div>
     </div>

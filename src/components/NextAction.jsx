@@ -65,7 +65,7 @@ function NextAction({ disaster, onBack, onShelter }) {
         </div>
 
         <button className="safe-button" onClick={onShelter}>
-          避難場所・安全情報を確認する
+          避難先を確認する
         </button>
       </div>
     </div>
