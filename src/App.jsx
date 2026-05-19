@@ -53,6 +53,11 @@ function App() {
   const [selectedDisaster, setSelectedDisaster] = useState(disasters[0])
   const [screen, setScreen] = useState('top')
 
+  const currentDisasterKey =
+    selectedDisaster && selectedDisaster.key
+      ? selectedDisaster.key
+      : 'earthquake'
+
   if (screen === 'location') {
     return (
       <LocationCheck
@@ -77,7 +82,7 @@ function App() {
   if (screen === 'action') {
     return (
       <ActionGuide
-        disaster={selectedDisaster.key}
+        disaster={currentDisasterKey}
         onBack={() => setScreen('top')}
         onNext={() => setScreen('next')}
       />
@@ -87,7 +92,7 @@ function App() {
   if (screen === 'next') {
     return (
       <NextAction
-        disaster={selectedDisaster.key}
+        disaster={currentDisasterKey}
         onBack={() => setScreen('location')}
         onShelter={() => setScreen('shelter')}
       />
@@ -97,7 +102,7 @@ function App() {
   if (screen === 'shelter') {
     return (
       <ShelterGuide
-        disaster={selectedDisaster.key}
+        disaster={currentDisasterKey}
         onBack={() => setScreen('next')}
         onNext={() => setScreen('check')}
       />
@@ -107,7 +112,7 @@ function App() {
   if (screen === 'check') {
     return (
       <SafetyCheck
-        disaster={selectedDisaster.key}
+        disaster={currentDisasterKey}
         onBack={() => setScreen('shelter')}
         onTop={(next) => {
           if (next === 'contact') {
@@ -123,7 +128,7 @@ function App() {
   if (screen === 'contact') {
     return (
       <FamilyContact
-        disaster={selectedDisaster.key}
+        disaster={currentDisasterKey}
         onBack={() => setScreen('check')}
         onTop={() => setScreen('top')}
         onNext={() => setScreen('completion')}
