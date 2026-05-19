@@ -8,6 +8,7 @@ import SafetyCheck from './components/SafetyCheck'
 import FamilyContact from './components/FamilyContact'
 import LocationCheck from './components/LocationCheck'
 import EmergencyModeScreen from './screens/EmergencyModeScreen'
+import CompletionScreen from './screens/CompletionScreen'
 
 const MOCK_LOCATION_RISK = {
   disaster: {
@@ -124,6 +125,15 @@ function App() {
       <FamilyContact
         disaster={selectedDisaster.key}
         onBack={() => setScreen('check')}
+        onTop={() => setScreen('top')}
+        onNext={() => setScreen('completion')}
+      />
+    )
+  }
+
+  if (screen === 'completion') {
+    return (
+      <CompletionScreen
         onTop={() => setScreen('top')}
       />
     )

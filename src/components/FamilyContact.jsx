@@ -1,4 +1,4 @@
-function FamilyContact({ disaster, onBack, onTop }) {
+function FamilyContact({ disaster, onBack, onTop, onNext }) {
   const messages = {
     earthquake: '地震のため、安全確認をしています。',
     flood: '洪水のおそれがあるため、安全な場所へ移動しています。',
@@ -45,8 +45,8 @@ function FamilyContact({ disaster, onBack, onTop }) {
           </p>
         </section>
 
-        <button className="primary-return" onClick={onTop}>
-          ホームへ戻る
+        <button className="primary-button" onClick={onNext}>
+        完了へ進む
         </button>
       </div>
     </div>
