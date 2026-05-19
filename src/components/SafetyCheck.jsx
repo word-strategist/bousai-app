@@ -29,6 +29,24 @@ function SafetyCheck({ disaster, onBack, onTop }) {
 
   return (
     <div className="app shelter-screen">
+
+        <div className="safety-header">
+        <div className="safety-phase-badge">
+            安全確認
+        </div>
+
+        <h1 className="safety-main-title">
+            落ち着いて、
+            <br />
+            安全を確認しましょう
+        </h1>
+
+        <p className="safety-main-text">
+            危険がないか、
+            順番に確認してください。
+        </p>
+        </div>
+
       <div className="shelter-header">
         <button className="back-button" onClick={onBack}>
           ← 戻る
@@ -36,11 +54,9 @@ function SafetyCheck({ disaster, onBack, onTop }) {
 
         <h1>安全確認チェック</h1>
 
-        <p>
             <p>
             1つずつ確認してください
             </p>
-        </p>
       </div>
 
       <div className="shelter-content">

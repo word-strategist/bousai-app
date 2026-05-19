@@ -14,6 +14,15 @@ body {
   color: #12324a;
 }
 
+#root {
+  width: 100%;
+  max-width: 430px;
+  margin: 0 auto;
+  min-height: 100vh;
+  background: #f7f8fb;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.08);
+}
+
 button {
   font-family: inherit;
   cursor: pointer;
@@ -953,4 +962,240 @@ button {
   font-size: 16px;
   font-weight: 800;
   line-height: 1.6;
+}
+
+/* =========================
+   HomeScreen
+========================= */
+
+.home-screen {
+  min-height: 100vh;
+  background: #f7f8fb;
+  padding: 20px;
+}
+
+.home-hero {
+  background: linear-gradient(135deg, #e9f3ff, #ffffff);
+  border-radius: 28px;
+  padding: 28px 22px;
+  margin-bottom: 20px;
+}
+
+.home-kicker,
+.section-label {
+  font-size: 13px;
+  font-weight: 700;
+  color: #3b82f6;
+  margin: 0 0 8px;
+}
+
+.home-hero h1 {
+  font-size: 32px;
+  margin: 0 0 10px;
+}
+
+.home-hero p {
+  line-height: 1.7;
+  margin: 0;
+}
+
+.home-main {
+  display: grid;
+  gap: 18px;
+}
+
+.daily-card,
+.emergency-entry {
+  background: #ffffff;
+  border-radius: 24px;
+  padding: 20px;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+}
+
+.daily-card h2 {
+  font-size: 20px;
+  margin: 0 0 8px;
+}
+
+.daily-card p {
+  margin: 0 0 16px;
+  line-height: 1.6;
+}
+
+.primary-button,
+.emergency-button {
+  width: 100%;
+  border: none;
+  border-radius: 999px;
+  padding: 15px 18px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.primary-button {
+  background: #2563eb;
+  color: #ffffff;
+}
+
+.home-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.home-menu-card {
+  background: #ffffff;
+  border: none;
+  border-radius: 22px;
+  padding: 18px 12px;
+  text-align: center;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+}
+
+.home-menu-card span {
+  display: block;
+  font-size: 32px;
+  margin-bottom: 8px;
+}
+
+.home-menu-card strong {
+  display: block;
+  font-size: 15px;
+  margin-bottom: 4px;
+}
+
+.home-menu-card small {
+  color: #64748b;
+}
+
+.emergency-entry p {
+  margin: 0 0 14px;
+  font-weight: 700;
+}
+
+.disaster-select {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.disaster-chip {
+  border: 1px solid #cbd5e1;
+  background: #ffffff;
+  border-radius: 999px;
+  padding: 8px 12px;
+  font-weight: 700;
+}
+
+.disaster-chip.active {
+  background: #fee2e2;
+  border-color: #ef4444;
+  color: #b91c1c;
+}
+
+.emergency-button {
+  background: #dc2626;
+  color: #ffffff;
+}
+
+/* =========================
+   Emergency Entry
+========================= */
+
+.emergency-entry {
+  border: 2px solid #fecaca;
+}
+
+.emergency-entry-header {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+
+.emergency-badge {
+  flex-shrink: 0;
+  background: #dc2626;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 800;
+  padding: 6px 10px;
+  border-radius: 999px;
+}
+
+.emergency-entry h2 {
+  margin: 0 0 6px;
+  font-size: 20px;
+  color: #991b1b;
+}
+
+.emergency-entry p {
+  margin: 0;
+  color: #7f1d1d;
+}
+
+/* =========================
+   Action Guide Header
+========================= */
+
+.guide-phase-label {
+  display: inline-block;
+  background: #dbeafe;
+  color: #1d4ed8;
+  font-size: 13px;
+  font-weight: 800;
+  padding: 6px 12px;
+  border-radius: 999px;
+  margin-bottom: 12px;
+}
+
+.guide-main-title {
+  font-size: 26px;
+  line-height: 1.35;
+  margin: 0 0 10px;
+  color: #12324a;
+}
+
+.guide-main-text {
+  margin: 0 0 20px;
+  line-height: 1.7;
+  color: #475569;
+}
+
+/* =========================
+   Safety Header
+========================= */
+
+.safety-header {
+  background: #ffffff;
+  border-radius: 28px;
+  padding: 28px 22px;
+  margin-bottom: 20px;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+}
+
+.safety-phase-badge {
+  display: inline-block;
+  background: #dcfce7;
+  color: #166534;
+  font-size: 13px;
+  font-weight: 800;
+  padding: 6px 12px;
+  border-radius: 999px;
+  margin-bottom: 14px;
+}
+
+.safety-main-title {
+  margin: 0 0 10px;
+  font-size: 30px;
+  line-height: 1.35;
+  color: #12324a;
+}
+
+.safety-main-text {
+  margin: 0;
+  line-height: 1.7;
+  color: #475569;
 }

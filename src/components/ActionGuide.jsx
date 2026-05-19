@@ -76,7 +76,19 @@ return (
         <h1>{current.title}発生</h1>
     </div>
 
-      <div className="action-content">
+        <div className="action-content">
+        <div className="guide-phase-label">
+            次の行動
+        </div>
+
+        <h1 className="guide-main-title">
+            危ない行動を避けましょう
+        </h1>
+
+        <p className="guide-main-text">
+            やってはいけないことと、今することを確認します。
+        </p>
+
         <div className="big-alert">⚠️ 今すぐ行動</div>
 
         <div className="stamp-grid">

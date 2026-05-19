@@ -1,4 +1,4 @@
-function ShelterGuide({ disaster, onBack, onTop }) {
+function ShelterGuide({ disaster, onBack, onNext }) {
   const guides = {
     earthquake: {
       title: '避難先を確認',
@@ -112,7 +112,7 @@ function ShelterGuide({ disaster, onBack, onTop }) {
 
             <button
                 className="primary-return"
-                onClick={() => onTop('check')}
+                onClick={onNext}
             >
             安全確認へ進む
             </button>

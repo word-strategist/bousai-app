@@ -65,14 +65,14 @@ function App() {
     )
   }
 
-    if (screen === 'emergency') {
+  if (screen === 'emergency') {
     return (
       <EmergencyModeScreen
         onComplete={() => setScreen('action')}
       />
     )
   }
-  
+
   if (screen === 'action') {
     return (
       <ActionGuide
@@ -98,6 +98,16 @@ function App() {
       <ShelterGuide
         disaster={selectedDisaster.key}
         onBack={() => setScreen('next')}
+        onNext={() => setScreen('check')}
+      />
+    )
+  }
+
+  if (screen === 'check') {
+    return (
+      <SafetyCheck
+        disaster={selectedDisaster.key}
+        onBack={() => setScreen('shelter')}
         onTop={(next) => {
           if (next === 'contact') {
             setScreen('contact')
@@ -109,32 +119,15 @@ function App() {
     )
   }
 
-  if (screen === 'check') {
-  return (
-    <SafetyCheck
-      disaster={selectedDisaster.key}
-      onBack={() => setScreen('shelter')}
-      onTop={(next) => {
-        if (next === 'check') {
-          setScreen('check')
-        } else {
-          setScreen('top')
-        }
-      }}
-    />
-  )
-
   if (screen === 'contact') {
-  return (
-    <FamilyContact
-      disaster={selectedDisaster.key}
-      onBack={() => setScreen('check')}
-      onTop={() => setScreen('top')}
-    />
-  )
-}
-
-}
+    return (
+      <FamilyContact
+        disaster={selectedDisaster.key}
+        onBack={() => setScreen('check')}
+        onTop={() => setScreen('top')}
+      />
+    )
+  }
 
   return (
     <HomeScreen

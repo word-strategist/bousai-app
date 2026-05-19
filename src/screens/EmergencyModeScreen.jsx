@@ -57,36 +57,55 @@ function EmergencyModeScreen({ onComplete }) {
     setCurrentStep((prev) => prev + 1)
   }
 
-  return (
-    <div className="emergency-screen">
-      <div className="emergency-content">
-        <div className="emergency-alert">
-          {action.alert}
+return (
+  <div className="emergency-screen">
+    <div className="emergency-content">
+
+      <div className="emergency-mode-top">
+        <div className="emergency-live-badge">
+          緊急モード
         </div>
 
-        <div className="emergency-visual">
-          <div className="emergency-person">
-            {action.visual}
-          </div>
-        </div>
-
-        <h1 className="emergency-title">
-          {action.title}
+        <h1>
+          落ち着いて、
+          <br />
+          順番に行動しましょう。
         </h1>
 
-        <p className="emergency-text">
-          {action.text}
+        <p>
+          今やることだけを、
+          1つずつ案内します。
         </p>
-
-        <button
-          className="emergency-button"
-          onClick={handleNext}
-        >
-          {action.button}
-        </button>
       </div>
+
+      <div className="emergency-alert">
+        {action.alert}
+      </div>
+
+      <div className="emergency-visual">
+        <div className="emergency-person">
+          {action.visual}
+        </div>
+      </div>
+
+      <h1 className="emergency-title">
+        {action.title}
+      </h1>
+
+      <p className="emergency-text">
+        {action.text}
+      </p>
+
+      <button
+        className="emergency-button"
+        onClick={handleNext}
+      >
+        {isLastStep ? '次の行動へ進む' : action.button}
+      </button>
+
     </div>
-  )
+  </div>
+)
 }
 
 export default EmergencyModeScreen
