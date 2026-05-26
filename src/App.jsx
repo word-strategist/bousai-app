@@ -12,11 +12,11 @@ import CompletionScreen from './screens/CompletionScreen'
 
 const MOCK_LOCATION_RISK = {
   disaster: {
-    key: 'flood',
-    name: '洪水',
+    key: 'earthquake',
+    name: '地震',
   },
   areaName: '大阪市付近',
-  riskLevel: 'やや高い',
+  riskLevel: '高い',
 }
 
 const disasters = [
@@ -52,11 +52,21 @@ const disasters = [
 function App() {
   const [selectedDisaster, setSelectedDisaster] = useState(disasters[0])
   const [screen, setScreen] = useState('top')
+  const [isCheckingLocation, setIsCheckingLocation] = useState(false)
 
   const currentDisasterKey =
     selectedDisaster && selectedDisaster.key
       ? selectedDisaster.key
       : 'earthquake'
+
+  const startLocationCheck = () => {
+    setIsCheckingLocation(true)
+
+    setTimeout(() => {
+      setIsCheckingLocation(false)
+      setScreen('location')
+    }, 1800)
+  }
 
   if (screen === 'location') {
     return (
@@ -148,8 +158,9 @@ function App() {
     <HomeScreen
       selectedDisaster={selectedDisaster}
       disasters={disasters}
+      isCheckingLocation={isCheckingLocation}
       onSelectDisaster={setSelectedDisaster}
-      onStartLocationCheck={() => setScreen('emergency')}
+      onStartLocationCheck={startLocationCheck}
     />
   )
 }

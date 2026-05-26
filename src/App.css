@@ -1045,28 +1045,44 @@ button {
 }
 
 .home-menu-card {
+  border: 1px solid #e5e7eb;
+  border-radius: 20px;
+
   background: #ffffff;
-  border: none;
-  border-radius: 22px;
+
   padding: 18px 12px;
-  text-align: center;
-  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  gap: 6px;
+
+  box-shadow: 0 4px 10px rgba(0,0,0,0.04);
+
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.home-menu-card:active {
+  transform: scale(0.98);
 }
 
 .home-menu-card span {
-  display: block;
-  font-size: 32px;
-  margin-bottom: 8px;
+  font-size: 24px;
 }
 
 .home-menu-card strong {
-  display: block;
-  font-size: 15px;
-  margin-bottom: 4px;
+  font-size: 14px;
+  font-weight: 700;
+
+  color: #374151;
 }
 
 .home-menu-card small {
-  color: #64748b;
+  display: none;
 }
 
 .emergency-entry p {
@@ -1198,4 +1214,158 @@ button {
   margin: 0;
   line-height: 1.7;
   color: #475569;
+}
+
+/* =========================
+   Danger Illustration UI
+========================= */
+
+.danger-card {
+  position: relative;
+  overflow: hidden;
+  min-height: 100vh;
+}
+
+.danger-title {
+  position: relative;
+  z-index: 2;
+
+  margin-top: 18px;
+  margin-bottom: 12px;
+
+  text-align: center;
+  font-size: 42px;
+  font-weight: 900;
+  color: #e60012;
+}
+
+.danger-illustration-box {
+  position: relative;
+  z-index: 1;
+
+  display: flex;
+  justify-content: center;
+
+  margin-top: -10px;
+}
+
+.danger-illustration {
+  width: 92%;
+  max-width: 420px;
+  height: auto;
+  object-fit: contain;
+}
+
+.danger-bottom-area {
+  position: relative;
+  z-index: 3;
+
+  margin-top: -20px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.danger-action {
+  margin-bottom: 18px;
+
+  font-size: 40px;
+  font-weight: 900;
+  line-height: 1.1;
+
+  color: #111;
+  text-align: center;
+}
+
+.danger-bottom-area .primary-button {
+  width: 88%;
+  max-width: 420px;
+}
+
+.after-info-box {
+  margin-top: 28px;
+  text-align: center;
+}
+
+/* =========================
+   Bear Alert Button
+========================= */
+
+.home-screen {
+  position: relative;
+}
+
+.bear-alert-button {
+  position: absolute;
+
+  top: 22px;
+  right: 22px;
+
+  width: 74px;
+  height: 74px;
+
+  border: 2px solid #ff8a00;
+  border-radius: 22px;
+
+  background: #fff7d6;
+
+  box-shadow:
+    0 10px 24px rgba(0,0,0,0.10);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  z-index: 20;
+
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
+
+    flex-direction: column;
+    gap: 2px;
+}
+
+.bear-alert-button:active {
+  transform: scale(0.94);
+}
+
+.bear-alert-button:hover {
+  box-shadow:
+    0 14px 28px rgba(0,0,0,0.14);
+}
+
+.bear-alert-icon {
+  width: 54px;
+  height: 54px;
+  object-fit: contain;
+}
+
+.bear-alert-text {
+  font-size: 11px;
+  font-weight: 800;
+  line-height: 1;
+
+  color: #5b3a00;
+
+  text-align: center;
+}
+
+/* =========================
+   Quiet UI Rules
+========================= */
+
+.home-kicker {
+  color: #2563eb;
+  font-weight: 700;
+}
+
+.section-label {
+  color: #6b7280;
+  font-weight: 700;
+}
+
+.home-sub-actions {
+  opacity: 0.72;
 }
