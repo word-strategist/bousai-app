@@ -1,14 +1,19 @@
 import HomeScreen from './screens/HomeScreen'
 import { useState } from 'react'
 import './App.css'
+
 import ActionGuide from './components/ActionGuide'
 import NextAction from './components/NextAction'
 import ShelterGuide from './components/ShelterGuide'
 import SafetyCheck from './components/SafetyCheck'
 import FamilyContact from './components/FamilyContact'
 import LocationCheck from './components/LocationCheck'
+
 import EmergencyModeScreen from './screens/EmergencyModeScreen'
 import CompletionScreen from './screens/CompletionScreen'
+
+import BearActionScreen from './screens/BearActionScreen'
+import HeatRiskScreen from './screens/HeatRiskScreen'
 
 const MOCK_LOCATION_RISK = {
   disaster: {
@@ -66,6 +71,22 @@ function App() {
       setIsCheckingLocation(false)
       setScreen('location')
     }, 1800)
+  }
+
+  if (screen === 'bear') {
+    return (
+      <BearActionScreen
+        onBack={() => setScreen('top')}
+      />
+    )
+  }
+
+  if (screen === 'heat') {
+    return (
+      <HeatRiskScreen
+        onBack={() => setScreen('top')}
+      />
+    )
   }
 
   if (screen === 'location') {
@@ -156,11 +177,28 @@ function App() {
 
   return (
     <HomeScreen
-      selectedDisaster={selectedDisaster}
-      disasters={disasters}
-      isCheckingLocation={isCheckingLocation}
-      onSelectDisaster={setSelectedDisaster}
       onStartLocationCheck={startLocationCheck}
+
+      onSelectDisaster={(disaster) => {
+        if (disaster.key === 'bear') {
+          setScreen('bear')
+          return
+        }
+
+        if (disaster.key === 'heat') {
+          setScreen('heat')
+          return
+        }
+
+        setSelectedDisaster(disaster)
+        setScreen('action')
+      }}
+
+      onStartSafetyCheck={() => setScreen('check')}
+
+      onStartShelterGuide={() => setScreen('shelter')}
+
+      onStartFamilyContact={() => setScreen('contact')}
     />
   )
 }
