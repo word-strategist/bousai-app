@@ -771,3 +771,99 @@ input {
   margin-top: 5px;
   font-weight: bold;
 }
+
+/* =========================
+   Main Action Icons
+========================= */
+
+.action-mark img {
+  width: 72px;
+  height: 72px;
+  object-fit: contain;
+
+  filter: brightness(0) invert(1);
+}
+
+/* =========================
+   Bear Flow Screen
+========================= */
+
+.bear-flow-screen {
+  min-height: 100vh;
+  background: #fff3e8;
+  color: #111827;
+}
+
+.bear-flow-main {
+  padding: 24px 22px 32px;
+}
+
+.bear-flow-progress {
+  width: fit-content;
+  margin: 0 auto 18px;
+  padding: 8px 18px;
+  border-radius: 999px;
+  background: #ff7a1a;
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: 900;
+}
+
+.bear-flow-card {
+  min-height: 430px;
+  padding: 36px 22px;
+  border-radius: 36px;
+  background: #ffffff;
+  box-shadow: 0 18px 40px rgba(17, 24, 39, 0.12);
+  text-align: center;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.bear-flow-mark {
+  width: 170px;
+  height: 170px;
+  margin-bottom: 24px;
+  border-radius: 50%;
+  background: #ff7a1a;
+  color: #ffffff;
+  font-size: 88px;
+  font-weight: 900;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bear-flow-card h2 {
+  margin: 0 0 14px;
+  color: #111827;
+  font-size: 46px;
+  font-weight: 1000;
+  line-height: 1.15;
+  letter-spacing: -0.04em;
+}
+
+.bear-flow-card p {
+  margin: 0;
+  color: #374151;
+  font-size: 24px;
+  font-weight: 900;
+  line-height: 1.45;
+}
+
+.bear-flow-next {
+  width: 100%;
+  min-height: 96px;
+  margin-top: 24px;
+  border: none;
+  border-radius: 30px;
+  background: #ff7a1a;
+  color: #ffffff;
+  font-size: 28px;
+  font-weight: 1000;
+  box-shadow: 0 16px 28px rgba(255, 122, 26, 0.3);
+}

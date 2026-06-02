@@ -1,52 +1,89 @@
+import { useState } from 'react'
+
+const bearSteps = [
+  {
+    id: 'seen',
+    label: '1/4',
+    title: '熊を見た',
+    message: 'まず立ち止まってください',
+    action: '走らない準備をする',
+    mark: '🐻',
+  },
+  {
+    id: 'dont-run',
+    label: '2/4',
+    title: '走らない',
+    message: '走ると追われる危険があります',
+    action: 'ゆっくり離れる',
+    mark: '✋',
+  },
+  {
+    id: 'back-away',
+    label: '3/4',
+    title: '静かに離れる',
+    message: '熊に背中を向けずに下がる',
+    action: '安全な場所へ向かう',
+    mark: '↙',
+  },
+  {
+    id: 'shelter',
+    label: '4/4',
+    title: '建物へ避難',
+    message: '近くの建物や車に入ってください',
+    action: '完了',
+    mark: '🏠',
+  },
+]
+
 function BearActionScreen({ onBack }) {
+  const [stepIndex, setStepIndex] = useState(0)
+
+  const step = bearSteps[stepIndex]
+  const isLastStep = stepIndex === bearSteps.length - 1
+
+  const handleNext = () => {
+    if (isLastStep) {
+      onBack()
+      return
+    }
+
+    setStepIndex((current) => current + 1)
+  }
+
+  const handlePrev = () => {
+    if (stepIndex === 0) {
+      onBack()
+      return
+    }
+
+    setStepIndex((current) => current - 1)
+  }
+
   return (
-    <div className="danger-screen bear-screen">
+    <div className="danger-screen bear-flow-screen">
       <header className="danger-header">
-        <button onClick={onBack}>‹</button>
+        <button type="button" onClick={handlePrev}>‹</button>
         <h1>熊を見たら</h1>
         <div />
       </header>
 
-      <main className="danger-body">
-        <section className="danger-alert">
-          <div className="danger-icon">🐻</div>
-          <p>走らず、落ち着いて離れる</p>
+      <main className="bear-flow-main">
+        <div className="bear-flow-progress">{step.label}</div>
+
+        <section className="bear-flow-card">
+          <div className="bear-flow-mark">{step.mark}</div>
+
+          <h2>{step.title}</h2>
+
+          <p>{step.message}</p>
         </section>
 
-        <section className="danger-block danger-ng">
-          <h2>やってはいけない</h2>
-
-          <div className="danger-item">
-            ❌ 走って逃げる
-          </div>
-
-          <div className="danger-item">
-            ❌ 背中を向ける
-          </div>
-
-          <div className="danger-item">
-            ❌ 近づいて撮影
-          </div>
-        </section>
-
-        <section className="danger-block danger-ok">
-          <h2>今すること</h2>
-
-          <div className="danger-item">
-            ⭕ ゆっくり離れる
-          </div>
-
-          <div className="danger-item">
-            ⭕ 子どもを後ろへ
-          </div>
-
-          <div className="danger-item">
-            ⭕ 落ち着いて行動
-          </div>
-        </section>
-
-        <button className="danger-main-button">
-          現在地を通報
+        <button
+          className="bear-flow-next"
+          type="button"
+          onClick={handleNext}
+        >
+          {step.action}
         </button>
       </main>
     </div>

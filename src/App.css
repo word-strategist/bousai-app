@@ -1637,6 +1637,39 @@ button {
 }
 
 /* =========================
+   HOME ICON IMAGES
+========================= */
+
+.action-mark img {
+  width: 56px;
+  height: 56px;
+  object-fit: contain;
+  display: block;
+}
+
+.home-top button img {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+  display: block;
+}
+
+.sub-grid button img {
+  width: 42px;
+  height: 42px;
+  object-fit: contain;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.home-menu-bar img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  display: block;
+}
+
+/* =========================
    DANGER SCREENS
 ========================= */
 
