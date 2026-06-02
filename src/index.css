@@ -867,3 +867,32 @@ input {
   font-weight: 1000;
   box-shadow: 0 16px 28px rgba(255, 122, 26, 0.3);
 }
+
+/* =========================
+   LINE WebView adjustment
+   下段メニュー見切れ対策
+========================= */
+
+.home-menu-card {
+  padding-bottom: 18px;
+}
+
+.home-sub-grid {
+  gap: 10px;
+}
+
+.home-sub-button {
+  min-height: 92px;
+  padding: 10px 6px 8px;
+}
+
+.home-sub-button img {
+  width: 40px;
+  height: 40px;
+}
+
+.home-sub-button span,
+.home-sub-button strong {
+  font-size: 18px;
+  line-height: 1.1;
+}
