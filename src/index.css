@@ -1052,3 +1052,60 @@ input {
 
   text-align: center;
 }
+
+/* =========================
+   LINE WebView compact TOP
+   主ボタンを少し圧縮して下段機能を残す
+========================= */
+
+.home-title-area {
+  margin-bottom: 18px;
+}
+
+.home-title-area h1 {
+  font-size: 42px;
+  line-height: 1.15;
+}
+
+.home-shield {
+  width: 74px;
+  height: 74px;
+  margin-bottom: 18px;
+}
+
+.home-main-actions {
+  gap: 14px;
+}
+
+.main-action {
+  min-height: 112px;
+  padding: 18px 26px;
+  border-radius: 28px;
+}
+
+.action-mark img {
+  width: 56px;
+  height: 56px;
+}
+
+.action-copy strong {
+  font-size: 34px;
+  line-height: 1.05;
+}
+
+.action-copy small {
+  font-size: 18px;
+  line-height: 1.15;
+}
+
+.home-sub-actions {
+  margin-top: 14px;
+}
+
+.sub-heading {
+  margin-bottom: 10px;
+}
+
+.sub-grid button {
+  min-height: 82px;
+}
