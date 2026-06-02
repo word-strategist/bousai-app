@@ -8,7 +8,11 @@ import suppliesIcon from '../assets/icons/supplies.png'
 import settingsIcon from '../assets/icons/settings.png'
 import homeIcon from '../assets/icons/home.png'
 
-function HomeScreen({ onStartLocationCheck, onSelectDisaster }) {
+function HomeScreen({
+  onStartLocationCheck,
+  onSelectDisaster,
+  onStartShelterGuide,
+}) {
   return (
     <div className="home-screen">
       <header className="home-top">
@@ -84,7 +88,7 @@ function HomeScreen({ onStartLocationCheck, onSelectDisaster }) {
               <strong>家族確認</strong>
             </button>
 
-            <button type="button">
+            <button type="button" onClick={onStartShelterGuide}>
               <img src={shelterIcon} alt="" />
               <strong>避難所</strong>
             </button>

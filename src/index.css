@@ -1020,3 +1020,35 @@ input {
   font-weight: 1000;
   box-shadow: 0 16px 28px rgba(247, 196, 0, 0.3);
 }
+
+/* =========================
+   Shelter Map Button
+========================= */
+
+.map-card {
+  text-align: center;
+}
+
+.map-open-button {
+  display: block;
+
+  width: 100%;
+
+  padding: 20px;
+
+  margin-top: 12px;
+
+  border-radius: 20px;
+
+  background: #2563eb;
+
+  color: #ffffff;
+
+  font-size: 22px;
+
+  font-weight: 900;
+
+  text-decoration: none;
+
+  text-align: center;
+}
