@@ -1109,3 +1109,87 @@ input {
 .sub-grid button {
   min-height: 82px;
 }
+
+/* =========================
+   Earthquake Flow Screen
+========================= */
+
+.earthquake-flow-screen {
+  min-height: 100vh;
+  background: #fff3e8;
+  color: #111827;
+}
+
+.earthquake-flow-main {
+  padding: 24px 22px 32px;
+}
+
+.earthquake-flow-progress {
+  width: fit-content;
+  margin: 0 auto 18px;
+  padding: 8px 18px;
+  border-radius: 999px;
+  background: #f97316;
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: 900;
+}
+
+.earthquake-flow-card {
+  min-height: 430px;
+  padding: 36px 22px;
+  border-radius: 36px;
+  background: #ffffff;
+  box-shadow: 0 18px 40px rgba(17, 24, 39, 0.12);
+  text-align: center;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.earthquake-flow-mark {
+  width: 170px;
+  height: 170px;
+  margin-bottom: 24px;
+  border-radius: 50%;
+  background: #f97316;
+  color: #ffffff;
+  font-size: 88px;
+  font-weight: 900;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.earthquake-flow-card h2 {
+  margin: 0 0 14px;
+  color: #111827;
+  font-size: 44px;
+  font-weight: 1000;
+  line-height: 1.15;
+  letter-spacing: -0.04em;
+}
+
+.earthquake-flow-card p {
+  margin: 0;
+  color: #374151;
+  font-size: 24px;
+  font-weight: 900;
+  line-height: 1.45;
+}
+
+.earthquake-flow-next {
+  width: 100%;
+  min-height: 96px;
+  margin-top: 24px;
+  border: none;
+  border-radius: 30px;
+  background: #f97316;
+  color: #ffffff;
+  font-size: 28px;
+  font-weight: 1000;
+  box-shadow: 0 16px 28px rgba(249, 115, 22, 0.3);
+}

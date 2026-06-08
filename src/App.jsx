@@ -14,11 +14,14 @@ import CompletionScreen from './screens/CompletionScreen'
 
 import BearActionScreen from './screens/BearActionScreen'
 import HeatRiskScreen from './screens/HeatRiskScreen'
+import EarthquakeActionScreen from './screens/EarthquakeActionScreen'
+import FloodActionScreen from './screens/FloodActionScreen'
+import FireActionScreen from './screens/FireActionScreen'
 
 const MOCK_LOCATION_RISK = {
   disaster: {
-    key: 'earthquake',
-    name: '地震',
+    key: 'fire',
+    name: '火災',
   },
   areaName: '大阪市付近',
   riskLevel: '高い',
@@ -94,10 +97,10 @@ function App() {
       <LocationCheck
         riskData={MOCK_LOCATION_RISK}
         onBack={() => setScreen('top')}
-        onNext={() => {
-          setSelectedDisaster(MOCK_LOCATION_RISK.disaster)
-          setScreen('action')
-        }}
+onNext={() => {
+  setSelectedDisaster(MOCK_LOCATION_RISK.disaster)
+  setScreen('action')
+}}
       />
     )
   }
@@ -111,6 +114,33 @@ function App() {
   }
 
   if (screen === 'action') {
+    if (currentDisasterKey === 'earthquake') {
+      return (
+        <EarthquakeActionScreen
+          onBack={() => setScreen('top')}
+          onNext={() => setScreen('shelter')}
+        />
+      )
+    }
+
+    if (currentDisasterKey === 'flood') {
+      return (
+        <FloodActionScreen
+          onBack={() => setScreen('top')}
+          onNext={() => setScreen('shelter')}
+        />
+      )
+    }
+
+    if (currentDisasterKey === 'fire') {
+      return (
+        <FireActionScreen
+          onBack={() => setScreen('top')}
+          onNext={() => setScreen('shelter')}
+        />
+      )
+    }
+
     return (
       <ActionGuide
         disaster={currentDisasterKey}
