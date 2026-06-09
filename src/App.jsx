@@ -1,5 +1,5 @@
 import HomeScreen from './screens/HomeScreen'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
 
 import ActionGuide from './components/ActionGuide'
@@ -80,25 +80,29 @@ function App() {
       ? selectedDisaster.key
       : 'earthquake'
 
+  useEffect(() => {
+    if (!location) return
+
+    const judgedRisk = judgeRiskByLocation(location)
+
+    if (!judgedRisk) return
+
+    setLocationRisk({
+      disaster: {
+        key: judgedRisk.key,
+        name: judgedRisk.name,
+      },
+      areaName: judgedRisk.areaName,
+      riskLevel: judgedRisk.riskLevel,
+    })
+  }, [location])
+
   const startLocationCheck = () => {
     setIsCheckingLocation(true)
 
     getCurrentLocation()
 
     setTimeout(() => {
-      const judgedRisk = judgeRiskByLocation(location)
-
-      if (judgedRisk) {
-        setLocationRisk({
-          disaster: {
-            key: judgedRisk.key,
-            name: judgedRisk.name,
-          },
-          areaName: judgedRisk.areaName,
-          riskLevel: judgedRisk.riskLevel,
-        })
-      }
-
       setIsCheckingLocation(false)
       setScreen('location')
     }, 1800)
@@ -145,6 +149,16 @@ function App() {
         location={location}
         onBack={() => setScreen('top')}
         onNext={() => {
+          if (locationRisk.disaster.key === 'bear') {
+            setScreen('bear')
+            return
+          }
+
+          if (locationRisk.disaster.key === 'heat') {
+            setScreen('heat')
+            return
+          }
+
           setSelectedDisaster(locationRisk.disaster)
           setScreen('action')
         }}
@@ -209,11 +223,12 @@ function App() {
 
   if (screen === 'shelter') {
     return (
-      <ShelterGuide
-        disaster={currentDisasterKey}
-        onBack={() => setScreen('next')}
-        onNext={() => setScreen('check')}
-      />
+    <ShelterGuide
+      disaster={currentDisasterKey}
+      location={location}
+      onBack={() => setScreen('next')}
+      onNext={() => setScreen('check')}
+    />
     )
   }
 

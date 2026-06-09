@@ -1,4 +1,4 @@
-function ShelterGuide({ disaster, onBack, onNext }) {
+function ShelterGuide({ disaster, location, onBack, onNext }) {
   const guides = {
     earthquake: {
       title: '避難先を確認',
@@ -21,6 +21,10 @@ function ShelterGuide({ disaster, onBack, onNext }) {
 
   const current = guides[disaster] || guides.earthquake
 
+  const mapUrl = location
+    ? `https://www.google.com/maps/dir/?api=1&origin=${location.lat},${location.lng}&destination=避難所&travelmode=walking`
+    : 'https://www.google.com/maps/search/?api=1&query=避難所'
+
   return (
     <div className="app shelter-screen">
       <div className={`shelter-header ${current.color}`}>
@@ -35,8 +39,18 @@ function ShelterGuide({ disaster, onBack, onNext }) {
       <div className="shelter-content">
         <section className="shelter-card">
           <h2>現在地付近</h2>
-          <p className="location-large">岡山県真庭市付近</p>
-          <span>※ GPS連動は後で実装予定</span>
+
+          {location ? (
+            <>
+              <p className="location-large">GPS取得済み</p>
+              <span>現在地から避難所までの経路を開けます</span>
+            </>
+          ) : (
+            <>
+              <p className="location-large">現在地未取得</p>
+              <span>地図検索で近くの避難所を確認します</span>
+            </>
+          )}
         </section>
 
         <section className="shelter-card map-card">
@@ -44,11 +58,11 @@ function ShelterGuide({ disaster, onBack, onNext }) {
 
           <a
             className="map-open-button"
-            href="https://www.google.com/maps/search/?api=1&query=避難所"
+            href={mapUrl}
             target="_blank"
             rel="noreferrer"
           >
-            地図で開く
+            Google Mapsで経路を見る
           </a>
         </section>
 
