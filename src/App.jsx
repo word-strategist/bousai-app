@@ -19,7 +19,10 @@ import FloodActionScreen from './screens/FloodActionScreen'
 import FireActionScreen from './screens/FireActionScreen'
 import SoundConfirmScreen from './screens/SoundConfirmScreen'
 
-const MOCK_LOCATION_RISK = {
+import { useCurrentLocation } from './hooks/useCurrentLocation'
+import { judgeRiskByLocation } from './utils/judgeRiskByLocation'
+
+const DEFAULT_LOCATION_RISK = {
   disaster: {
     key: 'fire',
     name: '火災',
@@ -63,6 +66,14 @@ function App() {
   const [screen, setScreen] = useState('top')
   const [isCheckingLocation, setIsCheckingLocation] = useState(false)
   const [soundType, setSoundType] = useState(null)
+  const [locationRisk, setLocationRisk] = useState(DEFAULT_LOCATION_RISK)
+
+  const {
+    location,
+    locationStatus,
+    locationError,
+    getCurrentLocation,
+  } = useCurrentLocation()
 
   const currentDisasterKey =
     selectedDisaster && selectedDisaster.key
@@ -72,7 +83,22 @@ function App() {
   const startLocationCheck = () => {
     setIsCheckingLocation(true)
 
+    getCurrentLocation()
+
     setTimeout(() => {
+      const judgedRisk = judgeRiskByLocation(location)
+
+      if (judgedRisk) {
+        setLocationRisk({
+          disaster: {
+            key: judgedRisk.key,
+            name: judgedRisk.name,
+          },
+          areaName: judgedRisk.areaName,
+          riskLevel: judgedRisk.riskLevel,
+        })
+      }
+
       setIsCheckingLocation(false)
       setScreen('location')
     }, 1800)
@@ -113,10 +139,12 @@ function App() {
   if (screen === 'location') {
     return (
       <LocationCheck
-        riskData={MOCK_LOCATION_RISK}
+        riskData={locationRisk}
+        locationStatus={locationStatus}
+        locationError={locationError}
         onBack={() => setScreen('top')}
         onNext={() => {
-          setSelectedDisaster(MOCK_LOCATION_RISK.disaster)
+          setSelectedDisaster(locationRisk.disaster)
           setScreen('action')
         }}
       />
@@ -226,6 +254,9 @@ function App() {
   return (
     <HomeScreen
       onStartLocationCheck={startLocationCheck}
+      isCheckingLocation={isCheckingLocation}
+      locationStatus={locationStatus}
+      locationError={locationError}
       onSelectDisaster={(disaster) => {
         if (disaster.key === 'bear') {
           setScreen('bear')
