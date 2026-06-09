@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react'
+
 import protectHeadImage from '../assets/stamps/action-protect-head.png'
+import bearImage from '../assets/stamps/bear-alert-icon.png'
+import fireImage from '../assets/stamps/fire-evacuate.png'
+import floodImage from '../assets/stamps/flood-evacuate.png'
+import heatImage from '../assets/icons/heat.png'
 
 export default function LocationCheck({
   riskData,
-  locationStatus,
-  locationError,
-  location,
   onNext,
   onBack,
 }) {
@@ -30,18 +32,33 @@ export default function LocationCheck({
           </h2>
 
           <p className="gps-loading-text">
-            危険情報を確認しています
+            周辺の危険情報を確認しています
           </p>
         </div>
       </div>
     )
   }
 
+  const illustrationMap = {
+    earthquake: protectHeadImage,
+    flood: floodImage,
+    fire: fireImage,
+    bear: bearImage,
+    heat: heatImage,
+  }
+
+  const currentImage =
+    illustrationMap[riskData?.disaster?.key] ||
+    protectHeadImage
+
   return (
     <div className="location-screen">
       <div className="location-card danger-card">
         <div className="location-back-area">
-          <button className="location-back-button" onClick={onBack}>
+          <button
+            className="location-back-button"
+            onClick={onBack}
+          >
             ← 戻る
           </button>
         </div>
@@ -56,26 +73,10 @@ export default function LocationCheck({
 
         <div className="danger-illustration-box">
           <img
-            src={protectHeadImage}
+            src={currentImage}
             alt="危険時の行動"
             className="danger-illustration"
           />
-        </div>
-
-        <div className="gps-debug-card">
-          <p>GPS状態：{locationStatus || '未確認'}</p>
-
-          {location && (
-            <>
-              <p>緯度：{location.lat}</p>
-              <p>経度：{location.lng}</p>
-              <p>誤差：約{Math.round(location.accuracy)}m</p>
-            </>
-          )}
-
-          {locationError && (
-            <p>エラー：{locationError}</p>
-          )}
         </div>
 
         <div className="danger-bottom-area">
@@ -83,7 +84,10 @@ export default function LocationCheck({
             次の行動へ進む
           </p>
 
-          <button className="primary-button" onClick={onNext}>
+          <button
+            className="primary-button"
+            onClick={onNext}
+          >
             次の行動を見る
           </button>
         </div>

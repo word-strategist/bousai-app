@@ -12,6 +12,10 @@ function HomeScreen({
   onStartLocationCheck,
   onSelectDisaster,
   onStartShelterGuide,
+  onStartSoundMode,
+  onStartAdminInfo,
+  onStartSupplies,
+  onStartFamilyContact,
 }) {
   return (
     <div className="home-screen">
@@ -83,7 +87,10 @@ function HomeScreen({
           </div>
 
           <div className="sub-grid">
-            <button type="button">
+            <button
+              type="button"
+              onClick={onStartFamilyContact}
+            >
               <img src={familyIcon} alt="" />
               <strong>家族確認</strong>
             </button>
@@ -93,12 +100,15 @@ function HomeScreen({
               <strong>避難所</strong>
             </button>
 
-            <button type="button">
+            <button type="button" onClick={onStartAdminInfo}>
               <img src={governmentIcon} alt="" />
               <strong>行政情報</strong>
             </button>
 
-            <button type="button">
+            <button
+              type="button"
+              onClick={onStartSupplies}
+            >
               <img src={suppliesIcon} alt="" />
               <strong>備え</strong>
             </button>

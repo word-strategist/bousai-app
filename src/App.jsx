@@ -18,6 +18,8 @@ import EarthquakeActionScreen from './screens/EarthquakeActionScreen'
 import FloodActionScreen from './screens/FloodActionScreen'
 import FireActionScreen from './screens/FireActionScreen'
 import SoundConfirmScreen from './screens/SoundConfirmScreen'
+import AdminInfoScreen from './screens/AdminInfoScreen'
+import SuppliesScreen from './screens/SuppliesScreen'
 
 import { useCurrentLocation } from './hooks/useCurrentLocation'
 import { judgeRiskByLocation } from './utils/judgeRiskByLocation'
@@ -111,6 +113,22 @@ function App() {
   const openSoundConfirm = (type) => {
     setSoundType(type)
     setScreen('sound-confirm')
+  }
+
+    if (screen === 'admin-info') {
+    return (
+      <AdminInfoScreen
+        onBack={() => setScreen('top')}
+      />
+    )
+  }
+
+    if (screen === 'supplies') {
+    return (
+      <SuppliesScreen
+        onBack={() => setScreen('top')}
+      />
+    )
   }
 
   if (screen === 'sound-confirm') {
@@ -290,6 +308,8 @@ function App() {
       onStartSafetyCheck={() => setScreen('check')}
       onStartShelterGuide={() => setScreen('shelter')}
       onStartFamilyContact={() => setScreen('contact')}
+      onStartAdminInfo={() => setScreen('admin-info')}
+      onStartSupplies={() => setScreen('supplies')}
     />
   )
 }
