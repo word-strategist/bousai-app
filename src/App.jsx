@@ -142,6 +142,7 @@ function App() {
         riskData={locationRisk}
         locationStatus={locationStatus}
         locationError={locationError}
+        location={location}
         onBack={() => setScreen('top')}
         onNext={() => {
           setSelectedDisaster(locationRisk.disaster)

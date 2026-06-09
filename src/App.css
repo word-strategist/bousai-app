@@ -1855,3 +1855,29 @@ button {
   background: #dc2626;
   color: #ffffff;
 }
+
+/* =========================
+   GPS Debug Card
+========================= */
+
+.gps-debug-card {
+  width: 100%;
+  max-width: 320px;
+  margin: 18px auto 20px;
+  padding: 12px 14px;
+  border-radius: 16px;
+  background: #f1f5f9;
+  color: #334155;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.5;
+  text-align: left;
+}
+
+.gps-debug-card p {
+  margin: 2px 0;
+}
+
+.danger-bottom-area {
+  margin-top: 18px;
+}
