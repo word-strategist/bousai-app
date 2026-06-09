@@ -17,6 +17,7 @@ import HeatRiskScreen from './screens/HeatRiskScreen'
 import EarthquakeActionScreen from './screens/EarthquakeActionScreen'
 import FloodActionScreen from './screens/FloodActionScreen'
 import FireActionScreen from './screens/FireActionScreen'
+import SoundConfirmScreen from './screens/SoundConfirmScreen'
 
 const MOCK_LOCATION_RISK = {
   disaster: {
@@ -61,6 +62,7 @@ function App() {
   const [selectedDisaster, setSelectedDisaster] = useState(disasters[0])
   const [screen, setScreen] = useState('top')
   const [isCheckingLocation, setIsCheckingLocation] = useState(false)
+  const [soundType, setSoundType] = useState(null)
 
   const currentDisasterKey =
     selectedDisaster && selectedDisaster.key
@@ -76,10 +78,25 @@ function App() {
     }, 1800)
   }
 
+  const openSoundConfirm = (type) => {
+    setSoundType(type)
+    setScreen('sound-confirm')
+  }
+
+  if (screen === 'sound-confirm') {
+    return (
+      <SoundConfirmScreen
+        soundType={soundType}
+        onBack={() => setScreen('top')}
+      />
+    )
+  }
+
   if (screen === 'bear') {
     return (
       <BearActionScreen
         onBack={() => setScreen('top')}
+        onStartSound={() => openSoundConfirm('bear')}
       />
     )
   }
@@ -88,6 +105,7 @@ function App() {
     return (
       <HeatRiskScreen
         onBack={() => setScreen('top')}
+        onStartSound={() => openSoundConfirm('help')}
       />
     )
   }
@@ -97,10 +115,10 @@ function App() {
       <LocationCheck
         riskData={MOCK_LOCATION_RISK}
         onBack={() => setScreen('top')}
-onNext={() => {
-  setSelectedDisaster(MOCK_LOCATION_RISK.disaster)
-  setScreen('action')
-}}
+        onNext={() => {
+          setSelectedDisaster(MOCK_LOCATION_RISK.disaster)
+          setScreen('action')
+        }}
       />
     )
   }
@@ -208,7 +226,6 @@ onNext={() => {
   return (
     <HomeScreen
       onStartLocationCheck={startLocationCheck}
-
       onSelectDisaster={(disaster) => {
         if (disaster.key === 'bear') {
           setScreen('bear')
@@ -223,11 +240,8 @@ onNext={() => {
         setSelectedDisaster(disaster)
         setScreen('action')
       }}
-
       onStartSafetyCheck={() => setScreen('check')}
-
       onStartShelterGuide={() => setScreen('shelter')}
-
       onStartFamilyContact={() => setScreen('contact')}
     />
   )

@@ -35,7 +35,7 @@ const heatSteps = [
   },
 ]
 
-function HeatRiskScreen({ onBack }) {
+function HeatRiskScreen({ onBack, onStartSound }) {
   const [stepIndex, setStepIndex] = useState(0)
 
   const step = heatSteps[stepIndex]
@@ -84,6 +84,14 @@ function HeatRiskScreen({ onBack }) {
           onClick={handleNext}
         >
           {step.action}
+        </button>
+
+        <button
+          className="heat-flow-sound"
+          type="button"
+          onClick={onStartSound}
+        >
+          助けてコール
         </button>
       </main>
     </div>
