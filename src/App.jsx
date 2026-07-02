@@ -1,5 +1,6 @@
 import HomeScreen from './screens/HomeScreen'
 import { useEffect, useState } from 'react'
+import liff from '@line/liff'
 import './App.css'
 
 import ActionGuide from './components/ActionGuide'
@@ -23,6 +24,8 @@ import SuppliesScreen from './screens/SuppliesScreen'
 
 import { useCurrentLocation } from './hooks/useCurrentLocation'
 import { judgeRiskByLocation } from './utils/judgeRiskByLocation'
+
+const LIFF_ID = '2010583885-uy5idWcR'
 
 const DEFAULT_LOCATION_RISK = {
   disaster: {
@@ -83,6 +86,20 @@ function App() {
       : 'earthquake'
 
   useEffect(() => {
+    liff
+      .init({ liffId: LIFF_ID })
+      .then(() => {
+        console.log('LIFF initialized', {
+          isInClient: liff.isInClient(),
+          isLoggedIn: liff.isLoggedIn(),
+        })
+      })
+      .catch((error) => {
+        console.warn('LIFF initialization failed', error)
+      })
+  }, [])
+
+  useEffect(() => {
     if (!location) return
 
     const judgedRisk = judgeRiskByLocation(location)
@@ -115,7 +132,7 @@ function App() {
     setScreen('sound-confirm')
   }
 
-    if (screen === 'admin-info') {
+  if (screen === 'admin-info') {
     return (
       <AdminInfoScreen
         onBack={() => setScreen('top')}
@@ -123,7 +140,7 @@ function App() {
     )
   }
 
-    if (screen === 'supplies') {
+  if (screen === 'supplies') {
     return (
       <SuppliesScreen
         onBack={() => setScreen('top')}
@@ -241,12 +258,12 @@ function App() {
 
   if (screen === 'shelter') {
     return (
-    <ShelterGuide
-      disaster={currentDisasterKey}
-      location={location}
-      onBack={() => setScreen('next')}
-      onNext={() => setScreen('check')}
-    />
+      <ShelterGuide
+        disaster={currentDisasterKey}
+        location={location}
+        onBack={() => setScreen('next')}
+        onNext={() => setScreen('check')}
+      />
     )
   }
 
