@@ -1,54 +1,94 @@
-function FamilyContact({ disaster, onBack, onTop, onNext }) {
+function FamilyContact({
+  disaster,
+  onBack,
+  onNext,
+}) {
   const messages = {
     earthquake: '地震のため、安全確認をしています。',
     flood: '洪水のおそれがあるため、安全な場所へ移動しています。',
     fire: '火災のため、安全な場所へ避難しています。',
   }
 
+  const currentMessage =
+    messages[disaster] || messages.earthquake
+
+  const contacts = [
+    '家族',
+    '近所の人',
+    '支援が必要な人',
+    '職場・学校',
+  ]
+
   return (
-    <div className="app shelter-screen">
-      <div className="shelter-header">
-        <button className="back-button" onClick={onBack}>
+    <div className="family-contact-screen">
+      <header className="family-contact-header">
+        <button
+          className="family-contact-back"
+          type="button"
+          onClick={onBack}
+        >
           ← 戻る
         </button>
 
-        <h1>無事を知らせる</h1>
-        <p>家族や周囲へ状況を伝えてください</p>
-      </div>
+        <p className="family-contact-badge">
+          安否連絡
+        </p>
 
-      <div className="shelter-content">
-        <section className="shelter-card">
-          <h2>連絡メッセージ例</h2>
-          <p className="contact-message">
-            {messages[disaster]}
+        <h1>無事を知らせる</h1>
+
+        <p className="family-contact-lead">
+          家族や周囲へ
+          <br />
+          状況を伝えてください
+        </p>
+      </header>
+
+      <main className="family-contact-main">
+        <section className="family-message-card">
+          <p className="family-section-label">
+            連絡メッセージ例
+          </p>
+
+          <p className="family-message-text">
+            {currentMessage}
             <br />
             今いる場所と安全状況を伝えます。
           </p>
         </section>
 
-        <section className="shelter-card">
+        <section className="family-recipient-card">
           <h2>連絡する相手</h2>
 
-          <div className="contact-list">
-            <div className="contact-card">家族</div>
-            <div className="contact-card">近所の人</div>
-            <div className="contact-card">支援が必要な人</div>
-            <div className="contact-card">職場・学校</div>
+          <div className="family-recipient-list">
+            {contacts.map((contact) => (
+              <div
+                className="family-recipient-item"
+                key={contact}
+              >
+                {contact}
+              </div>
+            ))}
           </div>
         </section>
 
-        <section className="shelter-card emergency-card">
-          <h2>緊急時</h2>
+        <section className="family-emergency-note">
+          <h2>命の危険があるとき</h2>
+
           <p>
-            命の危険がある場合は、家族連絡よりも先に
-            119番・110番・自治体の指示を優先してください。
+            家族への連絡より先に、
+            119番・110番・自治体の指示を
+            優先してください。
           </p>
         </section>
 
-        <button className="primary-button" onClick={onNext}>
-        完了へ進む
+        <button
+          className="family-contact-next"
+          type="button"
+          onClick={onNext}
+        >
+          完了へ進む
         </button>
-      </div>
+      </main>
     </div>
   )
 }

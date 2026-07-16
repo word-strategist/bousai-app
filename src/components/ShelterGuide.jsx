@@ -1,79 +1,103 @@
-function ShelterGuide({ disaster, location, onBack, onNext }) {
+function ShelterGuide({
+  disaster,
+  location,
+  onBack,
+  onNext,
+}) {
   const guides = {
     earthquake: {
-      title: '避難先を確認',
-      color: 'orange',
-      locationAdvice: '倒壊・落下物の危険がある場所から離れてください',
+      title: '避難所を確認',
+      label: '地震',
+      advice: '倒壊や落下物に注意して移動してください',
+      themeClass: 'is-earthquake',
     },
 
     flood: {
-      title: '避難先を確認',
-      color: 'blue',
-      locationAdvice: '川・用水路・低い場所からすぐに離れてください',
+      title: '避難所を確認',
+      label: '洪水',
+      advice: '川や低い場所から離れてください',
+      themeClass: 'is-flood',
     },
 
     fire: {
-      title: '避難先を確認',
-      color: 'red',
-      locationAdvice: '煙と炎から離れ、風上側へ避難してください',
+      title: '避難所を確認',
+      label: '火災',
+      advice: '煙と炎から離れてください',
+      themeClass: 'is-fire',
     },
   }
 
-  const current = guides[disaster] || guides.earthquake
+  const current =
+    guides[disaster] || guides.earthquake
 
   const mapUrl = location
     ? `https://www.google.com/maps/dir/?api=1&origin=${location.lat},${location.lng}&destination=避難所&travelmode=walking`
     : 'https://www.google.com/maps/search/?api=1&query=避難所'
 
   return (
-    <div className="app shelter-screen">
-      <div className={`shelter-header ${current.color}`}>
-        <button className="back-button" type="button" onClick={onBack}>
+    <div className={`shelter-guide-screen ${current.themeClass}`}>
+      <header className="shelter-guide-header">
+        <button
+          className="shelter-guide-back"
+          type="button"
+          onClick={onBack}
+        >
           ← 戻る
         </button>
 
+        <p className="shelter-guide-label">
+          {current.label}
+        </p>
+
         <h1>{current.title}</h1>
-        <p>{current.locationAdvice}</p>
-      </div>
+      </header>
 
-      <div className="shelter-content">
-        <section className="shelter-card">
-          <h2>現在地付近</h2>
+      <main className="shelter-guide-main">
+        <section className="shelter-location-card">
+          <p className="shelter-location-label">
+            現在地
+          </p>
 
-          {location ? (
-            <>
-              <p className="location-large">GPS取得済み</p>
-              <span>現在地から避難所までの経路を開けます</span>
-            </>
-          ) : (
-            <>
-              <p className="location-large">現在地未取得</p>
-              <span>地図検索で近くの避難所を確認します</span>
-            </>
-          )}
+          <h2>
+            {location
+              ? 'GPS取得済み'
+              : '現在地未取得'}
+          </h2>
+
+          <p>
+            {location
+              ? '現在地から近くの避難所を確認できます'
+              : '現在地周辺の避難所を検索します'}
+          </p>
         </section>
 
-        <section className="shelter-card map-card">
+        <section className="shelter-map-card">
+          <div className="shelter-map-icon" aria-hidden="true">
+            ⌖
+          </div>
+
           <h2>近くの避難所</h2>
 
+          <p>{current.advice}</p>
+
           <a
-            className="map-open-button"
+            className="shelter-map-button"
             href={mapUrl}
             target="_blank"
             rel="noreferrer"
           >
-            Google Mapsで経路を見る
+            Google Mapsで確認
           </a>
         </section>
 
         <button
-          className="primary-return"
+          className="shelter-next-button"
           type="button"
           onClick={onNext}
         >
           安全確認へ進む
         </button>
-      </div>
+      </main>
     </div>
   )
 }

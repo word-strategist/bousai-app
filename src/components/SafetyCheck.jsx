@@ -1,4 +1,8 @@
-function SafetyCheck({ disaster, onBack, onTop }) {
+function SafetyCheck({
+  disaster,
+  onBack,
+  onTop,
+}) {
   const checks = {
     earthquake: [
       '頭を守った',
@@ -25,61 +29,63 @@ function SafetyCheck({ disaster, onBack, onTop }) {
     ],
   }
 
-  const currentChecks = checks[disaster]
+  const currentChecks =
+    checks[disaster] || checks.earthquake
 
   return (
-    <div className="app shelter-screen">
-
-        <div className="safety-header">
-        <div className="safety-phase-badge">
-            安全確認
-        </div>
-
-        <h1 className="safety-main-title">
-            落ち着いて、
-            <br />
-            安全を確認しましょう
-        </h1>
-
-        <p className="safety-main-text">
-            危険がないか、
-            順番に確認してください。
-        </p>
-        </div>
-
-      <div className="shelter-header">
-        <button className="back-button" onClick={onBack}>
+    <div className="safety-check-screen">
+      <header className="safety-check-header">
+        <button
+          className="safety-check-back"
+          type="button"
+          onClick={onBack}
+        >
           ← 戻る
         </button>
 
-        <h1>安全確認チェック</h1>
+        <p className="safety-phase-badge">
+          安全確認
+        </p>
 
-            <p>
-            1つずつ確認してください
-            </p>
-      </div>
+        <h1>
+          落ち着いて、
+          <br />
+          安全を確認しましょう
+        </h1>
 
-      <div className="shelter-content">
-        <div className="warning-box">
-          ⚠️ 確認できたらチェック
-        </div>
+        <p className="safety-check-lead">
+          危険がないか、
+          <br />
+          順番に確認してください
+        </p>
+      </header>
 
-        <div className="check-list">
+      <main className="safety-check-main">
+        <p className="safety-check-guide">
+          確認できた項目にチェック
+        </p>
+
+        <div className="safety-check-list">
           {currentChecks.map((check) => (
-            <label className="check-card" key={check}>
+            <label
+              className="safety-check-item"
+              key={check}
+            >
               <input type="checkbox" />
+
               <span>{check}</span>
             </label>
           ))}
         </div>
 
         <button
-            className="primary-return"
-            onClick={() => onTop('contact')}
+          className="safety-check-next"
+          type="button"
+          onClick={() => onTop('contact')}
         >
-            家族・周囲へ連絡する
+          家族・周囲へ連絡する
         </button>
-      </div>
+      </main>
     </div>
   )
 }
