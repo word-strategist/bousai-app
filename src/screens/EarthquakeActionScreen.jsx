@@ -1,33 +1,42 @@
 import { useState } from 'react'
 
+import protectHeadImage from '../assets/stamps/action-protect-head.png'
+import waitImage from '../assets/app/action/app-action-earthquake-wait-v1.png'
+import dontGoOutImage from '../assets/app/action/app-action-earthquake-dont-go-out-v1.png'
+import moveToShelterImage from '../assets/app/action/app-action-earthquake-move-to-shelter-v1.png'
+
 const earthquakeSteps = [
   {
     label: '1/4',
-    title: '地震発生',
-    message: 'まず頭を守ってください',
+    title: '頭を守る',
+    message: 'まず、頭を守ってください',
     action: '頭を守る',
-    mark: '🛡',
+    image: protectHeadImage,
+    mark: null,
   },
   {
     label: '2/4',
-    title: '頭を守る',
-    message: '机の下やカバンで頭を守る',
+    title: 'その場で待つ',
+    message: '揺れが収まるまで動かない',
     action: '待つ',
-    mark: '🙆',
+    image: waitImage,
+    mark: null,
   },
   {
     label: '3/4',
-    title: '揺れが収まるまで待つ',
-    message: 'あわてて外へ出ない',
-    action: '避難する',
-    mark: '✋',
+    title: 'あわてて出ない',
+    message: '揺れが収まるまで外へ出ない',
+    action: '安全を確認',
+    image: dontGoOutImage,
+    mark: null,
   },
   {
     label: '4/4',
     title: '安全な場所へ',
     message: '落下物に注意して移動する',
     action: '避難所へ進む',
-    mark: '🏃',
+    image: moveToShelterImage,
+    mark: null,
   },
 ]
 
@@ -56,19 +65,47 @@ function EarthquakeActionScreen({ onBack, onNext }) {
   }
 
   return (
-    <div className="danger-screen earthquake-flow-screen">
-      <header className="danger-header">
-        <button type="button" onClick={handlePrev}>‹</button>
+    <div className="earthquake-flow-screen">
+      <header className="earthquake-flow-header">
+        <button
+          type="button"
+          className="earthquake-flow-back"
+          onClick={handlePrev}
+          aria-label="前の画面へ戻る"
+        >
+          ‹
+        </button>
+
         <h1>地震</h1>
-        <div />
+
+        <div aria-hidden="true" />
       </header>
 
       <main className="earthquake-flow-main">
-        <div className="earthquake-flow-progress">{step.label}</div>
+        <div className="earthquake-flow-progress">
+          {step.label}
+        </div>
 
         <section className="earthquake-flow-card">
-          <div className="earthquake-flow-mark">{step.mark}</div>
           <h2>{step.title}</h2>
+
+          <div className="earthquake-flow-visual">
+            {step.image ? (
+              <img
+                src={step.image}
+                alt=""
+                className="earthquake-flow-image"
+              />
+            ) : (
+              <span
+                className="earthquake-flow-mark"
+                aria-hidden="true"
+              >
+                {step.mark}
+              </span>
+            )}
+          </div>
+
           <p>{step.message}</p>
         </section>
 

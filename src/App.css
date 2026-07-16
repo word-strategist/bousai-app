@@ -1378,6 +1378,148 @@ button {
 }
 
 /* =========================
+   Earthquake Action Flow
+========================= */
+
+.earthquake-flow-screen {
+  min-height: 100dvh;
+  background: #f5f7fb;
+  color: #0f172a;
+  display: flex;
+  flex-direction: column;
+}
+
+.earthquake-flow-header {
+  min-height: 64px;
+  padding: 0 18px;
+  background: #ffffff;
+  border-bottom: 1px solid #e2e8f0;
+
+  display: grid;
+  grid-template-columns: 48px 1fr 48px;
+  align-items: center;
+}
+
+.earthquake-flow-header h1 {
+  margin: 0;
+  text-align: center;
+  font-size: 24px;
+  font-weight: 900;
+}
+
+.earthquake-flow-back {
+  width: 48px;
+  height: 48px;
+  border: none;
+  padding: 0;
+  background: transparent;
+  color: #0f172a;
+  font-size: 44px;
+  line-height: 1;
+}
+
+.earthquake-flow-main {
+  width: 100%;
+  max-width: 430px;
+  min-height: calc(100dvh - 64px);
+  margin: 0 auto;
+  padding: 22px 20px 28px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.earthquake-flow-progress {
+  min-width: 82px;
+  padding: 10px 18px;
+  border-radius: 999px;
+  background: #ff7a1a;
+  color: #ffffff;
+
+  text-align: center;
+  font-size: 18px;
+  line-height: 1;
+  font-weight: 900;
+}
+
+.earthquake-flow-card {
+  width: 100%;
+  flex: 1;
+  margin-top: 18px;
+  padding: 26px 20px 24px;
+  border-radius: 32px;
+  background: #ffffff;
+  box-shadow: 0 14px 30px rgba(15, 23, 42, 0.08);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.earthquake-flow-card h2 {
+  margin: 0;
+  color: #dc2626;
+  font-size: clamp(38px, 11vw, 54px);
+  line-height: 1.1;
+  font-weight: 900;
+}
+
+.earthquake-flow-visual {
+  width: 100%;
+  flex: 1;
+  min-height: 300px;
+  margin: 18px 0;
+
+  display: grid;
+  place-items: center;
+}
+
+.earthquake-flow-image {
+  display: block;
+  width: 96%;
+  max-width: 330px;
+  height: auto;
+  margin: 0 auto;
+  object-fit: contain;
+}
+
+.earthquake-flow-mark {
+  font-size: 150px;
+  line-height: 1;
+}
+
+.earthquake-flow-card p {
+  margin: 0;
+  color: #12304a;
+  font-size: 25px;
+  line-height: 1.45;
+  font-weight: 900;
+}
+
+.earthquake-flow-next {
+  width: 100%;
+  min-height: 88px;
+  margin-top: 22px;
+  border: none;
+  border-radius: 999px;
+  background: #2563eb;
+  color: #ffffff;
+
+  font-size: 30px;
+  line-height: 1;
+  font-weight: 900;
+
+  box-shadow: 0 12px 24px rgba(37, 99, 235, 0.25);
+}
+
+.earthquake-flow-next:active {
+  transform: scale(0.97);
+  opacity: 0.92;
+}
+
+/* =========================
    FOOTER / TAP FEEDBACK
 ========================= */
 
