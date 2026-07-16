@@ -1,6 +1,7 @@
-import locationIcon from '../assets/icons/location.png'
-import bearIcon from '../assets/icons/bear.png'
-import heatIcon from '../assets/icons/heat.png'
+import locationIcon from '../assets/app/home/app-home-location-icon-v1.png'
+import bearIcon from '../assets/app/home/app-home-bear-icon-v1.png'
+import heatIcon from '../assets/app/home/app-home-heat-icon-v1.png'
+
 import familyIcon from '../assets/icons/family.png'
 import shelterIcon from '../assets/icons/shelter.png'
 import governmentIcon from '../assets/icons/government.png'
@@ -17,25 +18,37 @@ function HomeScreen({
   return (
     <div className="home-screen">
       <main className="home-body">
+        {/* =========================
+            TOP Hero
+        ========================= */}
         <section className="home-hero">
-          <p className="home-label">地域防災プラットフォーム</p>
+          <div className="home-hero-copy">
+            <p className="home-label">地域防災プラットフォーム</p>
 
-          <div className="home-shield">✓</div>
+            <h1>
+              いま、
+              <br />
+              何の危険がある？
+            </h1>
+          </div>
 
-          <h1>
-            迷わない。<br />
-            押すだけ。
-          </h1>
-
-          <p className="home-lead">
-            いざという時、<br />
-            次の一歩へ。
-          </p>
+          <div className="home-hero-visual" aria-hidden="true">
+          </div>
         </section>
 
-        <section className="home-main-actions">
-          <button className="main-action main-action-primary" type="button" onClick={onStartLocationCheck}>
-            <span className="action-mark">
+        {/* =========================
+            Main Actions
+        ========================= */}
+        <section
+          className="home-main-actions"
+          aria-label="すぐに確認する機能"
+        >
+          <button
+            className="main-action blue"
+            type="button"
+            onClick={onStartLocationCheck}
+          >
+            <span className="action-mark" aria-hidden="true">
               <img src={locationIcon} alt="" />
             </span>
 
@@ -43,14 +56,24 @@ function HomeScreen({
               <strong>現在地を確認</strong>
               <small>今いる場所の危険を見る</small>
             </span>
+
+            <span className="action-arrow" aria-hidden="true">
+              ›
+            </span>
           </button>
 
           <button
-            className="main-action main-action-danger"
+            className="main-action orange"
             type="button"
-            onClick={() => onSelectDisaster?.({ key: 'bear', label: '熊', title: '' })}
+            onClick={() =>
+              onSelectDisaster?.({
+                key: 'bear',
+                label: '熊',
+                title: '',
+              })
+            }
           >
-            <span className="action-mark">
+            <span className="action-mark" aria-hidden="true">
               <img src={bearIcon} alt="" />
             </span>
 
@@ -58,14 +81,24 @@ function HomeScreen({
               <strong>熊を見たら</strong>
               <small>すぐにとる行動を見る</small>
             </span>
+
+            <span className="action-arrow" aria-hidden="true">
+              ›
+            </span>
           </button>
 
           <button
-            className="main-action main-action-warning"
+            className="main-action yellow"
             type="button"
-            onClick={() => onSelectDisaster?.({ key: 'heat', label: '暑さ', title: '暑さの危険' })}
+            onClick={() =>
+              onSelectDisaster?.({
+                key: 'heat',
+                label: '暑さ',
+                title: '暑さの危険',
+              })
+            }
           >
-            <span className="action-mark">
+            <span className="action-mark" aria-hidden="true">
               <img src={heatIcon} alt="" />
             </span>
 
@@ -73,11 +106,29 @@ function HomeScreen({
               <strong>暑さの危険</strong>
               <small>熱中症の危険を見る</small>
             </span>
+
+            <span className="action-arrow" aria-hidden="true">
+              ›
+            </span>
           </button>
         </section>
 
-        <section className="home-sub-actions">
-          <p className="home-sub-title">落ち着いた後に使う機能</p>
+        {/* =========================
+            Sub Actions
+        ========================= */}
+        <section
+          className="home-sub-actions"
+          aria-labelledby="home-sub-actions-title"
+        >
+          <div className="sub-heading">
+            <span aria-hidden="true" />
+
+            <p id="home-sub-actions-title">
+              落ち着いた後に使う機能
+            </p>
+
+            <span aria-hidden="true" />
+          </div>
 
           <div className="sub-grid">
             <button type="button" onClick={onStartFamilyContact}>

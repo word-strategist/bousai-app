@@ -27,12 +27,18 @@ import { judgeRiskByLocation } from './utils/judgeRiskByLocation'
 
 const LIFF_ID = '2010583885-uy5idWcR'
 
+// =========================
+// Demo Setting
+// 地震フロー確認後に false へ戻す
+// =========================
+const EARTHQUAKE_DEMO_ENABLED = true
+
 const DEFAULT_LOCATION_RISK = {
   disaster: {
-    key: 'fire',
-    name: '火災',
+    key: 'earthquake',
+    name: '地震',
   },
-  areaName: '大阪市付近',
+  areaName: '現在地周辺',
   riskLevel: '高い',
 }
 
@@ -99,22 +105,41 @@ function App() {
       })
   }, [])
 
-  useEffect(() => {
-    if (!location) return
+useEffect(() => {
+  if (!location) return
 
-    const judgedRisk = judgeRiskByLocation(location)
-
-    if (!judgedRisk) return
-
+  // =========================
+  // Earthquake Demo
+  // =========================
+  if (EARTHQUAKE_DEMO_ENABLED) {
     setLocationRisk({
       disaster: {
-        key: judgedRisk.key,
-        name: judgedRisk.name,
+        key: 'earthquake',
+        name: '地震',
       },
-      areaName: judgedRisk.areaName,
-      riskLevel: judgedRisk.riskLevel,
+      areaName: '現在地周辺',
+      riskLevel: '高い',
     })
-  }, [location])
+
+    return
+  }
+
+  // =========================
+  // Location Risk Judgment
+  // =========================
+  const judgedRisk = judgeRiskByLocation(location)
+
+  if (!judgedRisk) return
+
+  setLocationRisk({
+    disaster: {
+      key: judgedRisk.key,
+      name: judgedRisk.name,
+    },
+    areaName: judgedRisk.areaName,
+    riskLevel: judgedRisk.riskLevel,
+  })
+}, [location])
 
   const startLocationCheck = () => {
     setIsCheckingLocation(true)

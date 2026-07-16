@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-import protectHeadImage from '../assets/stamps/action-protect-head.png'
+import earthquakeAlertImage from '../assets/app/alert/app-alert-earthquake-visual-v1.png'
 import bearImage from '../assets/stamps/bear-alert-icon.png'
 import fireImage from '../assets/stamps/fire-evacuate.png'
 import floodImage from '../assets/stamps/flood-evacuate.png'
@@ -39,23 +39,56 @@ export default function LocationCheck({
     )
   }
 
-  const illustrationMap = {
-    earthquake: protectHeadImage,
-    flood: floodImage,
-    fire: fireImage,
-    bear: bearImage,
-    heat: heatImage,
+  const riskKey = riskData?.disaster?.key || 'earthquake'
+  const areaName = riskData?.areaName || '現在地周辺'
+
+  const contentMap = {
+    earthquake: {
+      title: '地震',
+      messageTop: '今いる場所に',
+      messageBottom: '地震の危険があります',
+      image: earthquakeAlertImage,
+      themeClass: 'is-earthquake',
+    },
+    flood: {
+      title: '洪水',
+      messageTop: '今いる場所に',
+      messageBottom: '洪水の危険があります',
+      image: floodImage,
+      themeClass: 'is-flood',
+    },
+    fire: {
+      title: '火災',
+      messageTop: '今いる場所に',
+      messageBottom: '火災の危険があります',
+      image: fireImage,
+      themeClass: 'is-fire',
+    },
+    bear: {
+      title: '熊',
+      messageTop: '今いる場所に',
+      messageBottom: '熊出没の危険があります',
+      image: bearImage,
+      themeClass: 'is-bear',
+    },
+    heat: {
+      title: '暑さ',
+      messageTop: '今いる場所に',
+      messageBottom: '暑さの危険があります',
+      image: heatImage,
+      themeClass: 'is-heat',
+    },
   }
 
-  const currentImage =
-    illustrationMap[riskData?.disaster?.key] ||
-    protectHeadImage
+  const currentContent =
+    contentMap[riskKey] || contentMap.earthquake
 
   return (
     <div className="location-screen">
-      <div className="location-card danger-card">
+      <div className={`location-card danger-card ${currentContent.themeClass}`}>
         <div className="location-back-area">
           <button
+            type="button"
             className="location-back-button"
             onClick={onBack}
           >
@@ -63,28 +96,33 @@ export default function LocationCheck({
           </button>
         </div>
 
-        <p className="location-label">
-          {riskData?.areaName || '現在地周辺'}で注意
-        </p>
+        <div className="danger-main-area">
+          <p className="location-label">
+            {areaName}
+          </p>
 
-        <h1 className="danger-title">
-          {riskData?.disaster?.name || '危険'}に注意
-        </h1>
+          <h1 className="danger-title">
+            {currentContent.title}
+          </h1>
 
-        <div className="danger-illustration-box">
-          <img
-            src={currentImage}
-            alt="危険時の行動"
-            className="danger-illustration"
-          />
+          <div className="danger-illustration-box">
+            <img
+              src={currentContent.image}
+              alt=""
+              className="danger-illustration"
+            />
+          </div>
+
+          <p className="danger-message">
+            {currentContent.messageTop}
+            <br />
+            {currentContent.messageBottom}
+          </p>
         </div>
 
         <div className="danger-bottom-area">
-          <p className="danger-action">
-            次の行動へ進む
-          </p>
-
           <button
+            type="button"
             className="primary-button"
             onClick={onNext}
           >
