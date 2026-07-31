@@ -3,15 +3,16 @@ function SafetyCheck({
   onBack,
   onTop,
 }) {
-  const checks = {
-    earthquake: [
-      '頭を守った',
-      '揺れがおさまった',
-      '火元を確認した',
-      '出口を確認した',
-      '周囲の落下物を確認した',
-    ],
+  const isEarthquakeDemo = disaster === 'earthquake'
 
+  const earthquakeGuides = [
+    'けがをしていないか確認する',
+    '周囲に落ちてくるものがないか確認する',
+    '火や煙が出ていないか確認する',
+    '危険があれば安全な場所から離れる',
+  ]
+
+  const checks = {
     flood: [
       '低い場所から離れた',
       '川・用水路へ近づいていない',
@@ -19,7 +20,6 @@ function SafetyCheck({
       '高い場所へ移動できる',
       '冠水道路へ入っていない',
     ],
-
     fire: [
       '煙を吸っていない',
       '安全な場所へ移動した',
@@ -29,8 +29,7 @@ function SafetyCheck({
     ],
   }
 
-  const currentChecks =
-    checks[disaster] || checks.earthquake
+  const currentChecks = checks[disaster] || []
 
   return (
     <div className="safety-check-screen">
@@ -44,47 +43,103 @@ function SafetyCheck({
         </button>
 
         <p className="safety-phase-badge">
-          安全確認
+          {isEarthquakeDemo ? 'デモ表示' : '安全確認'}
         </p>
 
         <h1>
-          落ち着いて、
-          <br />
-          安全を確認しましょう
+          {isEarthquakeDemo ? (
+            <>
+              周囲と自分の
+              <br />
+              安全を確認する
+            </>
+          ) : (
+            <>
+              落ち着いて、
+              <br />
+              安全を確認しましょう
+            </>
+          )}
         </h1>
 
         <p className="safety-check-lead">
-          危険がないか、
-          <br />
-          順番に確認してください
+          {isEarthquakeDemo ? (
+            <>
+              無理に動かず、
+              <br />
+              危険がないか確認してください
+            </>
+          ) : (
+            <>
+              危険がないか、
+              <br />
+              順番に確認してください
+            </>
+          )}
         </p>
       </header>
 
       <main className="safety-check-main">
-        <p className="safety-check-guide">
-          確認できた項目にチェック
-        </p>
+        {isEarthquakeDemo ? (
+          <>
+            <p className="safety-check-guide">
+              今いる場所で確認すること
+            </p>
 
-        <div className="safety-check-list">
-          {currentChecks.map((check) => (
-            <label
-              className="safety-check-item"
-              key={check}
+            <div className="safety-guide-list">
+              {earthquakeGuides.map((guide, index) => (
+                <div
+                  className="safety-guide-item"
+                  key={guide}
+                >
+                  <span aria-hidden="true">
+                    {index + 1}
+                  </span>
+                  <p>{guide}</p>
+                </div>
+              ))}
+            </div>
+
+            <button
+              className="safety-check-next"
+              type="button"
+              onClick={() => onTop('completion')}
             >
-              <input type="checkbox" />
+              最新情報の確認方法を見る
+            </button>
 
-              <span>{check}</span>
-            </label>
-          ))}
-        </div>
+            <p className="safety-check-demo-note">
+              これはデモです。実際の災害情報とは
+              連動していません。
+            </p>
+          </>
+        ) : (
+          <>
+            <p className="safety-check-guide">
+              確認できた項目にチェック
+            </p>
 
-        <button
-          className="safety-check-next"
-          type="button"
-          onClick={() => onTop('contact')}
-        >
-          家族・周囲へ連絡する
-        </button>
+            <div className="safety-check-list">
+              {currentChecks.map((check) => (
+                <label
+                  className="safety-check-item"
+                  key={check}
+                >
+                  <input type="checkbox" />
+                  <span>{check}</span>
+                </label>
+              ))}
+            </div>
+
+            <button
+              className="safety-check-next"
+              type="button"
+              onClick={() => onTop('contact')}
+            >
+              家族・周囲へ連絡する
+            </button>
+          </>
+        )}
       </main>
     </div>
   )

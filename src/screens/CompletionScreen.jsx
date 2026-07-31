@@ -1,24 +1,21 @@
 function CompletionScreen({ onTop }) {
-  const completedActions = [
-    '身の安全を確認',
-    '避難先を確認',
-    '家族・周囲へ連絡',
-    '公的情報を確認',
-  ]
-
   return (
     <div className="completion-screen">
       <header className="completion-header">
         <p className="completion-badge">
-          完了
+          デモ終了
         </p>
 
-        <h1>ここまでできました</h1>
+        <h1>
+          地震時の行動案内は
+          <br />
+          ここまでです
+        </h1>
 
         <p className="completion-lead">
-          安全の確保と、
+          実際の災害時は、
           <br />
-          必要な連絡まで完了しました
+          公的機関の最新情報を確認してください
         </p>
       </header>
 
@@ -28,31 +25,25 @@ function CompletionScreen({ onTop }) {
             className="completion-status-icon"
             aria-hidden="true"
           >
-            ✓
+            i
           </div>
 
-          <h2>安全な場所で待機してください</h2>
+          <h2>最新情報を確認する</h2>
 
           <p>
-            自治体や気象庁などの公的情報を確認しながら、
-            周囲の安全に注意してください。
+            自治体、気象庁、消防、警察などの
+            公的機関が発信する情報を確認してください。
           </p>
         </section>
 
-        <section className="completion-actions-card">
-          <h2>ここまでの行動</h2>
+        <section className="completion-demo-note">
+          <h2>この画面について</h2>
 
-          <div className="completion-action-list">
-            {completedActions.map((action) => (
-              <div
-                className="completion-action-item"
-                key={action}
-              >
-                <span aria-hidden="true">✓</span>
-                <p>{action}</p>
-              </div>
-            ))}
-          </div>
+          <p>
+            これは疑似情報を使用したデモです。
+            実際の緊急地震速報や災害情報とは
+            連動していません。
+          </p>
         </section>
 
         <button
@@ -60,7 +51,7 @@ function CompletionScreen({ onTop }) {
           type="button"
           onClick={onTop}
         >
-          ホームへ戻る
+          TOPへ戻る
         </button>
       </main>
     </div>
