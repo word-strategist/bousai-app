@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react'
 
 import locationIcon from '../assets/app/home/app-home-location-icon-v1.png'
 import earthquakeIcon from '../assets/app/home/app-home-earthquake-icon-v1.png'
+import bearPreviewIcon from '../assets/app/home/app-home-bear-preview-icon-v1.png'
+import heatPreviewIcon from '../assets/app/home/app-home-heat-icon-v1.png'
 
 import shelterIcon from '../assets/icons/shelter.png'
 import governmentIcon from '../assets/icons/government.png'
@@ -243,12 +245,65 @@ function HomeScreen({
               </p>
             ) : null}
 
-            {/* =========================
-                準備中の機能
-            ========================= */}
-            <p className="home-coming-soon-note">
-              熊・暑さの案内は準備中です
-            </p>
+      {/* =========================
+          準備中の画面イメージ
+      ========================= */}
+      <section
+        className="home-preview-section"
+        aria-labelledby="home-preview-title"
+      >
+        <div className="home-preview-heading">
+          <p>今後追加予定の案内</p>
+
+          <h2 id="home-preview-title">
+            準備中の画面イメージ
+          </h2>
+        </div>
+
+        <div className="home-preview-grid">
+          {/* =========================
+              熊の案内プレビュー
+          ========================= */}
+          <article className="home-preview-card">
+            <div
+              className="home-preview-visual home-preview-visual-bear"
+              aria-hidden="true"
+            >
+              <img src={bearPreviewIcon} alt="" />
+            </div>
+
+            <div className="home-preview-copy">
+              <strong>熊の案内</strong>
+              <span>画面イメージ</span>
+            </div>
+
+            <span className="home-preview-badge">
+              準備中
+            </span>
+          </article>
+
+          {/* =========================
+              暑さの案内プレビュー
+          ========================= */}
+          <article className="home-preview-card">
+            <div
+              className="home-preview-visual home-preview-visual-heat"
+              aria-hidden="true"
+            >
+              <img src={heatPreviewIcon} alt="" />
+            </div>
+
+            <div className="home-preview-copy">
+              <strong>暑さの案内</strong>
+              <span>画面イメージ</span>
+            </div>
+
+            <span className="home-preview-badge">
+              準備中
+            </span>
+          </article>
+        </div>
+      </section>
           </section>
 
         <p className="home-demo-notice">

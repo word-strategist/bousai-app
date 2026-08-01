@@ -91,6 +91,17 @@ function App() {
       ? selectedDisaster.key
       : 'earthquake'
 
+        // =========================
+  // 画面遷移時のスクロール位置
+  // =========================
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'auto',
+    })
+  }, [screen])
+
   useEffect(() => {
     liff
       .init({ liffId: LIFF_ID })
