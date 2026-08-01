@@ -105,7 +105,15 @@ function App() {
       })
   }, [])
 
-useEffect(() => {
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'auto',
+    })
+  }, [screen])
+
+  useEffect(() => {
   if (!location) return
 
   // =========================

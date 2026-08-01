@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import locationIcon from '../assets/app/home/app-home-location-icon-v1.png'
 import bearIcon from '../assets/app/home/app-home-bear-icon-v1.png'
 import heatIcon from '../assets/app/home/app-home-heat-icon-v1.png'
-import earthquakeDemoVisual from '../assets/app/home/app-home-earthquake-demo-visual-v1.png'
+import earthquakeIcon from '../assets/app/home/app-home-earthquake-icon-v1.png'
 
 import familyIcon from '../assets/icons/family.png'
 import shelterIcon from '../assets/icons/shelter.png'
@@ -152,122 +152,118 @@ function HomeScreen({
           className="home-main-actions"
           aria-label="すぐに確認する機能"
         >
-          {/* =========================
-              地震デモ導入
-          ========================= */}
-          <button
-            className="earthquake-demo-card"
-            type="button"
-            onClick={onStartEarthquakeDemo}
-            aria-label="地震時の行動案内デモを体験する"
-          >
-            <span className="earthquake-demo-copy">
-              <span className="earthquake-demo-badge">
-                防災サプリ デモ版
+            {/* =========================
+                現在地確認デモ
+            ========================= */}
+            <button
+              className="location-demo-card"
+              type="button"
+              onClick={onStartLocationCheck}
+              disabled={isLocationLoading}
+            >
+              <span
+                className="location-demo-icon"
+                aria-hidden="true"
+              >
+                <img src={locationIcon} alt="" />
               </span>
 
-              <strong className="earthquake-demo-title">
-                地震時の行動案内を
-                <br />
-                体験する
-              </strong>
+              <span className="location-demo-copy">
+                <strong>
+                  {isLocationLoading
+                    ? '現在地を確認中'
+                    : '現在地確認デモ'}
+                </strong>
 
-              <span className="earthquake-demo-description">
-                一つずつ行動を確認します
+                <small>
+                  {isLocationLoading
+                    ? '位置情報を取得しています'
+                    : '位置情報を使った案内例を見る'}
+                </small>
               </span>
-            </span>
 
-            <span
-              className="earthquake-demo-visual"
-              aria-hidden="true"
+              <span
+                className="location-demo-arrow"
+                aria-hidden="true"
+              >
+                ›
+              </span>
+            </button>
+
+            {locationError ? (
+              <p className="home-location-error" role="status">
+                {locationError}
+              </p>
+            ) : null}
+
+            {/* =========================
+                地震・熊・暑さ
+            ========================= */}
+            <button
+              className="main-action blue"
+              type="button"
+              onClick={onStartEarthquakeDemo}
+              aria-label="地震時の行動案内デモを体験する"
             >
-              <img
-                src={earthquakeDemoVisual}
-                alt=""
-              />
-            </span>
+              <span
+                className="action-mark action-mark-visual"
+                aria-hidden="true"
+              >
+                <img src={earthquakeIcon} alt="" />
+              </span>
 
-            <span
-              className="earthquake-demo-arrow"
-              aria-hidden="true"
+              <span className="action-copy">
+                <span className="action-badge">
+                  防災サプリ デモ版
+                </span>
+
+                <strong>地震時の行動案内</strong>
+                <small>一つずつ行動を確認する</small>
+              </span>
+
+              <span className="action-arrow" aria-hidden="true">
+                ›
+              </span>
+            </button>
+
+            <button
+              className="main-action orange"
+              type="button"
+              onClick={openBear}
             >
-              ›
-            </span>
-          </button>
+              <span className="action-mark" aria-hidden="true">
+                <img src={bearIcon} alt="" />
+              </span>
 
-          <button
-            className="main-action blue"
-            type="button"
-            onClick={onStartLocationCheck}
-            disabled={isLocationLoading}
-          >
-            <span className="action-mark" aria-hidden="true">
-              <img src={locationIcon} alt="" />
-            </span>
+              <span className="action-copy">
+                <strong>熊を見たら</strong>
+                <small>すぐにとる行動を見る</small>
+              </span>
 
-            <span className="action-copy">
-              <strong>
-                {isLocationLoading
-                  ? '現在地を確認中'
-                  : '現在地を確認'}
-              </strong>
+              <span className="action-arrow" aria-hidden="true">
+                ›
+              </span>
+            </button>
 
-              <small>
-                {isLocationLoading
-                  ? '位置情報を取得しています'
-                  : '今いる場所の危険を見る'}
-              </small>
-            </span>
+            <button
+              className="main-action yellow"
+              type="button"
+              onClick={openHeat}
+            >
+              <span className="action-mark" aria-hidden="true">
+                <img src={heatIcon} alt="" />
+              </span>
 
-            <span className="action-arrow" aria-hidden="true">
-              ›
-            </span>
-          </button>
+              <span className="action-copy">
+                <strong>暑さの危険</strong>
+                <small>熱中症の危険を見る</small>
+              </span>
 
-          {locationError ? (
-            <p className="home-location-error" role="status">
-              {locationError}
-            </p>
-          ) : null}
-
-          <button
-            className="main-action orange"
-            type="button"
-            onClick={openBear}
-          >
-            <span className="action-mark" aria-hidden="true">
-              <img src={bearIcon} alt="" />
-            </span>
-
-            <span className="action-copy">
-              <strong>熊を見たら</strong>
-              <small>すぐにとる行動を見る</small>
-            </span>
-
-            <span className="action-arrow" aria-hidden="true">
-              ›
-            </span>
-          </button>
-
-          <button
-            className="main-action yellow"
-            type="button"
-            onClick={openHeat}
-          >
-            <span className="action-mark" aria-hidden="true">
-              <img src={heatIcon} alt="" />
-            </span>
-
-            <span className="action-copy">
-              <strong>暑さの危険</strong>
-              <small>熱中症の危険を見る</small>
-            </span>
-
-            <span className="action-arrow" aria-hidden="true">
-              ›
-            </span>
-          </button>
-        </section>
+              <span className="action-arrow" aria-hidden="true">
+                ›
+              </span>
+            </button>
+          </section>
 
         <p className="home-demo-notice">
           これはデモ版です。実際の災害情報とは連動していません。

@@ -1529,18 +1529,126 @@ body.app-panel-open {
   gap: 10px;
 }
 
-.main-action {
+/* =========================
+   Location Demo Card
+========================= */
+
+.location-demo-card {
   width: 100%;
-  border: 0;
+  min-height: 78px;
+  padding: 10px 16px;
+
+  border: 2px solid #bfd2f4;
   border-radius: 22px;
-  padding: 0 15px;
+
+  background: linear-gradient(
+    180deg,
+    #ffffff 0%,
+    #f1f6ff 100%
+  );
 
   display: grid;
-  grid-template-columns: 58px 1fr 24px;
+  grid-template-columns: 50px 1fr 24px;
   align-items: center;
+  gap: 10px;
 
+  color: #174ea6;
   text-align: left;
+
+  box-shadow: 0 10px 22px rgba(15, 23, 42, 0.08);
+
+  transition:
+    transform 0.12s ease,
+    box-shadow 0.12s ease,
+    opacity 0.12s ease;
+}
+
+.location-demo-card:active {
+  transform: scale(0.98);
+  opacity: 0.94;
+}
+
+.location-demo-card:disabled {
+  cursor: wait;
+  opacity: 0.7;
+}
+
+/* =========================
+   現在地確認デモ アイコン
+========================= */
+.location-demo-icon {
+  width: 46px;
+  height: 46px;
+  padding: 7px;
+
+  border-radius: 14px;
+  background: #2563eb;
+
+  display: grid;
+  place-items: center;
+}
+
+.location-demo-icon img {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+  object-fit: contain;
+
+  filter: brightness(0) invert(1);
+}
+
+.location-demo-copy {
+  min-width: 0;
+}
+
+.location-demo-copy strong {
+  display: block;
+
+  color: #174ea6;
+  font-size: 18px;
+  line-height: 1.15;
+  font-weight: 900;
+}
+
+.location-demo-copy small {
+  display: block;
+  margin-top: 4px;
+
+  color: #52647d;
+  font-size: 11px;
+  line-height: 1.3;
+  font-weight: 800;
+}
+
+.location-demo-arrow {
+  justify-self: end;
+
+  color: #2563eb;
+  font-size: 38px;
+  line-height: 1;
+  font-weight: 300;
+}
+
+/* =========================
+   Disaster Action Cards
+========================= */
+
+.main-action {
+  width: 100%;
+  height: 82px;
+  padding: 0 16px;
+
+  border: 0;
+  border-radius: 22px;
+
+  display: grid;
+  grid-template-columns: 54px 1fr 24px;
+  align-items: center;
+  gap: 10px;
+
   color: #ffffff;
+  text-align: left;
 
   overflow: hidden;
 
@@ -1559,19 +1667,8 @@ body.app-panel-open {
   opacity: 0.92;
 }
 
-.main-action:disabled {
-  cursor: wait;
-  opacity: 0.72;
-}
-
 .main-action.blue {
-  height: 88px;
   background: #2563eb;
-}
-
-.main-action.orange,
-.main-action.yellow {
-  height: 72px;
 }
 
 .main-action.orange {
@@ -1583,219 +1680,73 @@ body.app-panel-open {
 }
 
 .action-mark {
-  width: 52px;
-  height: 52px;
+  width: 50px;
+  height: 50px;
 
   display: grid;
   place-items: center;
-
-  flex-shrink: 0;
-}
-
-.main-action.orange .action-mark,
-.main-action.yellow .action-mark {
-  width: 46px;
-  height: 46px;
 }
 
 .action-mark img {
   width: 100%;
   height: 100%;
 
+  display: block;
   object-fit: contain;
-  display: block;
-}
-
-.action-copy strong {
-  display: block;
-
-  font-size: 20px;
-  line-height: 1.1;
-  font-weight: 900;
-}
-
-.main-action.blue .action-copy strong {
-  font-size: 24px;
-}
-
-.action-copy small {
-  display: block;
-  margin-top: 3px;
-
-  font-size: 11px;
-  line-height: 1.25;
-  font-weight: 800;
-}
-
-.main-action.blue .action-copy small {
-  font-size: 12px;
-}
-
-.action-arrow {
-  justify-self: end;
-
-  color: #ffffff;
-  font-size: 42px;
-  line-height: 1;
-  font-weight: 300;
-}
-
-.home-location-error {
-  margin: -6px 4px 0;
-
-  color: #b42318;
-  font-size: 12px;
-  line-height: 1.5;
-  font-weight: 800;
-  text-align: center;
 }
 
 /* =========================
-   Earthquake Demo Card
+   地震カードアイコン
+   赤色の透過原画をTOPでは白色表示にする
 ========================= */
+.action-mark-visual {
+  width: 58px;
+  height: 58px;
+  padding: 0;
 
-.earthquake-demo-card {
-  position: relative;
-  width: 100%;
-  min-height: 118px;
-  padding: 11px 45px 11px 13px;
+  background: transparent;
+  border-radius: 0;
 
-  border: 1px solid #c9d8f5;
-  border-radius: 22px;
-
-  background: linear-gradient(
-    180deg,
-    #f8fbff 0%,
-    #f2f6fc 100%
-  );
-
-  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.07);
-
-  display: grid;
-  grid-template-columns:
-    minmax(0, 1fr)
-    minmax(82px, 0.62fr);
-  align-items: center;
-  gap: 8px;
-
-  color: #0f172a;
-  text-align: left;
-
-  cursor: pointer;
-  appearance: none;
-
-  transition:
-    transform 0.12s ease,
-    border-color 0.12s ease,
-    box-shadow 0.12s ease,
-    opacity 0.12s ease;
+  overflow: visible;
 }
 
-.earthquake-demo-card:hover {
-  border-color: #abc4f4;
-  box-shadow: 0 14px 30px rgba(15, 23, 42, 0.09);
-}
-
-.earthquake-demo-card:active {
-  transform: scale(0.98);
-  opacity: 0.96;
-}
-
-.earthquake-demo-card:focus-visible {
-  outline: 4px solid rgba(37, 99, 235, 0.24);
-  outline-offset: 3px;
-}
-
-.earthquake-demo-copy {
-  min-width: 0;
-
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-
-.earthquake-demo-badge {
-  display: inline-flex;
-  align-items: center;
-
-  min-height: 23px;
-  margin-bottom: 5px;
-  padding: 3px 7px;
-
-  border-radius: 9px;
-
-  background: #3563e9;
-  color: #ffffff;
-
-  font-size: 0.58rem;
-  line-height: 1.2;
-  font-weight: 900;
-
-  white-space: nowrap;
-}
-
-.earthquake-demo-title {
-  color: #0f172a;
-
-  font-size: clamp(1.02rem, 4vw, 1.24rem);
-  line-height: 1.14;
-  font-weight: 900;
-  letter-spacing: -0.035em;
-}
-
-.earthquake-demo-description {
-  margin-top: 5px;
-
-  color: #64748b;
-
-  font-size: 0.68rem;
-  line-height: 1.4;
-  font-weight: 800;
-}
-
-.earthquake-demo-visual {
-  width: 100%;
-  height: 82px;
-
-  border-radius: 15px;
-
-  display: block;
-  overflow: hidden;
-
-  background: #dce9fb;
-}
-
-.earthquake-demo-visual img {
+.action-mark-visual img {
   width: 100%;
   height: 100%;
+  padding: 0;
 
   display: block;
+  object-fit: contain;
 
-  object-fit: cover;
-  object-position: center;
+  filter: brightness(0) invert(1);
 }
 
-.earthquake-demo-arrow {
-  position: absolute;
-  top: 50%;
-  right: 12px;
+/* =========================
+   TOP 災害カード均等表示（暫定上書き）
+   旧レスポンシブ指定が残っているため、
+   地震・熊・暑さの3カードを同じ高さ・同じ文字サイズに揃える
+   表示確認後、旧指定を削除してこの上書きも整理する
+========================= */
+@media (max-width: 390px) {
+  .main-action,
+  .main-action.blue,
+  .main-action.orange,
+  .main-action.yellow {
+    height: 82px;
+  }
 
-  width: 30px;
-  height: 30px;
+  .main-action {
+    grid-template-columns: 62px 1fr 24px;
+  }
 
-  border-radius: 999px;
+  .main-action .action-mark {
+    width: 50px;
+    height: 50px;
+  }
 
-  background: #3563e9;
-  color: #ffffff;
-
-  display: grid;
-  place-items: center;
-
-  font-size: 1.55rem;
-  line-height: 1;
-  font-weight: 400;
-
-  transform: translateY(-50%);
+  .main-action .action-copy strong {
+    font-size: 21px;
+  }
 }
 
 /* =========================
