@@ -1,11 +1,8 @@
 import { useEffect, useState } from 'react'
 
 import locationIcon from '../assets/app/home/app-home-location-icon-v1.png'
-import bearIcon from '../assets/app/home/app-home-bear-icon-v1.png'
-import heatIcon from '../assets/app/home/app-home-heat-icon-v1.png'
 import earthquakeIcon from '../assets/app/home/app-home-earthquake-icon-v1.png'
 
-import familyIcon from '../assets/icons/family.png'
 import shelterIcon from '../assets/icons/shelter.png'
 import governmentIcon from '../assets/icons/government.png'
 import suppliesIcon from '../assets/icons/supplies.png'
@@ -102,25 +99,44 @@ function HomeScreen({
           aria-expanded={activePanel === 'settings'}
           aria-controls="home-settings-panel"
         >
-          <svg
-            viewBox="0 0 48 48"
-            aria-hidden="true"
-          >
-            <path
-              d="
-                M20 3h8l2 6
-                5 2 6-3 5 6-4 5
-                1 5 5 4-3 8-6 1
-                -3 5 1 7-7 4-4-5
-                h-6l-4 5-7-4 1-7
-                -3-5-6-1-3-8 5-4
-                1-5-4-5 5-6 6 3
-                5-2 2-6Z
-              "
-            />
+            <svg
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path
+                d="M4 7h10M18 7h2"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.8"
+                strokeLinecap="round"
+              />
 
-            <circle cx="24" cy="24" r="7" />
-          </svg>
+              <circle
+                cx="16"
+                cy="7"
+                r="2"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.8"
+              />
+
+              <path
+                d="M4 17h2M10 17h10"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.8"
+                strokeLinecap="round"
+              />
+
+              <circle
+                cx="8"
+                cy="17"
+                r="2"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.8"
+              />
+            </svg>
         </button>
       </header>
 
@@ -145,30 +161,61 @@ function HomeScreen({
           </div>
         </section>
 
-        {/* =========================
-            Main Actions
-        ========================= */}
-        <section
-          className="home-main-actions"
-          aria-label="すぐに確認する機能"
-        >
+          {/* =========================
+              公開機能
+          ========================= */}
+          <section
+            className="home-main-actions"
+            aria-label="防災サプリの公開機能"
+          >
             {/* =========================
-                現在地確認デモ
+                主役：地震時の行動案内
             ========================= */}
             <button
-              className="location-demo-card"
+              className="home-primary-action"
+              type="button"
+              onClick={onStartEarthquakeDemo}
+              aria-label="地震時の行動案内デモを体験する"
+            >
+              <span
+                className="home-primary-action-icon"
+                aria-hidden="true"
+              >
+                <img src={earthquakeIcon} alt="" />
+              </span>
+
+              <span className="home-primary-action-copy">
+                <strong>地震時の行動案内</strong>
+                <small>
+                  一つずつ、今することを確認する
+                </small>
+              </span>
+
+              <span
+                className="home-primary-action-arrow"
+                aria-hidden="true"
+              >
+                ›
+              </span>
+            </button>
+
+            {/* =========================
+                第二導線：現在地確認デモ
+            ========================= */}
+            <button
+              className="home-location-action"
               type="button"
               onClick={onStartLocationCheck}
               disabled={isLocationLoading}
             >
               <span
-                className="location-demo-icon"
+                className="home-location-action-icon"
                 aria-hidden="true"
               >
                 <img src={locationIcon} alt="" />
               </span>
 
-              <span className="location-demo-copy">
+              <span className="home-location-action-copy">
                 <strong>
                   {isLocationLoading
                     ? '現在地を確認中'
@@ -183,7 +230,7 @@ function HomeScreen({
               </span>
 
               <span
-                className="location-demo-arrow"
+                className="home-location-action-arrow"
                 aria-hidden="true"
               >
                 ›
@@ -197,72 +244,11 @@ function HomeScreen({
             ) : null}
 
             {/* =========================
-                地震・熊・暑さ
+                準備中の機能
             ========================= */}
-            <button
-              className="main-action blue"
-              type="button"
-              onClick={onStartEarthquakeDemo}
-              aria-label="地震時の行動案内デモを体験する"
-            >
-              <span
-                className="action-mark action-mark-visual"
-                aria-hidden="true"
-              >
-                <img src={earthquakeIcon} alt="" />
-              </span>
-
-              <span className="action-copy">
-                <span className="action-badge">
-                  防災サプリ デモ版
-                </span>
-
-                <strong>地震時の行動案内</strong>
-                <small>一つずつ行動を確認する</small>
-              </span>
-
-              <span className="action-arrow" aria-hidden="true">
-                ›
-              </span>
-            </button>
-
-            <button
-              className="main-action orange"
-              type="button"
-              onClick={openBear}
-            >
-              <span className="action-mark" aria-hidden="true">
-                <img src={bearIcon} alt="" />
-              </span>
-
-              <span className="action-copy">
-                <strong>熊を見たら</strong>
-                <small>すぐにとる行動を見る</small>
-              </span>
-
-              <span className="action-arrow" aria-hidden="true">
-                ›
-              </span>
-            </button>
-
-            <button
-              className="main-action yellow"
-              type="button"
-              onClick={openHeat}
-            >
-              <span className="action-mark" aria-hidden="true">
-                <img src={heatIcon} alt="" />
-              </span>
-
-              <span className="action-copy">
-                <strong>暑さの危険</strong>
-                <small>熱中症の危険を見る</small>
-              </span>
-
-              <span className="action-arrow" aria-hidden="true">
-                ›
-              </span>
-            </button>
+            <p className="home-coming-soon-note">
+              熊・暑さの案内は準備中です
+            </p>
           </section>
 
         <p className="home-demo-notice">
@@ -270,115 +256,77 @@ function HomeScreen({
         </p>
       </main>
 
-      {/* =========================
-          Bottom Navigation
-      ========================= */}
-      <nav
-        className="home-bottom-nav"
-        aria-label="主要メニュー"
-      >
-        <button
-          type="button"
-          className="is-active"
-          onClick={closePanel}
+        {/* =========================
+            Bottom Navigation
+        ========================= */}
+        <nav
+          className="home-bottom-nav"
+          aria-label="主要メニュー"
         >
-          <span className="home-bottom-nav-icon">
-            <svg
-              viewBox="0 0 24 24"
-              aria-hidden="true"
-            >
-              <path d="M3 11.5 12 4l9 7.5V21h-6v-6H9v6H3Z" />
-            </svg>
-          </span>
+          <button
+            type="button"
+            className="is-active"
+            onClick={closePanel}
+          >
+            <span className="home-bottom-nav-icon">
+              <svg
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path d="M3 11.5 12 4l9 7.5V21h-6v-6H9v6H3Z" />
+              </svg>
+            </span>
 
-          <span>ホーム</span>
-        </button>
+            <span>ホーム</span>
+          </button>
 
-        <button
-          type="button"
-          onClick={() => runAndClose(onStartShelterGuide)}
-        >
-          <span className="home-bottom-nav-icon">
-            <svg
-              viewBox="0 0 24 24"
-              aria-hidden="true"
-            >
-              <path
-                d="M12 22s7-6.2 7-13a7 7 0 1 0-14 0c0 6.8 7 13 7 13Z"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinejoin="round"
-              />
+          <button
+            type="button"
+            onClick={() => runAndClose(onStartLocationCheck)}
+          >
+            <span className="home-bottom-nav-icon">
+              <svg
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path
+                  d="M12 22s7-6.2 7-13a7 7 0 1 0-14 0c0 6.8 7 13 7 13Z"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinejoin="round"
+                />
 
-              <circle
-                cx="12"
-                cy="9"
-                r="2.5"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-              />
-            </svg>
-          </span>
+                <circle
+                  cx="12"
+                  cy="9"
+                  r="2.5"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                />
+              </svg>
+            </span>
 
-          <span>避難所</span>
-        </button>
+            <span>現在地</span>
+          </button>
 
-        <button
-          type="button"
-          onClick={() => runAndClose(onStartSupplies)}
-        >
-          <span className="home-bottom-nav-icon">
-            <svg
-              viewBox="0 0 24 24"
-              aria-hidden="true"
-            >
-              <path
-                d="M7 8V6a5 5 0 0 1 10 0v2"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-              />
+          <button
+            type="button"
+            onClick={() => openPanel('menu')}
+            aria-label="メニューを開く"
+            aria-expanded={activePanel === 'menu'}
+            aria-controls="home-menu-panel"
+          >
+            <span className="home-bottom-nav-icon home-menu-lines">
+              <i />
+              <i />
+              <i />
+            </span>
 
-              <path
-                d="M5 8h14l1 13H4L5 8Z"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinejoin="round"
-              />
-
-              <path
-                d="M9 14h6M12 11v6"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-              />
-            </svg>
-          </span>
-
-          <span>備え</span>
-        </button>
-
-        <button
-          type="button"
-          onClick={() => openPanel('menu')}
-          aria-label="メニューを開く"
-          aria-expanded={activePanel === 'menu'}
-          aria-controls="home-menu-panel"
-        >
-          <span className="home-bottom-nav-icon home-menu-lines">
-            <i />
-            <i />
-            <i />
-          </span>
-
-          <span>メニュー</span>
-        </button>
-      </nav>
+            <span>メニュー</span>
+          </button>
+        </nav>
 
       {/* =========================
           Panel Overlay
@@ -429,37 +377,38 @@ function HomeScreen({
               </button>
             </header>
 
-            {activePanel === 'menu' ? (
-              <div className="home-menu-list">
-                <button
-                  type="button"
-                  onClick={() =>
-                    runAndClose(onStartFamilyContact)
-                  }
-                >
-                  <span className="home-menu-icon">
-                    <img src={familyIcon} alt="" />
-                  </span>
+                          {activePanel === 'menu' ? (
+                <div className="home-menu-list">
+                  {/* =========================
+                      公的機関の防災情報
+                  ========================= */}
+                  <a
+                    className="home-menu-external-link"
+                    href="https://www.jma.go.jp/bosai/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={closePanel}
+                  >
+                    <span className="home-menu-icon">
+                      <img src={governmentIcon} alt="" />
+                    </span>
 
-                  <span>家族確認</span>
-                  <span aria-hidden="true">›</span>
-                </button>
+                    <span className="home-menu-external-copy">
+                      <strong>公的機関の防災情報</strong>
+                      <small>
+                        気象庁の最新情報を確認します
+                      </small>
+                    </span>
 
-                <button
-                  type="button"
-                  onClick={() =>
-                    runAndClose(onStartAdminInfo)
-                  }
-                >
-                  <span className="home-menu-icon">
-                    <img src={governmentIcon} alt="" />
-                  </span>
-
-                  <span>行政情報</span>
-                  <span aria-hidden="true">›</span>
-                </button>
-              </div>
-            ) : (
+                    <span
+                      className="home-menu-external-mark"
+                      aria-hidden="true"
+                    >
+                      ↗
+                    </span>
+                  </a>
+                </div>
+              ) : (
               <div className="home-settings-content">
                 <section>
                   <h3>デモ版について</h3>

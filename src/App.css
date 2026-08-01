@@ -1415,35 +1415,42 @@ body.app-panel-open {
   object-fit: contain;
 }
 
+/* =========================
+   ヘッダー設定ボタン
+========================= */
+
 .home-settings-button {
   width: 42px;
   height: 42px;
-  padding: 8px;
+  padding: 9px;
 
-  border: 1px solid #e6e0d8;
-  border-radius: 50%;
+  border: 1px solid #d9e1ea;
+  border-radius: 14px;
 
-  background: #f7f4ee;
+  background: #ffffff;
   color: #183b68;
 
   display: grid;
   place-items: center;
 
-  box-shadow: 0 7px 18px rgba(24, 48, 74, 0.08);
+  box-shadow: none;
 }
 
 .home-settings-button svg {
-  width: 29px;
-  height: 29px;
+  width: 22px;
+  height: 22px;
+
   display: block;
 }
 
-.home-settings-button path {
-  fill: currentColor;
+.home-settings-button path,
+.home-settings-button circle {
+  fill: none;
 }
 
-.home-settings-button circle {
-  fill: #f7f4ee;
+.home-settings-button:active {
+  transform: scale(0.96);
+  background: #f5f8fc;
 }
 
 .home-settings-button:active {
@@ -1750,6 +1757,338 @@ body.app-panel-open {
 }
 
 /* =========================
+   TOP 公開機能
+   主役：地震
+   第二導線：現在地確認デモ
+   準備中：熊・暑さ
+========================= */
+
+.home-main-actions {
+  display: grid;
+  gap: 12px;
+}
+
+/* =========================
+   地震時の行動案内
+========================= */
+
+.home-primary-action {
+  width: 100%;
+  min-height: 132px;
+  padding: 16px 18px;
+
+  border: 0;
+  border-radius: 26px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #2f6fec 0%,
+      #1f5bd8 100%
+    );
+
+  display: grid;
+  grid-template-columns: 66px 1fr 28px;
+  align-items: center;
+  gap: 12px;
+
+  color: #ffffff;
+  text-align: left;
+
+  box-shadow:
+    0 18px 34px rgba(37, 99, 235, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.18);
+
+  transition:
+    transform 0.12s ease,
+    opacity 0.12s ease;
+}
+
+.home-primary-action:active {
+  transform: scale(0.98);
+  opacity: 0.94;
+}
+
+.home-primary-action-icon {
+  width: 70px;
+  height: 70px;
+
+  display: grid;
+  place-items: center;
+}
+
+.home-primary-action-icon img {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+  object-fit: contain;
+
+  filter: brightness(0) invert(1);
+}
+
+.home-primary-action-copy {
+  min-width: 0;
+}
+
+.home-primary-action-copy strong {
+  display: block;
+
+  font-size: 27px;
+  line-height: 1.12;
+  font-weight: 900;
+}
+
+.home-primary-action-copy small {
+  display: block;
+  margin-top: 8px;
+
+  font-size: 14px;
+  line-height: 1.4;
+  font-weight: 800;
+}
+
+.home-primary-action-arrow {
+  justify-self: end;
+
+  font-size: 48px;
+  line-height: 1;
+  font-weight: 300;
+}
+
+/* =========================
+   現在地確認デモ
+========================= */
+
+.home-location-action {
+  width: 100%;
+  min-height: 92px;
+  padding: 12px 18px;
+
+  border: 2px solid #bfd2f4;
+  border-radius: 22px;
+
+  background:
+    linear-gradient(
+      180deg,
+      #ffffff 0%,
+      #f2f7ff 100%
+    );
+
+  display: grid;
+  grid-template-columns: 54px 1fr 26px;
+  align-items: center;
+  gap: 12px;
+
+  color: #174ea6;
+  text-align: left;
+
+  box-shadow: 0 10px 22px rgba(15, 23, 42, 0.08);
+
+  transition:
+    transform 0.12s ease,
+    opacity 0.12s ease;
+}
+
+.home-location-action:active {
+  transform: scale(0.98);
+  opacity: 0.94;
+}
+
+.home-location-action:disabled {
+  cursor: wait;
+  opacity: 0.7;
+}
+
+.home-location-action-icon {
+  width: 52px;
+  height: 52px;
+  padding: 8px;
+
+  border-radius: 16px;
+  background: #2563eb;
+
+  display: grid;
+  place-items: center;
+}
+
+.home-location-action-icon img {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+  object-fit: contain;
+
+  filter: brightness(0) invert(1);
+}
+
+.home-location-action-copy {
+  min-width: 0;
+}
+
+.home-location-action-copy strong {
+  display: block;
+
+  color: #174ea6;
+  font-size: 21px;
+  line-height: 1.15;
+  font-weight: 900;
+}
+
+.home-location-action-copy small {
+  display: block;
+  margin-top: 5px;
+
+  color: #52647d;
+  font-size: 12px;
+  line-height: 1.35;
+  font-weight: 800;
+}
+
+.home-location-action-arrow {
+  justify-self: end;
+
+  color: #2563eb;
+  font-size: 40px;
+  line-height: 1;
+  font-weight: 300;
+}
+
+/* =========================
+   準備中の機能
+========================= */
+
+.home-coming-soon {
+  margin-top: 4px;
+  padding: 14px;
+
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.66);
+}
+
+.home-coming-soon h2 {
+  margin: 0 0 10px;
+
+  color: #64748b;
+  font-size: 14px;
+  line-height: 1.4;
+  font-weight: 900;
+  text-align: left;
+}
+
+.home-coming-soon-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.home-coming-soon-card {
+  min-height: 90px;
+  padding: 12px 8px;
+
+  border: 1px solid #dbe3ee;
+  border-radius: 18px;
+
+  background: #f8fafc;
+
+  display: grid;
+  justify-items: center;
+  align-content: center;
+  gap: 6px;
+
+  color: #94a3b8;
+  text-align: center;
+
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+.home-coming-soon-icon {
+  width: 38px;
+  height: 38px;
+
+  display: grid;
+  place-items: center;
+
+  opacity: 0.55;
+  filter: grayscale(1);
+}
+
+.home-coming-soon-icon img {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+  object-fit: contain;
+}
+
+.home-coming-soon-copy strong {
+  display: block;
+
+  font-size: 14px;
+  line-height: 1.25;
+  font-weight: 900;
+}
+
+.home-coming-soon-copy small {
+  display: inline-block;
+  margin-top: 4px;
+  padding: 3px 9px;
+
+  border: 1px solid #cbd5e1;
+  border-radius: 999px;
+
+  background: #ffffff;
+
+  font-size: 10px;
+  line-height: 1.2;
+  font-weight: 800;
+}
+
+/* =========================
+   TOP 公開機能 モバイル調整
+========================= */
+
+@media (max-width: 390px) {
+  .home-primary-action {
+    min-height: 138px;
+    padding: 16px;
+
+    grid-template-columns: 64px 1fr 28px;
+    gap: 12px;
+  }
+
+  .home-primary-action-icon {
+    width: 62px;
+    height: 62px;
+  }
+
+  .home-primary-action-copy strong {
+    font-size: 24px;
+  }
+
+  .home-primary-action-copy small {
+    font-size: 12px;
+  }
+
+  .home-location-action {
+    min-height: 86px;
+    padding: 11px 15px;
+
+    grid-template-columns: 50px 1fr 24px;
+  }
+
+  .home-location-action-icon {
+    width: 48px;
+    height: 48px;
+  }
+
+  .home-location-action-copy strong {
+    font-size: 19px;
+  }
+}
+
+/* =========================
    Home Demo Notice
 ========================= */
 
@@ -1788,7 +2127,7 @@ body.app-panel-open {
   transform: translateX(-50%);
 
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 
   box-shadow: 0 -9px 24px rgba(24, 48, 74, 0.07);
   backdrop-filter: blur(12px);
@@ -2047,9 +2386,9 @@ body.app-panel-open {
   }
 
   .home-settings-button {
-    width: 39px;
-    height: 39px;
-    padding: 7px;
+    width: 40px;
+    height: 40px;
+    padding: 8px;
   }
 
   .home-body {
@@ -2987,3 +3326,78 @@ button {
   opacity: 0.92;
 }
 
+/* =========================
+   準備中の機能
+========================= */
+
+.home-coming-soon-note {
+  margin: 8px 0 0;
+
+  color: #7b8798;
+  font-size: 11px;
+  line-height: 1.5;
+  font-weight: 700;
+  text-align: center;
+}
+
+/* =========================
+   メニュー 公的機関の外部リンク
+========================= */
+
+.home-menu-external-link {
+  width: 100%;
+  min-height: 74px;
+  padding: 12px 14px;
+
+  border: 1px solid #dbe4f0;
+  border-radius: 18px;
+
+  background: #ffffff;
+  color: #17395f;
+  text-decoration: none;
+
+  display: grid;
+  grid-template-columns: 44px 1fr 24px;
+  align-items: center;
+  gap: 12px;
+
+  text-align: left;
+
+  box-shadow: 0 8px 20px rgba(24, 48, 74, 0.07);
+}
+
+.home-menu-external-link:active {
+  transform: scale(0.98);
+  background: #f5f8fc;
+}
+
+.home-menu-external-copy {
+  min-width: 0;
+}
+
+.home-menu-external-copy strong {
+  display: block;
+
+  font-size: 16px;
+  line-height: 1.3;
+  font-weight: 900;
+}
+
+.home-menu-external-copy small {
+  display: block;
+  margin-top: 4px;
+
+  color: #66758a;
+  font-size: 11px;
+  line-height: 1.4;
+  font-weight: 700;
+}
+
+.home-menu-external-mark {
+  justify-self: end;
+
+  color: #2563eb;
+  font-size: 20px;
+  line-height: 1;
+  font-weight: 800;
+}
