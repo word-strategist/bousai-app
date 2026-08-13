@@ -226,20 +226,22 @@ function App() {
         locationStatus={locationStatus}
         locationError={locationError}
         location={location}
-        onBack={() => setScreen('emergency')}
-        onNext={() => {
-          if (locationRisk.disaster.key === 'bear') {
+        onBack={() => setScreen('top')}
+        onNext={(riskKey) => {
+          if (riskKey === 'bear') {
             setScreen('bear')
             return
           }
 
-          if (locationRisk.disaster.key === 'heat') {
+          if (riskKey === 'heat') {
             setScreen('heat')
             return
           }
 
-          setSelectedDisaster(locationRisk.disaster)
-          setScreen('action')
+          if (riskKey === 'earthquake') {
+            setSelectedDisaster(disasters[0])
+            setScreen('action')
+          }
         }}
       />
     )

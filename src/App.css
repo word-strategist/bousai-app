@@ -1308,6 +1308,61 @@ button {
 }
 
 /* =========================
+   LocationCheck Demo Select
+========================= */
+
+.location-demo-select .danger-main-area {
+  flex: 0;
+}
+
+.location-demo-select-title {
+  margin: 0 0 16px;
+  color: #12304a;
+  font-size: clamp(30px, 7vw, 40px);
+  line-height: 1.15;
+  font-weight: 900;
+  letter-spacing: 0.01em;
+}
+
+.location-demo-select .danger-message {
+  font-size: 18px;
+  line-height: 1.55;
+}
+
+.location-demo-select .home-demo-notice {
+  margin: 14px 0 0;
+  color: #65758b;
+  font-size: 15px;
+  line-height: 1.55;
+  font-weight: 700;
+}
+
+.location-demo-select .danger-bottom-area {
+  display: grid;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.location-demo-option {
+  width: 100%;
+  min-height: 64px;
+  padding: 14px 18px;
+  border: 2px solid #3f6ad8;
+  border-radius: 18px;
+  background: #ffffff;
+  color: #2463df;
+  font-size: 22px;
+  font-weight: 900;
+  line-height: 1.2;
+  text-align: left;
+  box-shadow: 0 4px 12px rgba(18, 48, 74, 0.05);
+}
+
+.location-demo-option:active {
+  transform: translateY(1px);
+}
+
+/* =========================
    GPS Loading
 ========================= */
 
@@ -3363,147 +3418,75 @@ button {
 ========================= */
 
 /* =========================
-   準備中の画面イメージ
+   防災サプリの体験価値
 ========================= */
 
-.home-preview-section {
+.home-experience-note {
   width: 100%;
-  margin-top: 14px;
-  padding-top: 14px;
-  border-top: 1px solid #e5ebf3;
+  margin-top: 20px;
+  padding: 20px 18px;
+
+  border: 1px solid #dbe4f0;
+  border-radius: 20px;
+
+  background: #f8fbff;
 }
 
-.home-preview-heading {
+.home-experience-note-copy {
   text-align: left;
 }
 
-.home-preview-heading p {
+.home-experience-note-copy h2 {
   margin: 0;
-  color: #2563eb;
-  font-size: 11px;
-  line-height: 1.4;
-  font-weight: 900;
-}
 
-.home-preview-heading h2 {
-  margin: 3px 0 0;
-  color: #334155;
-  font-size: 16px;
-  line-height: 1.4;
-  font-weight: 900;
-}
-
-.home-preview-grid {
-  margin-top: 10px;
-
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 10px;
-}
-
-.home-preview-card {
-  min-width: 0;
-  padding: 10px;
-
-  border: 1px solid #dbe4f0;
-  border-radius: 18px;
-
-  background: #ffffff;
-
-  position: relative;
-
-  box-shadow: 0 7px 18px rgba(24, 48, 74, 0.06);
-}
-
-.home-preview-visual {
-  width: 100%;
-  aspect-ratio: 1.45 / 1;
-
-  border-radius: 13px;
-
-  background: #eef4ff;
-
-  overflow: hidden;
-
-  display: grid;
-  place-items: center;
-}
-
-.home-preview-visual img {
-  width: 76%;
-  height: 76%;
-  display: block;
-  object-fit: contain;
-}
-
-.home-preview-card:nth-child(2) .home-preview-visual img {
-  filter: brightness(0.82) contrast(1.25);
-}
-
-.home-preview-visual-bear {
-  background: #162a43;
-}
-
-.home-preview-visual-bear img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-
-  transform: translateY(-12px) scale(1.03);
-
-  filter:
-    brightness(1.8)
-    contrast(1.15)
-    saturate(1.15);
-}
-
-.home-preview-visual-heat {
-  background: #2563eb;
-}
-
-.home-preview-visual-heat img {
-  width: 72%;
-  height: 72%;
-  object-fit: contain;
-
-  filter: none;
-  opacity: 1;
-}
-
-.home-preview-copy {
-  margin-top: 9px;
-}
-
-.home-preview-copy strong {
-  display: block;
   color: #17395f;
-  font-size: 14px;
-  line-height: 1.35;
+
+  font-size: 20px;
+  line-height: 1.5;
   font-weight: 900;
 }
 
-.home-preview-copy span {
-  display: block;
-  margin-top: 2px;
-  color: #7b8798;
-  font-size: 10px;
-  line-height: 1.4;
+.home-experience-note-copy p {
+  margin: 12px 0 0;
+
+  color: #66758a;
+
+  font-size: 14px;
+  line-height: 1.7;
   font-weight: 700;
 }
 
-.home-preview-badge {
-  display: inline-block;
-  margin-top: 7px;
-  padding: 4px 9px;
+.home-official-info-link {
+  width: 100%;
+  min-height: 50px;
+  margin-top: 18px;
+  padding: 12px 15px;
 
-  border-radius: 999px;
+  border: 1px solid #cbd8e8;
+  border-radius: 15px;
 
-  background: #eef2f7;
-  color: #66758a;
+  background: #ffffff;
 
-  font-size: 10px;
-  line-height: 1;
+  color: #2563eb;
+  text-decoration: none;
+
+  font-size: 14px;
+  line-height: 1.4;
   font-weight: 900;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.home-official-info-link:active {
+  transform: translateY(1px);
+}
+
+.home-official-info-link:focus-visible {
+  outline: 3px solid currentColor;
+  outline-offset: 3px;
 }
 
 /* =========================
