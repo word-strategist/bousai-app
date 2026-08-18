@@ -205,7 +205,6 @@ function App() {
     return (
       <BearActionScreen
         onBack={() => setScreen('emergency')}
-        onStartSound={() => openSoundConfirm('bear')}
       />
     )
   }
