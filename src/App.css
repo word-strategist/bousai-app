@@ -2604,6 +2604,124 @@ body.app-panel-open {
 }
 
 /* =========================
+   TOP Hero 認知負荷調整
+========================= */
+
+.home-hero {
+  margin-bottom: 14px;
+  padding: 18px 16px 14px;
+}
+
+.home-hero-copy {
+  display: flex;
+  justify-content: center;
+}
+
+.home-hero h1 {
+  margin: 0;
+
+  color: #0f172a;
+  font-size: 36px;
+  line-height: 0.98;
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  text-align: center;
+}
+
+/* =========================
+   TOP 主導線 簡略表示
+========================= */
+
+.home-primary-action-copy strong {
+  font-size: 34px;
+  line-height: 1;
+}
+
+.home-location-action-copy strong {
+  font-size: 26px;
+  line-height: 1;
+}
+
+/* =========================
+   TOP デモ表示
+========================= */
+
+.home-demo-notice {
+  margin: 10px 0 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+
+  text-align: left;
+}
+
+.home-demo-badge {
+  flex-shrink: 0;
+
+  padding: 3px 7px;
+
+  border-radius: 999px;
+  background: #fff1f2;
+
+  color: #c2414b;
+  font-size: 10px;
+  line-height: 1.2;
+  font-weight: 900;
+}
+
+.home-demo-text {
+  color: #64748b;
+  font-size: 9px;
+  line-height: 1.4;
+  font-weight: 700;
+}
+
+/* =========================
+   TOP スマートフォン調整
+========================= */
+
+@media (max-width: 390px) {
+  .home-hero {
+    padding-top: 15px;
+    padding-bottom: 12px;
+  }
+
+  .home-hero h1 {
+    font-size: 34px;
+  }
+
+  .home-primary-action-copy strong {
+    font-size: 32px;
+  }
+
+  .home-location-action-copy strong {
+    font-size: 24px;
+  }
+
+  .home-demo-notice {
+    gap: 6px;
+  }
+
+  .home-demo-text {
+    font-size: 8px;
+  }
+}
+
+/* =========================
+   TOP Hero スマートフォン調整
+========================= */
+
+@media (max-width: 390px) {
+  .home-hero {
+    padding-top: 11px;
+    padding-bottom: 10px;
+  }
+
+}
+
+/* =========================
    DANGER SCREENS
 ========================= */
 
@@ -3429,37 +3547,120 @@ button {
   font-weight: 700;
 }
 
+/* =========================
+   TOP 公的な防災情報
+========================= */
+
 .home-official-info-link {
   width: 100%;
-  min-height: 50px;
-  margin-top: 18px;
-  padding: 12px 15px;
+  min-height: 82px;
+  margin-top: 28px;
+  padding: 14px 16px;
 
   border: 1px solid #cbd8e8;
-  border-radius: 15px;
+  border-radius: 18px;
 
   background: #ffffff;
 
   color: #2563eb;
   text-decoration: none;
 
-  font-size: 14px;
-  line-height: 1.4;
-  font-weight: 900;
-
-  display: flex;
+  display: grid;
+  grid-template-columns: 50px 1fr 22px;
   align-items: center;
-  justify-content: space-between;
-  gap: 12px;
+  gap: 14px;
+
+  text-align: left;
+
+  transition:
+    transform 0.12s ease,
+    background 0.12s ease;
 }
 
 .home-official-info-link:active {
-  transform: translateY(1px);
+  transform: scale(0.98);
+  background: #f8fbff;
 }
 
 .home-official-info-link:focus-visible {
   outline: 3px solid currentColor;
   outline-offset: 3px;
+}
+
+.home-official-info-icon {
+  width: 50px;
+  height: 50px;
+
+  border-radius: 15px;
+  background: #eef5ff;
+
+  display: grid;
+  place-items: center;
+
+  color: #2563eb;
+}
+
+.home-official-info-icon svg {
+  width: 36px;
+  height: 36px;
+  display: block;
+}
+
+.home-official-info-copy {
+  min-width: 0;
+
+  display: grid;
+  gap: 3px;
+
+  color: #174ea6;
+}
+
+.home-official-agency {
+  width: fit-content;
+
+  display: grid;
+  justify-items: center;
+  gap: 1px;
+}
+
+.home-official-agency-reading {
+  color: #64748b;
+  font-size: 8px;
+  line-height: 1;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.home-official-agency strong {
+  color: #174ea6;
+  font-size: 20px;
+  line-height: 1.1;
+  font-weight: 900;
+}
+
+.home-official-info-copy rt {
+  color: #64748b;
+  font-size: 8px;
+  line-height: 1;
+  font-weight: 700;
+}
+
+.home-official-info-copy small {
+  display: block;
+
+  color: #52647d;
+  font-size: 12px;
+  line-height: 1.25;
+  font-weight: 800;
+}
+
+.home-official-info-arrow {
+  justify-self: end;
+
+  color: #2563eb;
+  font-size: 22px;
+  line-height: 1;
+  font-weight: 800;
 }
 
 /* =========================

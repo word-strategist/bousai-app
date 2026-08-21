@@ -144,22 +144,18 @@ function HomeScreen({
           TOP Main
       ========================= */}
       <main className="home-body">
-        {/* =========================
-            TOP Hero
-        ========================= */}
-        <section className="home-hero">
-          <div className="home-hero-copy">
-            <p className="home-label">
-              地域防災プラットフォーム
-            </p>
-
-            <h1>
-              いま、
-              <br />
-              何の危険がある？
-            </h1>
-          </div>
-        </section>
+      {/* =========================
+          TOP Hero
+      ========================= */}
+      <section className="home-hero">
+        <div className="home-hero-copy">
+          <h1>
+            迷わない。
+            <br />
+            押すだけ。
+          </h1>
+        </div>
+      </section>
 
           {/* =========================
               公開機能
@@ -185,10 +181,7 @@ function HomeScreen({
               </span>
 
               <span className="home-primary-action-copy">
-                <strong>地震時の行動案内</strong>
-                <small>
-                  一つずつ、今することを確認する
-                </small>
+                <strong>地震のとき</strong>
               </span>
 
               <span
@@ -207,6 +200,11 @@ function HomeScreen({
               type="button"
               onClick={onStartLocationCheck}
               disabled={isLocationLoading}
+              aria-label={
+                isLocationLoading
+                  ? '現在地を確認しています'
+                  : '現在地確認デモを体験する'
+              }
             >
               <span
                 className="home-location-action-icon"
@@ -218,15 +216,9 @@ function HomeScreen({
               <span className="home-location-action-copy">
                 <strong>
                   {isLocationLoading
-                    ? '現在地を確認中'
-                    : '現在地確認デモ'}
+                    ? '確認中'
+                    : 'いま、どこ？'}
                 </strong>
-
-                <small>
-                  {isLocationLoading
-                    ? '位置情報を取得しています'
-                    : '位置情報を使った案内例を見る'}
-                </small>
               </span>
 
               <span
@@ -245,42 +237,77 @@ function HomeScreen({
 
       </section>
 
-      {/* =========================
-          防災サプリの体験価値
-      ========================= */}
-      <section
-        className="home-experience-note"
-        aria-labelledby="home-experience-note-title"
-      >
-        <div className="home-experience-note-copy">
-          <h2 id="home-experience-note-title">
-            防災情報を探すのではなく、
-            <br />
-            今することを一つずつ。
-          </h2>
-
-          <p>
-            デモでは、地震・熊・暑さの
-            <br />
-            行動案内を体験できます。
-          </p>
-        </div>
-
+        {/* =========================
+            公的な防災情報
+        ========================= */}
         <a
           className="home-official-info-link"
           href="https://www.jma.go.jp/bosai/"
           target="_blank"
           rel="noopener noreferrer"
+          aria-label="気象庁の防災情報を開く"
         >
-          <span>気象庁の防災情報を確認する</span>
-          <span aria-hidden="true">↗</span>
-        </a>
-      </section>
+          <span
+            className="home-official-info-icon"
+            aria-hidden="true"
+          >
+            <svg viewBox="0 0 48 48">
+              <path
+                d="M15 33h20a7 7 0 0 0 0-14 11 11 0 0 0-21-2A8 8 0 0 0 15 33Z"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="3"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+              <path
+                d="M24 23v5"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="3"
+                strokeLinecap="round"
+              />
+              <circle
+                cx="24"
+                cy="32"
+                r="1.7"
+                fill="currentColor"
+              />
+            </svg>
+          </span>
 
-        <p className="home-demo-notice">
-          これはデモ版です。実際の災害情報とは連動していません。
-        </p>
-      </main>
+          <span className="home-official-info-copy">
+            <span className="home-official-agency">
+              <span className="home-official-agency-reading">
+                きしょうちょう
+              </span>
+
+              <strong>
+                気象庁
+              </strong>
+            </span>
+
+            <small>ぼうさいじょうほう</small>
+          </span>
+
+          <span
+            className="home-official-info-arrow"
+            aria-hidden="true"
+          >
+            ↗
+          </span>
+        </a>
+
+        <div className="home-demo-notice">
+          <span className="home-demo-badge">
+            デモ版
+          </span>
+
+          <span className="home-demo-text">
+            実際の災害情報とは連動していません。
+          </span>
+        </div>
+        </main>
 
         {/* =========================
             Bottom Navigation
