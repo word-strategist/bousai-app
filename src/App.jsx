@@ -78,6 +78,7 @@ function App() {
   const [isCheckingLocation, setIsCheckingLocation] = useState(false)
   const [soundType, setSoundType] = useState(null)
   const [locationRisk, setLocationRisk] = useState(DEFAULT_LOCATION_RISK)
+  const [resumeLocationDemo, setResumeLocationDemo] = useState(false)
 
   const {
     location,
@@ -204,7 +205,14 @@ function App() {
   if (screen === 'bear') {
     return (
       <BearActionScreen
-        onBack={() => setScreen('emergency')}
+        onBack={() => {
+          setResumeLocationDemo(true)
+          setScreen('location')
+        }}
+        onComplete={() => {
+          setResumeLocationDemo(true)
+          setScreen('location')
+        }}
       />
     )
   }
@@ -212,8 +220,14 @@ function App() {
   if (screen === 'heat') {
     return (
       <HeatRiskScreen
-        onBack={() => setScreen('emergency')}
-        onStartSound={() => openSoundConfirm('help')}
+        onBack={() => {
+          setResumeLocationDemo(true)
+          setScreen('location')
+        }}
+        onComplete={() => {
+          setResumeLocationDemo(true)
+          setScreen('location')
+        }}
       />
     )
   }
@@ -225,14 +239,20 @@ function App() {
         locationStatus={locationStatus}
         locationError={locationError}
         location={location}
-        onBack={() => setScreen('top')}
+        skipLoading={resumeLocationDemo}
+        onBack={() => {
+          setResumeLocationDemo(false)
+          setScreen('top')
+        }}
         onNext={(riskKey) => {
           if (riskKey === 'bear') {
+            setResumeLocationDemo(true)
             setScreen('bear')
             return
           }
 
           if (riskKey === 'heat') {
+            setResumeLocationDemo(true)
             setScreen('heat')
             return
           }

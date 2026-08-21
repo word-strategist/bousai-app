@@ -34,17 +34,22 @@ const demoContentMap = {
 export default function LocationCheck({
   onNext,
   onBack,
+  skipLoading = false,
 }) {
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(!skipLoading)
   const [selectedRiskKey, setSelectedRiskKey] = useState(null)
 
   useEffect(() => {
+    if (skipLoading) {
+      return undefined
+    }
+
     const timer = setTimeout(() => {
       setLoading(false)
     }, 1400)
 
     return () => clearTimeout(timer)
-  }, [])
+  }, [skipLoading])
 
   if (loading) {
     return (

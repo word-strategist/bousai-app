@@ -2981,29 +2981,6 @@ button {
 }
 
 /* =========================
-   Sound Action Button
-========================= */
-
-.heat-flow-sound {
-  width: 100%;
-  border: none;
-  border-radius: 22px;
-  padding: 18px 16px;
-  margin-top: 12px;
-  background: #dc2626;
-  color: #ffffff;
-  font-size: 18px;
-  font-weight: 800;
-  cursor: pointer;
-  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.18);
-}
-
-.heat-flow-sound {
-  background: #dc2626;
-  color: #ffffff;
-}
-
-/* =========================
    GPS Debug Card
 ========================= */
 

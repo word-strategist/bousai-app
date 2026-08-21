@@ -1,4 +1,7 @@
 import { useState } from 'react'
+import bearDontRunImage from '../assets/app/action/app-action-bear-dont-run-v1.png'
+import bearBackAwayImage from '../assets/app/action/app-action-bear-back-away-v1.png'
+import bearKeepDistanceImage from '../assets/app/action/app-action-bear-keep-distance-v1.png'
 
 const bearSteps = [
   {
@@ -7,6 +10,7 @@ const bearSteps = [
     title: '走らない',
     message: '大声を出さず、急に動かない',
     action: 'ゆっくり下がる',
+    image: bearDontRunImage,
   },
   {
     id: 'back-away',
@@ -14,6 +18,7 @@ const bearSteps = [
     title: 'ゆっくり下がる',
     message: '熊を見ながら、少しずつ離れる',
     action: 'もっと離れる',
+    image: bearBackAwayImage,
   },
   {
     id: 'keep-distance',
@@ -21,10 +26,11 @@ const bearSteps = [
     title: '十分に離れる',
     message: '熊から距離をとって、安全な場所へ移動する',
     action: '案内を終える',
+    image: bearKeepDistanceImage,
   },
 ]
 
-function BearActionScreen({ onBack }) {
+function BearActionScreen({ onBack, onComplete }) {
   const [stepIndex, setStepIndex] = useState(0)
 
   const step = bearSteps[stepIndex]
@@ -32,7 +38,7 @@ function BearActionScreen({ onBack }) {
 
   const handleNext = () => {
     if (isLastStep) {
-      onBack()
+      onComplete()
       return
     }
 
@@ -83,10 +89,13 @@ function BearActionScreen({ onBack }) {
 
           <h2>{step.title}</h2>
 
-          <div
-            className="bear-flow-visual"
-            aria-hidden="true"
-          />
+          <div className="bear-flow-visual">
+            <img
+              src={step.image}
+              alt=""
+              className="bear-flow-image"
+            />
+          </div>
 
           <p className="bear-flow-message">
             {step.message}
