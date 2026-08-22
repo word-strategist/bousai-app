@@ -1311,55 +1311,406 @@ button {
    LocationCheck Demo Select
 ========================= */
 
+.location-demo-select {
+  justify-content: flex-start;
+}
+
+.location-demo-select {
+  position: relative;
+  justify-content: flex-start;
+}
+
+.location-demo-select .location-back-area {
+  position: absolute;
+  top: 24px;
+  left: 20px;
+
+  width: auto;
+  margin: 0;
+
+  display: block;
+  z-index: 2;
+}
+
+.location-demo-select .location-back-button {
+  width: 48px;
+  min-width: 48px;
+  height: 48px;
+  padding: 0;
+
+  border: none;
+  background: transparent;
+
+  color: #12304a;
+  font-size: 34px;
+  line-height: 1;
+  font-weight: 900;
+
+  display: grid;
+  place-items: center;
+}
+
 .location-demo-select .danger-main-area {
   flex: 0;
+  padding-top: 58px;
+  text-align: center;
+}
+
+.location-demo-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  margin: 0 0 10px;
+  padding: 7px 14px;
+
+  border-radius: 999px;
+  background: #fff1f2;
+
+  color: #c2414b;
+  font-size: 13px;
+  line-height: 1;
+  font-weight: 900;
 }
 
 .location-demo-select-title {
-  margin: 0 0 16px;
+  margin: 0 0 8px;
+
   color: #12304a;
-  font-size: clamp(30px, 7vw, 40px);
-  line-height: 1.15;
+  font-size: clamp(34px, 8vw, 44px);
+  line-height: 1.1;
   font-weight: 900;
-  letter-spacing: 0.01em;
+  letter-spacing: -0.03em;
 }
 
-.location-demo-select .danger-message {
-  font-size: 18px;
-  line-height: 1.55;
+/* =========================
+   LocationCheck Demo Preview
+========================= */
+
+.location-demo-preview {
+  position: relative;
+  justify-content: flex-start;
 }
 
-.location-demo-select .home-demo-notice {
-  margin: 14px 0 0;
-  color: #65758b;
-  font-size: 15px;
-  line-height: 1.55;
-  font-weight: 700;
+.location-demo-preview .location-back-area {
+  position: absolute;
+  top: 24px;
+  left: 20px;
+
+  width: auto;
+  margin: 0;
+
+  display: block;
+  z-index: 2;
 }
 
-.location-demo-select .danger-bottom-area {
+.location-demo-preview .location-back-button {
+  width: 48px;
+  min-width: 48px;
+  height: 48px;
+  padding: 0;
+
+  border: none;
+  background: transparent;
+
+  color: #12304a;
+  font-size: 34px;
+  line-height: 1;
+  font-weight: 900;
+
   display: grid;
-  gap: 12px;
-  margin-top: 24px;
+  place-items: center;
+}
+
+/* =========================
+   Preview Main
+========================= */
+
+.location-demo-preview-main {
+  width: 100%;
+  padding-top: 58px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  text-align: center;
+}
+
+.location-demo-preview-title {
+  margin: 2px 0 22px;
+
+  color: #12304a;
+  font-size: clamp(46px, 11vw, 62px);
+  line-height: 1;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+}
+
+/* =========================
+   Preview Visual
+========================= */
+
+.location-demo-preview-visual {
+  width: 100%;
+  max-width: 300px;
+  aspect-ratio: 1 / 1;
+
+  margin: 0 auto 22px;
+
+  border-radius: 24px;
+  background: #f7fafc;
+
+  display: grid;
+  place-items: center;
+
+  overflow: hidden;
+}
+
+.location-demo-preview-visual img {
+  display: block;
+
+  width: 82%;
+  height: 82%;
+
+  object-fit: contain;
+}
+
+/* =========================
+   Preview Copy
+========================= */
+
+.location-demo-preview-message {
+  margin: 0;
+
+  color: #425466;
+  font-size: 20px;
+  line-height: 1.45;
+  font-weight: 800;
+}
+
+/* =========================
+   Preview Main Action
+========================= */
+
+.location-demo-preview-action {
+  width: 100%;
+  margin-top: 30px;
+}
+
+.location-demo-preview-action .primary-button {
+  width: 100%;
+  min-height: 88px;
+
+  border: none;
+  border-radius: 999px;
+
+  background: #2563eb;
+  color: #ffffff;
+
+  font-size: 28px;
+  line-height: 1.1;
+  font-weight: 900;
+
+  box-shadow: 0 12px 24px rgba(37, 99, 235, 0.2);
+}
+
+/* =========================
+   Preview Demo Notice
+========================= */
+
+.location-demo-preview-notice {
+  margin: 18px 0 0;
+
+  color: #65758b;
+  font-size: 12px;
+  line-height: 1.45;
+  font-weight: 700;
+
+  text-align: center;
+}
+
+/* =========================
+   Preview Smartphone
+========================= */
+
+@media (max-width: 390px) {
+  .location-demo-preview-main {
+    padding-top: 54px;
+  }
+
+  .location-demo-preview-title {
+    margin-bottom: 18px;
+    font-size: 46px;
+  }
+
+  .location-demo-preview-visual {
+    max-width: 270px;
+    margin-bottom: 18px;
+  }
+
+  .location-demo-preview-message {
+    font-size: 18px;
+  }
+
+  .location-demo-preview-action {
+    margin-top: 24px;
+  }
+
+  .location-demo-preview-action .primary-button {
+    min-height: 80px;
+    font-size: 26px;
+  }
+}
+
+/* =========================
+   案内例 3択
+========================= */
+
+.location-demo-options {
+  display: grid;
+  gap: 14px;
+
+  margin-top: 28px;
 }
 
 .location-demo-option {
   width: 100%;
-  min-height: 64px;
+  min-height: 112px;
   padding: 14px 18px;
-  border: 2px solid #3f6ad8;
-  border-radius: 18px;
+
+  border: 2px solid #c9daf7;
+  border-radius: 22px;
+
   background: #ffffff;
-  color: #2463df;
-  font-size: 22px;
-  font-weight: 900;
-  line-height: 1.2;
+  color: #174ea6;
+
+  display: grid;
+  grid-template-columns: 76px 1fr 28px;
+  align-items: center;
+  gap: 16px;
+
   text-align: left;
-  box-shadow: 0 4px 12px rgba(18, 48, 74, 0.05);
+
+  box-shadow: 0 8px 20px rgba(18, 48, 74, 0.06);
 }
 
 .location-demo-option:active {
-  transform: translateY(1px);
+  transform: scale(0.98);
+}
+
+.location-demo-option:focus-visible {
+  outline: 3px solid #2563eb;
+  outline-offset: 3px;
+}
+
+.location-demo-option-icon {
+  width: 76px;
+  height: 76px;
+
+  border-radius: 18px;
+  background: #f4f8fd;
+
+  display: grid;
+  place-items: center;
+
+  overflow: hidden;
+}
+
+.location-demo-option-icon img {
+  display: block;
+  width: 86%;
+  height: 86%;
+  object-fit: contain;
+}
+
+.location-demo-option strong {
+  color: #174ea6;
+  font-size: 28px;
+  line-height: 1.1;
+  font-weight: 900;
+}
+
+.location-demo-option-arrow {
+  justify-self: end;
+
+  color: #2563eb;
+  font-size: 40px;
+  line-height: 1;
+  font-weight: 800;
+}
+
+/* =========================
+   デモ注意
+========================= */
+
+.location-demo-notice {
+  margin-top: 24px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  color: #65758b;
+  font-size: 12px;
+  line-height: 1.45;
+  font-weight: 700;
+
+  text-align: left;
+}
+
+.location-demo-notice-badge {
+  flex-shrink: 0;
+
+  padding: 4px 8px;
+
+  border-radius: 999px;
+  background: #fff1f2;
+
+  color: #c2414b;
+  font-size: 11px;
+  line-height: 1;
+  font-weight: 900;
+}
+
+/* =========================
+   LocationCheck Demo Select
+   Smartphone
+========================= */
+
+@media (max-width: 390px) {
+  .location-demo-options {
+    gap: 12px;
+    margin-top: 22px;
+  }
+
+  .location-demo-option {
+    min-height: 98px;
+    padding: 12px 14px;
+
+    grid-template-columns: 64px 1fr 24px;
+    gap: 13px;
+  }
+
+  .location-demo-option-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 16px;
+  }
+
+  .location-demo-option strong {
+    font-size: 25px;
+  }
+
+  .location-demo-option-arrow {
+    font-size: 34px;
+  }
+
+  .location-demo-notice {
+    margin-top: 18px;
+    font-size: 11px;
+  }
 }
 
 /* =========================

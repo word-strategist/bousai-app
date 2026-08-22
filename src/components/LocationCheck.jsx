@@ -7,25 +7,19 @@ import heatImage from '../assets/icons/heat.png'
 const demoContentMap = {
   earthquake: {
     title: '地震',
-    description: '地震が起きた想定の案内を見る',
-    messageTop: '地震が起きた想定です',
-    messageBottom: '次の行動を確認します',
+    message: '地震の想定です',
     image: earthquakeAlertImage,
     themeClass: 'is-earthquake',
   },
   bear: {
     title: '熊',
-    description: '熊を見かけた想定の案内を見る',
-    messageTop: '熊を見かけた想定です',
-    messageBottom: '次の行動を確認します',
+    message: '熊を見た想定です',
     image: bearImage,
     themeClass: 'is-bear',
   },
   heat: {
     title: '暑さ',
-    description: '暑さによる危険を想定した案内を見る',
-    messageTop: '暑さによる危険がある想定です',
-    messageBottom: '次の行動を確認します',
+    message: '暑さによる危険を想定しています',
     image: heatImage,
     themeClass: 'is-heat',
   },
@@ -73,48 +67,75 @@ export default function LocationCheck({
     return (
       <div className="location-screen">
         <div className="location-card danger-card location-demo-select">
+          {/* =========================
+              Back
+          ========================= */}
           <div className="location-back-area">
             <button
               type="button"
               className="location-back-button"
               onClick={onBack}
+              aria-label="ホームへ戻る"
             >
-              ← 戻る
+              ←
             </button>
           </div>
 
+          {/* =========================
+              Demo Selector
+          ========================= */}
           <div className="danger-main-area">
-            <p className="location-label">
-              現在地確認デモ
+            <p className="location-demo-badge">
+              デモ版
             </p>
 
             <h1 className="location-demo-select-title">
-              案内例を選ぶ
+              どれを見る？
             </h1>
-
-            <p className="danger-message">
-              位置情報の確認後に表示される
-              <br />
-              案内例を選んでください
-            </p>
-
-            <p className="home-demo-notice">
-              これはデモ表示です。
-              実際の現在地の災害情報とは連動していません。
-            </p>
           </div>
 
-          <div className="danger-bottom-area">
+          <div className="danger-bottom-area location-demo-options">
             {Object.entries(demoContentMap).map(([key, content]) => (
               <button
                 key={key}
                 type="button"
-                className="location-demo-option"
+                className={`location-demo-option ${content.themeClass}`}
                 onClick={() => setSelectedRiskKey(key)}
+                aria-label={`${content.title}の行動案内を見る`}
               >
-                {content.title}
+                <span
+                  className="location-demo-option-icon"
+                  aria-hidden="true"
+                >
+                  <img
+                    src={content.image}
+                    alt=""
+                  />
+                </span>
+
+                <strong>
+                  {content.title}
+                </strong>
+
+                <span
+                  className="location-demo-option-arrow"
+                  aria-hidden="true"
+                >
+                  ›
+                </span>
               </button>
             ))}
+          </div>
+
+          {/* =========================
+              Demo Notice
+          ========================= */}
+          <div className="location-demo-notice">
+            <span>
+              実際の現在地の災害情報とは
+              <br />
+              連動していません。
+            </span>
           </div>
         </div>
       </div>
@@ -126,55 +147,67 @@ export default function LocationCheck({
   return (
     <div className="location-screen">
       <div
-        className={`location-card danger-card ${currentContent.themeClass}`}
+        className={`location-card danger-card location-demo-preview ${currentContent.themeClass}`}
       >
+        {/* =========================
+            Back
+        ========================= */}
         <div className="location-back-area">
           <button
             type="button"
             className="location-back-button"
             onClick={() => setSelectedRiskKey(null)}
+            aria-label="案内例の選択へ戻る"
           >
-            ← 戻る
+            ←
           </button>
         </div>
 
-        <div className="danger-main-area">
-          <p className="location-label">
-            デモ表示
+        {/* =========================
+            Preview
+        ========================= */}
+        <main className="location-demo-preview-main">
+          <p className="location-demo-badge">
+            デモ版
           </p>
 
-          <h1 className="danger-title">
+          <h1 className="location-demo-preview-title">
             {currentContent.title}
           </h1>
 
-          <div className="danger-illustration-box">
+          <div className="location-demo-preview-visual">
             <img
               src={currentContent.image}
               alt=""
-              className="danger-illustration"
             />
           </div>
 
-          <p className="danger-message">
-            {currentContent.messageTop}
-            <br />
-            {currentContent.messageBottom}
+          <p className="location-demo-preview-message">
+            {currentContent.message}
           </p>
+        </main>
 
-          <p className="home-demo-notice">
-            実際の現在地の災害情報とは連動していません。
-          </p>
-        </div>
-
-        <div className="danger-bottom-area">
+        {/* =========================
+            Main Action
+        ========================= */}
+        <div className="location-demo-preview-action">
           <button
             type="button"
             className="primary-button"
             onClick={() => onNext(selectedRiskKey)}
           >
-            次の行動を見る
+            行動を見る
           </button>
         </div>
+
+        {/* =========================
+            Demo Notice
+        ========================= */}
+        <p className="location-demo-preview-notice">
+          実際の現在地の災害情報とは
+          <br />
+          連動していません。
+        </p>
       </div>
     </div>
   )

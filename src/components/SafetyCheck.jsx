@@ -6,10 +6,10 @@ function SafetyCheck({
   const isEarthquakeDemo = disaster === 'earthquake'
 
   const earthquakeGuides = [
-    'けがをしていないか確認する',
-    '周囲に落ちてくるものがないか確認する',
-    '火や煙が出ていないか確認する',
-    '危険があれば安全な場所から離れる',
+    'けがはない？',
+    '落ちてくるものはない？',
+    '火や煙はない？',
+    '危険な場所から離れる',
   ]
 
   const checks = {
@@ -49,8 +49,6 @@ function SafetyCheck({
         <h1>
           {isEarthquakeDemo ? (
             <>
-              周囲と自分の
-              <br />
               安全を確認する
             </>
           ) : (
@@ -62,29 +60,18 @@ function SafetyCheck({
           )}
         </h1>
 
-        <p className="safety-check-lead">
-          {isEarthquakeDemo ? (
-            <>
-              無理に動かず、
-              <br />
-              危険がないか確認してください
-            </>
-          ) : (
-            <>
-              危険がないか、
-              <br />
-              順番に確認してください
-            </>
-          )}
-        </p>
+        {!isEarthquakeDemo ? (
+          <p className="safety-check-lead">
+            危険がないか、
+            <br />
+            順番に確認してください
+          </p>
+        ) : null}
       </header>
 
       <main className="safety-check-main">
         {isEarthquakeDemo ? (
           <>
-            <p className="safety-check-guide">
-              今いる場所で確認すること
-            </p>
 
             <div className="safety-guide-list">
               {earthquakeGuides.map((guide, index) => (
@@ -105,7 +92,7 @@ function SafetyCheck({
               type="button"
               onClick={() => onTop('completion')}
             >
-              最新情報の確認方法を見る
+              最新情報を見る
             </button>
 
             <p className="safety-check-demo-note">
