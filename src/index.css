@@ -1122,6 +1122,16 @@ input {
   overflow: hidden;
 }
 
+.heat-flow-image {
+  display: block;
+  width: 100%;
+  max-width: 330px;
+  height: auto;
+  max-height: 300px;
+  margin: 0 auto;
+  object-fit: contain;
+}
+
 .heat-flow-message {
   margin: 0;
 
@@ -1185,19 +1195,38 @@ input {
   min-height: 88px;
   margin-top: 24px;
 
+  border: none;
   border-radius: 26px;
 
   background: #dc2626;
   color: #ffffff;
 
   font-size: 26px;
-  line-height: 88px;
+  line-height: 1.2;
   font-weight: 900;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
 
   text-align: center;
   text-decoration: none;
 
   box-shadow: 0 12px 24px rgba(220, 38, 38, 0.2);
+}
+
+.heat-flow-call-icon {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+}
+
+.heat-flow-emergency-call-label {
+  display: block;
+  text-align: center;
+  line-height: 1.15;
+  white-space: nowrap;
 }
 
 .heat-flow-emergency-call:focus-visible,
@@ -1215,6 +1244,27 @@ input {
   line-height: 1.55;
   font-weight: 700;
 
+  text-align: center;
+}
+
+/* =========================
+   119発信 確認画面
+========================= */
+
+.heat-flow-confirm-card {
+  min-height: 240px;
+  padding: 36px 24px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.heat-flow-confirm-card h2 {
+  margin: 0;
+
+  font-size: 48px;
+  line-height: 1.1;
   text-align: center;
 }
 
