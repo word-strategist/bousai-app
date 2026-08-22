@@ -795,11 +795,11 @@ input {
 }
 
 .bear-flow-main {
-  padding: 24px 22px 32px;
+  padding: 12px 22px 18px;
 }
 
 .bear-flow-status {
-  margin: 0 0 18px;
+  margin: 0 0 8px;
 
   display: flex;
   align-items: center;
@@ -855,7 +855,7 @@ input {
 }
 
 .bear-flow-demo-note {
-  margin: 16px 0 0;
+  margin: 10px 0 0;
 
   color: #65758b;
 
@@ -867,8 +867,8 @@ input {
 }
 
 .bear-flow-card {
-  min-height: 430px;
-  padding: 36px 22px;
+  min-height: 380px;
+  padding: 22px 22px;
 
   border: 1px solid #e1e8f0;
   border-radius: 30px;
@@ -887,8 +887,8 @@ input {
 
 .bear-flow-visual {
   width: 100%;
-  min-height: 210px;
-  margin: 22px 0 24px;
+  min-height: 180px;
+  margin: 12px 0 14px;
 
   border-radius: 24px;
   background: #f7fafc;
@@ -923,8 +923,8 @@ input {
 
 .bear-flow-next {
   width: 100%;
-  min-height: 88px;
-  margin-top: 24px;
+  min-height: 78px;
+  margin-top: 12px;
 
   border: none;
   border-radius: 26px;
@@ -1245,6 +1245,38 @@ input {
   font-weight: 700;
 
   text-align: center;
+}
+
+/* =========================
+   行動案内 公的情報リンク
+========================= */
+
+.flow-official-link {
+  width: fit-content;
+  min-height: 44px;
+  margin: 8px auto 0;
+  padding: 8px 10px;
+
+  color: #2563eb;
+  text-decoration: none;
+
+  font-size: 15px;
+  line-height: 1.2;
+  font-weight: 800;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.flow-official-link:active {
+  transform: translateY(1px);
+}
+
+.flow-official-link:focus-visible {
+  outline: 3px solid #12304a;
+  outline-offset: 3px;
 }
 
 /* =========================

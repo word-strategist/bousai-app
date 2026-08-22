@@ -161,15 +161,17 @@ function App() {
   })
 }, [location])
 
+  useEffect(() => {
+    if (locationStatus !== 'loading') {
+      setIsCheckingLocation(false)
+    }
+  }, [locationStatus])
+
   const startLocationCheck = () => {
     setIsCheckingLocation(true)
-
+    setResumeLocationDemo(false)
+    setScreen('location')
     getCurrentLocation()
-
-    setTimeout(() => {
-      setIsCheckingLocation(false)
-      setScreen('location')
-    }, 1800)
   }
 
   const openSoundConfirm = (type) => {

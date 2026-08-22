@@ -260,6 +260,18 @@ function HeatRiskScreen({ onBack, onComplete }) {
           {step.action}
         </button>
 
+        {isLastStep ? (
+          <a
+            className="flow-official-link"
+            href="https://www.wbgt.env.go.jp/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span>公的な情報を見る</span>
+            <span aria-hidden="true">↗</span>
+          </a>
+        ) : null}
+
         <button
           className="heat-flow-emergency-link"
           type="button"

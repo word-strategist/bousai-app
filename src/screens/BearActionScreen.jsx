@@ -24,7 +24,7 @@ const bearSteps = [
     id: 'keep-distance',
     label: '3/3',
     title: '十分に離れる',
-    message: '熊から距離をとって、安全な場所へ移動する',
+    message: '熊との距離をとり、静かにその場を離れる',
     action: '案内を終える',
     image: bearKeepDistanceImage,
   },
@@ -109,6 +109,18 @@ function BearActionScreen({ onBack, onComplete }) {
         >
           {step.action}
         </button>
+
+        {isLastStep ? (
+          <a
+            className="flow-official-link"
+            href="https://www.env.go.jp/nature/choju/effort/effort12/effort12.html"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span>公的な情報を見る</span>
+            <span aria-hidden="true">↗</span>
+          </a>
+        ) : null}
 
         <p className="bear-flow-demo-note">
           これはデモです。実際の災害情報とは

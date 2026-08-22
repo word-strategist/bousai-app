@@ -50,9 +50,9 @@ function EmergencyModeScreen({ onBack, onComplete }) {
           </div>
 
           <p className="emergency-action-message">
-            落ちてくるものや、
+            頭を守り、
             <br />
-            倒れそうなものから離れてください。
+            安全な姿勢をとる
           </p>
         </section>
 

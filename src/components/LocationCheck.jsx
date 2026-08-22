@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 import earthquakeAlertImage from '../assets/app/alert/app-alert-earthquake-visual-v1.png'
 import bearImage from '../assets/stamps/bear-alert-icon.png'
@@ -29,23 +29,74 @@ export default function LocationCheck({
   onNext,
   onBack,
   skipLoading = false,
+  locationStatus,
+  locationError,
 }) {
-  const [loading, setLoading] = useState(!skipLoading)
   const [selectedRiskKey, setSelectedRiskKey] = useState(null)
+  const [continueWithoutLocation, setContinueWithoutLocation] =
+    useState(false)
 
-  useEffect(() => {
-    if (skipLoading) {
-      return undefined
-    }
+  if (
+  !skipLoading &&
+  locationStatus === 'error' &&
+  !continueWithoutLocation
+) {
+  return (
+    <div className="location-screen">
+      <div className="location-card danger-card location-error-card">
+        <div className="location-back-area">
+          <button
+            type="button"
+            className="location-back-button"
+            onClick={onBack}
+            aria-label="TOPへ戻る"
+          >
+            ←
+          </button>
+        </div>
 
-    const timer = setTimeout(() => {
-      setLoading(false)
-    }, 1400)
+        <main className="location-error-main">
+          <p className="location-demo-badge">
+            デモ版
+          </p>
 
-    return () => clearTimeout(timer)
-  }, [skipLoading])
+          <h1>
+            位置情報を
+            <br />
+            確認できませんでした
+          </h1>
 
-  if (loading) {
+          <p className="location-error-message">
+            {locationError ||
+              'この端末では位置情報を確認できません'}
+          </p>
+
+          <button
+            type="button"
+            className="primary-button"
+            onClick={() => setContinueWithoutLocation(true)}
+          >
+            デモを続ける
+          </button>
+
+          <button
+            type="button"
+            className="location-error-back"
+            onClick={onBack}
+          >
+            TOPへ戻る
+          </button>
+        </main>
+      </div>
+    </div>
+  )
+}
+
+  if (
+    !skipLoading &&
+    !continueWithoutLocation &&
+    (locationStatus === 'idle' || locationStatus === 'loading')
+  ) {
     return (
       <div className="location-screen">
         <div className="location-card loading-card">
