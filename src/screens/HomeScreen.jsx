@@ -154,6 +154,60 @@ function HomeScreen({
             <br />
             押すだけ。
           </h1>
+
+          <p className="home-hero-subcopy">
+            今することを、一つずつ。
+          </p>
+
+          {/* =========================
+              TOP 体験ビジュアル
+          ========================= */}
+          <div
+            className="home-hero-experience"
+            aria-hidden="true"
+          >
+            <div className="home-mini-phone home-mini-phone--left">
+              <span className="home-mini-phone__label">
+                地震
+              </span>
+
+              <strong>
+                今すること
+              </strong>
+
+              <span className="home-mini-phone__button">
+                案内を見る
+              </span>
+            </div>
+
+            <div className="home-mini-phone home-mini-phone--center">
+              <span className="home-mini-phone__label">
+                危険情報
+              </span>
+
+              <span className="home-mini-phone__alert">
+                ！
+              </span>
+
+              <span className="home-mini-phone__button home-mini-phone__button--danger">
+                次の行動へ
+              </span>
+            </div>
+
+            <div className="home-mini-phone home-mini-phone--right">
+              <span className="home-mini-phone__label">
+                行動案内
+              </span>
+
+              <strong>
+                一つずつ
+              </strong>
+
+              <span className="home-mini-phone__button">
+                次へ
+              </span>
+            </div>
+          </div>
         </div>
       </section>
 
