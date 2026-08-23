@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import bearDontRunImage from '../assets/app/action/app-action-bear-dont-run-v1.png'
 import bearBackAwayImage from '../assets/app/action/app-action-bear-back-away-v1.png'
 import bearKeepDistanceImage from '../assets/app/action/app-action-bear-keep-distance-v1.png'
@@ -32,6 +32,13 @@ const bearSteps = [
 
 function BearActionScreen({ onBack, onComplete }) {
   const [stepIndex, setStepIndex] = useState(0)
+
+  useEffect(() => {
+    bearSteps.forEach((item) => {
+      const image = new Image()
+      image.src = item.image
+    })
+  }, [])
 
   const step = bearSteps[stepIndex]
   const isLastStep = stepIndex === bearSteps.length - 1

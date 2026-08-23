@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import heatCoolPlaceImage from '../assets/app/action/app-action-heat-cool-place-v1.png'
 import heatCoolBodyImage from '../assets/app/action/app-action-heat-cool-body-v1.png'
 import heatDrinkImage from '../assets/app/action/app-action-heat-drink-v1.png'
@@ -35,6 +35,18 @@ function HeatRiskScreen({ onBack, onComplete }) {
   const [stepIndex, setStepIndex] = useState(0)
   const [showEmergency, setShowEmergency] = useState(false)
   const [showCallConfirm, setShowCallConfirm] = useState(false)
+
+  useEffect(() => {
+    const images = [
+      ...heatSteps.map((item) => item.image),
+      heatEmergencyCallImage,
+    ]
+
+    images.forEach((src) => {
+      const image = new Image()
+      image.src = src
+    })
+  }, [])
 
   const step = heatSteps[stepIndex]
   const isLastStep = stepIndex === heatSteps.length - 1
