@@ -1,158 +1,545 @@
-import locationIcon from '../assets/app/home/app-home-location-icon-v1.png'
-import bearIcon from '../assets/app/home/app-home-bear-icon-v1.png'
-import heatIcon from '../assets/app/home/app-home-heat-icon-v1.png'
+import { useEffect, useState } from 'react'
 
-import familyIcon from '../assets/icons/family.png'
+import locationIcon from '../assets/app/home/app-home-location-icon-v1.png'
+import earthquakeIcon from '../assets/app/home/app-home-earthquake-icon-v1.png'
+
 import shelterIcon from '../assets/icons/shelter.png'
 import governmentIcon from '../assets/icons/government.png'
 import suppliesIcon from '../assets/icons/supplies.png'
 
 function HomeScreen({
   onStartLocationCheck,
+  onStartEarthquakeDemo,
   onSelectDisaster,
   onStartShelterGuide,
   onStartAdminInfo,
   onStartSupplies,
   onStartFamilyContact,
+  isCheckingLocation,
+  locationStatus,
+  locationError,
 }) {
+  const [activePanel, setActivePanel] = useState(null)
+
+  const isLocationLoading =
+    isCheckingLocation || locationStatus === 'loading'
+
+  const closePanel = () => {
+    setActivePanel(null)
+  }
+
+  const openPanel = (panelName) => {
+    setActivePanel(panelName)
+  }
+
+  const runAndClose = (callback) => {
+    closePanel()
+    callback?.()
+  }
+
+  const openBear = () => {
+    runAndClose(() =>
+      onSelectDisaster?.({
+        key: 'bear',
+        label: '熊',
+        title: '',
+      })
+    )
+  }
+
+  const openHeat = () => {
+    runAndClose(() =>
+      onSelectDisaster?.({
+        key: 'heat',
+        label: '暑さ',
+        title: '暑さの危険',
+      })
+    )
+  }
+
+  useEffect(() => {
+    if (!activePanel) return undefined
+
+    const handleKeyDown = (event) => {
+      if (event.key === 'Escape') {
+        closePanel()
+      }
+    }
+
+    document.body.classList.add('app-panel-open')
+    window.addEventListener('keydown', handleKeyDown)
+
+    return () => {
+      document.body.classList.remove('app-panel-open')
+      window.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [activePanel])
+
   return (
     <div className="home-screen">
+      {/* =========================
+          App Header
+      ========================= */}
+      <header className="home-app-header">
+        <div className="home-app-brand">
+          <img
+            src="/favicon.svg"
+            alt=""
+            className="home-app-brand-icon"
+          />
+
+          <span>防災サプリ</span>
+        </div>
+
+        <button
+          className="home-settings-button"
+          type="button"
+          onClick={() => openPanel('settings')}
+          aria-label="設定を開く"
+          aria-expanded={activePanel === 'settings'}
+          aria-controls="home-settings-panel"
+        >
+            <svg
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path
+                d="M4 7h10M18 7h2"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.8"
+                strokeLinecap="round"
+              />
+
+              <circle
+                cx="16"
+                cy="7"
+                r="2"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.8"
+              />
+
+              <path
+                d="M4 17h2M10 17h10"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.8"
+                strokeLinecap="round"
+              />
+
+              <circle
+                cx="8"
+                cy="17"
+                r="2"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.8"
+              />
+            </svg>
+        </button>
+      </header>
+
+      {/* =========================
+          TOP Main
+      ========================= */}
       <main className="home-body">
-        {/* =========================
-            TOP Hero
-        ========================= */}
-        <section className="home-hero">
-          <div className="home-hero-copy">
-            <p className="home-label">地域防災プラットフォーム</p>
+      {/* =========================
+          TOP Hero
+      ========================= */}
+      <section className="home-hero">
+        <div className="home-hero-copy">
+          <h1>
+            迷わない。
+            <br />
+            押すだけ。
+          </h1>
 
-            <h1>
-              いま、
-              <br />
-              何の危険がある？
-            </h1>
+          <p className="home-hero-subcopy">
+            今することを、一つずつ。
+          </p>
+
+          {/* =========================
+              TOP 体験ビジュアル
+          ========================= */}
+          <div
+            className="home-hero-experience"
+            aria-hidden="true"
+          >
+            <div className="home-mini-phone home-mini-phone--left">
+              <span className="home-mini-phone__label">
+                地震
+              </span>
+
+              <strong>
+                今すること
+              </strong>
+
+              <span className="home-mini-phone__button">
+                案内を見る
+              </span>
+            </div>
+
+            <div className="home-mini-phone home-mini-phone--center">
+              <span className="home-mini-phone__label">
+                危険情報
+              </span>
+
+              <span className="home-mini-phone__alert">
+                ！
+              </span>
+
+              <span className="home-mini-phone__button home-mini-phone__button--danger">
+                次の行動へ
+              </span>
+            </div>
+
+            <div className="home-mini-phone home-mini-phone--right">
+              <span className="home-mini-phone__label">
+                行動案内
+              </span>
+
+              <strong>
+                一つずつ
+              </strong>
+
+              <span className="home-mini-phone__button">
+                次へ
+              </span>
+            </div>
           </div>
+        </div>
+      </section>
 
-          <div className="home-hero-visual" aria-hidden="true">
-          </div>
-        </section>
+          {/* =========================
+              公開機能
+          ========================= */}
+          <section
+            className="home-main-actions"
+            aria-label="防災サプリの公開機能"
+          >
+            {/* =========================
+                主役：地震時の行動案内
+            ========================= */}
+            <button
+              className="home-primary-action"
+              type="button"
+              onClick={onStartEarthquakeDemo}
+              aria-label="地震時の行動案内デモを体験する"
+            >
+              <span
+                className="home-primary-action-icon"
+                aria-hidden="true"
+              >
+                <img src={earthquakeIcon} alt="" />
+              </span>
+
+              <span className="home-primary-action-copy">
+                <strong>地震のとき</strong>
+              </span>
+
+              <span
+                className="home-primary-action-arrow"
+                aria-hidden="true"
+              >
+                ›
+              </span>
+            </button>
+
+            {/* =========================
+                第二導線：現在地確認デモ
+            ========================= */}
+            <button
+              className="home-location-action"
+              type="button"
+              onClick={onStartLocationCheck}
+              disabled={isLocationLoading}
+              aria-label={
+                isLocationLoading
+                  ? '現在地を確認しています'
+                  : '現在地確認デモを体験する'
+              }
+            >
+              <span
+                className="home-location-action-icon"
+                aria-hidden="true"
+              >
+                <img src={locationIcon} alt="" />
+              </span>
+
+              <span className="home-location-action-copy">
+                <strong>
+                  {isLocationLoading
+                    ? '確認中'
+                    : 'いま、どこ？'}
+                </strong>
+              </span>
+
+              <span
+                className="home-location-action-arrow"
+                aria-hidden="true"
+              >
+                ›
+              </span>
+            </button>
+
+            {locationError ? (
+              <p className="home-location-error" role="status">
+                {locationError}
+              </p>
+            ) : null}
+
+      </section>
 
         {/* =========================
-            Main Actions
+            公的な防災情報
         ========================= */}
-        <section
-          className="home-main-actions"
-          aria-label="すぐに確認する機能"
+        <a
+          className="home-official-info-link"
+          href="https://www.jma.go.jp/bosai/"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="気象庁の防災情報を開く"
+        >
+          <span
+            className="home-official-info-icon"
+            aria-hidden="true"
+          >
+            <svg viewBox="0 0 48 48">
+              <path
+                d="M15 33h20a7 7 0 0 0 0-14 11 11 0 0 0-21-2A8 8 0 0 0 15 33Z"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="3"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+              <path
+                d="M24 23v5"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="3"
+                strokeLinecap="round"
+              />
+              <circle
+                cx="24"
+                cy="32"
+                r="1.7"
+                fill="currentColor"
+              />
+            </svg>
+          </span>
+
+          <span className="home-official-info-copy">
+            <span className="home-official-agency">
+              <span className="home-official-agency-reading">
+                きしょうちょう
+              </span>
+
+              <strong>
+                気象庁
+              </strong>
+            </span>
+
+            <small>ぼうさいじょうほう</small>
+          </span>
+
+          <span
+            className="home-official-info-arrow"
+            aria-hidden="true"
+          >
+            ↗
+          </span>
+        </a>
+
+        <div className="home-demo-notice">
+          <span className="home-demo-badge">
+            デモ版
+          </span>
+
+          <span className="home-demo-text">
+            実際の災害情報とは連動していません。
+          </span>
+        </div>
+        </main>
+
+        {/* =========================
+            Bottom Navigation
+        ========================= */}
+        <nav
+          className="home-bottom-nav"
+          aria-label="主要メニュー"
         >
           <button
-            className="main-action blue"
             type="button"
-            onClick={onStartLocationCheck}
+            className="is-active"
+            onClick={closePanel}
           >
-            <span className="action-mark" aria-hidden="true">
-              <img src={locationIcon} alt="" />
+            <span className="home-bottom-nav-icon">
+              <svg
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path d="M3 11.5 12 4l9 7.5V21h-6v-6H9v6H3Z" />
+              </svg>
             </span>
 
-            <span className="action-copy">
-              <strong>現在地を確認</strong>
-              <small>今いる場所の危険を見る</small>
-            </span>
-
-            <span className="action-arrow" aria-hidden="true">
-              ›
-            </span>
+            <span>ホーム</span>
           </button>
 
           <button
-            className="main-action orange"
             type="button"
-            onClick={() =>
-              onSelectDisaster?.({
-                key: 'bear',
-                label: '熊',
-                title: '',
-              })
-            }
+            onClick={() => runAndClose(onStartLocationCheck)}
           >
-            <span className="action-mark" aria-hidden="true">
-              <img src={bearIcon} alt="" />
+            <span className="home-bottom-nav-icon">
+              <svg
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path
+                  d="M12 22s7-6.2 7-13a7 7 0 1 0-14 0c0 6.8 7 13 7 13Z"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinejoin="round"
+                />
+
+                <circle
+                  cx="12"
+                  cy="9"
+                  r="2.5"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                />
+              </svg>
             </span>
 
-            <span className="action-copy">
-              <strong>熊を見たら</strong>
-              <small>すぐにとる行動を見る</small>
-            </span>
-
-            <span className="action-arrow" aria-hidden="true">
-              ›
-            </span>
+            <span>現在地</span>
           </button>
 
           <button
-            className="main-action yellow"
             type="button"
-            onClick={() =>
-              onSelectDisaster?.({
-                key: 'heat',
-                label: '暑さ',
-                title: '暑さの危険',
-              })
-            }
+            onClick={() => openPanel('menu')}
+            aria-label="メニューを開く"
+            aria-expanded={activePanel === 'menu'}
+            aria-controls="home-menu-panel"
           >
-            <span className="action-mark" aria-hidden="true">
-              <img src={heatIcon} alt="" />
+            <span className="home-bottom-nav-icon home-menu-lines">
+              <i />
+              <i />
+              <i />
             </span>
 
-            <span className="action-copy">
-              <strong>暑さの危険</strong>
-              <small>熱中症の危険を見る</small>
-            </span>
-
-            <span className="action-arrow" aria-hidden="true">
-              ›
-            </span>
+            <span>メニュー</span>
           </button>
-        </section>
+        </nav>
 
-        {/* =========================
-            Sub Actions
-        ========================= */}
-        <section
-          className="home-sub-actions"
-          aria-labelledby="home-sub-actions-title"
-        >
-          <div className="sub-heading">
-            <span aria-hidden="true" />
+      {/* =========================
+          Panel Overlay
+      ========================= */}
+      {activePanel ? (
+        <div className="home-menu-layer">
+          <button
+            type="button"
+            className="home-menu-backdrop"
+            onClick={closePanel}
+            aria-label="パネルを閉じる"
+          />
 
-            <p id="home-sub-actions-title">
-              落ち着いた後に使う機能
-            </p>
+          <section
+            id={
+              activePanel === 'menu'
+                ? 'home-menu-panel'
+                : 'home-settings-panel'
+            }
+            className="home-menu-panel"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="home-panel-title"
+          >
+            <div className="home-menu-handle" />
 
-            <span aria-hidden="true" />
-          </div>
+            <header className="home-menu-panel-header">
+              <div>
+                <p>
+                  {activePanel === 'menu'
+                    ? '補助機能'
+                    : '防災サプリ'}
+                </p>
 
-          <div className="sub-grid">
-            <button type="button" onClick={onStartFamilyContact}>
-              <img src={familyIcon} alt="" />
-              <strong>家族確認</strong>
-            </button>
+                <h2 id="home-panel-title">
+                  {activePanel === 'menu'
+                    ? 'メニュー'
+                    : '設定・ご案内'}
+                </h2>
+              </div>
 
-            <button type="button" onClick={onStartShelterGuide}>
-              <img src={shelterIcon} alt="" />
-              <strong>避難所</strong>
-            </button>
+              <button
+                type="button"
+                onClick={closePanel}
+                aria-label="閉じる"
+              >
+                ×
+              </button>
+            </header>
 
-            <button type="button" onClick={onStartAdminInfo}>
-              <img src={governmentIcon} alt="" />
-              <strong>行政情報</strong>
-            </button>
+                          {activePanel === 'menu' ? (
+                <div className="home-menu-list">
+                  {/* =========================
+                      公的機関の防災情報
+                  ========================= */}
+                  <a
+                    className="home-menu-external-link"
+                    href="https://www.jma.go.jp/bosai/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={closePanel}
+                  >
+                    <span className="home-menu-icon">
+                      <img src={governmentIcon} alt="" />
+                    </span>
 
-            <button type="button" onClick={onStartSupplies}>
-              <img src={suppliesIcon} alt="" />
-              <strong>備え</strong>
-            </button>
-          </div>
-        </section>
-      </main>
+                    <span className="home-menu-external-copy">
+                      <strong>公的機関の防災情報</strong>
+                      <small>
+                        気象庁の最新情報を確認します
+                      </small>
+                    </span>
+
+                    <span
+                      className="home-menu-external-mark"
+                      aria-hidden="true"
+                    >
+                      ↗
+                    </span>
+                  </a>
+                </div>
+              ) : (
+              <div className="home-settings-content">
+                <section>
+                  <h3>デモ版について</h3>
+
+                  <p>
+                    現在の防災サプリはデモ版です。
+                    実際の緊急地震速報や災害情報とは
+                    連動していません。
+                  </p>
+                </section>
+
+                <section>
+                  <h3>位置情報について</h3>
+
+                  <p>
+                    位置情報は「現在地を確認」を押した後に、
+                    端末の確認画面が表示されます。
+                  </p>
+                </section>
+              </div>
+            )}
+          </section>
+        </div>
+      ) : null}
     </div>
   )
 }

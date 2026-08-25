@@ -1,49 +1,51 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import bearDontRunImage from '../assets/app/action/app-action-bear-dont-run-v1.png'
+import bearBackAwayImage from '../assets/app/action/app-action-bear-back-away-v1.png'
+import bearKeepDistanceImage from '../assets/app/action/app-action-bear-keep-distance-v1.png'
 
 const bearSteps = [
   {
-    id: 'seen',
-    label: '1/4',
-    title: '熊を見た',
-    message: 'まず立ち止まってください',
-    action: '走らない準備をする',
-    mark: '🐻',
-  },
-  {
     id: 'dont-run',
-    label: '2/4',
+    label: '1/3',
     title: '走らない',
-    message: '走ると追われる危険があります',
-    action: 'ゆっくり離れる',
-    mark: '✋',
+    message: '大声を出さず、急に動かない',
+    action: 'ゆっくり下がる',
+    image: bearDontRunImage,
   },
   {
     id: 'back-away',
-    label: '3/4',
-    title: '静かに離れる',
-    message: '熊に背中を向けずに下がる',
-    action: '安全な場所へ向かう',
-    mark: '↙',
+    label: '2/3',
+    title: 'ゆっくり下がる',
+    message: '熊を見ながら、少しずつ離れる',
+    action: 'もっと離れる',
+    image: bearBackAwayImage,
   },
   {
-    id: 'shelter',
-    label: '4/4',
-    title: '建物へ避難',
-    message: '近くの建物や車に入ってください',
-    action: '完了',
-    mark: '🏠',
+    id: 'keep-distance',
+    label: '3/3',
+    title: '十分に離れる',
+    message: '熊との距離をとり、静かにその場を離れる',
+    action: '案内を終える',
+    image: bearKeepDistanceImage,
   },
 ]
 
-function BearActionScreen({ onBack, onStartSound }) {
+function BearActionScreen({ onBack, onComplete }) {
   const [stepIndex, setStepIndex] = useState(0)
+
+  useEffect(() => {
+    bearSteps.forEach((item) => {
+      const image = new Image()
+      image.src = item.image
+    })
+  }, [])
 
   const step = bearSteps[stepIndex]
   const isLastStep = stepIndex === bearSteps.length - 1
 
   const handleNext = () => {
     if (isLastStep) {
-      onBack()
+      onComplete()
       return
     }
 
@@ -61,21 +63,50 @@ function BearActionScreen({ onBack, onStartSound }) {
 
   return (
     <div className="danger-screen bear-flow-screen">
+      {/* =========================
+          Header
+      ========================= */}
       <header className="danger-header">
-        <button type="button" onClick={handlePrev}>‹</button>
+        <button
+          type="button"
+          onClick={handlePrev}
+          aria-label="前の画面へ戻る"
+        >
+          ‹
+        </button>
+
         <h1>熊を見たら</h1>
-        <div />
+
+        <div aria-hidden="true" />
       </header>
 
+      {/* =========================
+          Current Action
+      ========================= */}
       <main className="bear-flow-main">
-        <div className="bear-flow-progress">{step.label}</div>
+        <div className="bear-flow-status">
+          <span>デモ表示</span>
+          <strong>{step.label}</strong>
+        </div>
 
         <section className="bear-flow-card">
-          <div className="bear-flow-mark">{step.mark}</div>
+          <p className="bear-flow-step-label">
+            次にすること
+          </p>
 
           <h2>{step.title}</h2>
 
-          <p>{step.message}</p>
+          <div className="bear-flow-visual">
+            <img
+              src={step.image}
+              alt=""
+              className="bear-flow-image"
+            />
+          </div>
+
+          <p className="bear-flow-message">
+            {step.message}
+          </p>
         </section>
 
         <button
@@ -86,13 +117,22 @@ function BearActionScreen({ onBack, onStartSound }) {
           {step.action}
         </button>
 
-        <button
-          className="bear-flow-sound"
-          type="button"
-          onClick={onStartSound}
-        >
-          熊対策音
-        </button>
+        {isLastStep ? (
+          <a
+            className="flow-official-link"
+            href="https://www.env.go.jp/nature/choju/effort/effort12/effort12.html"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span>公的な情報を見る</span>
+            <span aria-hidden="true">↗</span>
+          </a>
+        ) : null}
+
+        <p className="bear-flow-demo-note">
+          これはデモです。実際の災害情報とは
+          連動していません。
+        </p>
       </main>
     </div>
   )

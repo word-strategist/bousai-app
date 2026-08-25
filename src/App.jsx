@@ -78,6 +78,7 @@ function App() {
   const [isCheckingLocation, setIsCheckingLocation] = useState(false)
   const [soundType, setSoundType] = useState(null)
   const [locationRisk, setLocationRisk] = useState(DEFAULT_LOCATION_RISK)
+  const [resumeLocationDemo, setResumeLocationDemo] = useState(false)
 
   const {
     location,
@@ -90,6 +91,17 @@ function App() {
     selectedDisaster && selectedDisaster.key
       ? selectedDisaster.key
       : 'earthquake'
+
+        // =========================
+  // 画面遷移時のスクロール位置
+  // =========================
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'auto',
+    })
+  }, [screen])
 
   useEffect(() => {
     liff
@@ -105,7 +117,15 @@ function App() {
       })
   }, [])
 
-useEffect(() => {
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'auto',
+    })
+  }, [screen])
+
+  useEffect(() => {
   if (!location) return
 
   // =========================
@@ -141,15 +161,17 @@ useEffect(() => {
   })
 }, [location])
 
+  useEffect(() => {
+    if (locationStatus !== 'loading') {
+      setIsCheckingLocation(false)
+    }
+  }, [locationStatus])
+
   const startLocationCheck = () => {
     setIsCheckingLocation(true)
-
+    setResumeLocationDemo(false)
+    setScreen('location')
     getCurrentLocation()
-
-    setTimeout(() => {
-      setIsCheckingLocation(false)
-      setScreen('location')
-    }, 1800)
   }
 
   const openSoundConfirm = (type) => {
@@ -160,7 +182,7 @@ useEffect(() => {
   if (screen === 'admin-info') {
     return (
       <AdminInfoScreen
-        onBack={() => setScreen('top')}
+        onBack={() => setScreen('emergency')}
       />
     )
   }
@@ -168,7 +190,7 @@ useEffect(() => {
   if (screen === 'supplies') {
     return (
       <SuppliesScreen
-        onBack={() => setScreen('top')}
+        onBack={() => setScreen('emergency')}
       />
     )
   }
@@ -177,7 +199,7 @@ useEffect(() => {
     return (
       <SoundConfirmScreen
         soundType={soundType}
-        onBack={() => setScreen('top')}
+        onBack={() => setScreen('emergency')}
       />
     )
   }
@@ -185,8 +207,14 @@ useEffect(() => {
   if (screen === 'bear') {
     return (
       <BearActionScreen
-        onBack={() => setScreen('top')}
-        onStartSound={() => openSoundConfirm('bear')}
+        onBack={() => {
+          setResumeLocationDemo(true)
+          setScreen('location')
+        }}
+        onComplete={() => {
+          setResumeLocationDemo(true)
+          setScreen('location')
+        }}
       />
     )
   }
@@ -194,8 +222,14 @@ useEffect(() => {
   if (screen === 'heat') {
     return (
       <HeatRiskScreen
-        onBack={() => setScreen('top')}
-        onStartSound={() => openSoundConfirm('help')}
+        onBack={() => {
+          setResumeLocationDemo(true)
+          setScreen('location')
+        }}
+        onComplete={() => {
+          setResumeLocationDemo(true)
+          setScreen('location')
+        }}
       />
     )
   }
@@ -207,20 +241,28 @@ useEffect(() => {
         locationStatus={locationStatus}
         locationError={locationError}
         location={location}
-        onBack={() => setScreen('top')}
-        onNext={() => {
-          if (locationRisk.disaster.key === 'bear') {
+        skipLoading={resumeLocationDemo}
+        onBack={() => {
+          setResumeLocationDemo(false)
+          setScreen('top')
+        }}
+        onNext={(riskKey) => {
+          if (riskKey === 'bear') {
+            setResumeLocationDemo(true)
             setScreen('bear')
             return
           }
 
-          if (locationRisk.disaster.key === 'heat') {
+          if (riskKey === 'heat') {
+            setResumeLocationDemo(true)
             setScreen('heat')
             return
           }
 
-          setSelectedDisaster(locationRisk.disaster)
-          setScreen('action')
+          if (riskKey === 'earthquake') {
+            setSelectedDisaster(disasters[0])
+            setScreen('action')
+          }
         }}
       />
     )
@@ -229,6 +271,7 @@ useEffect(() => {
   if (screen === 'emergency') {
     return (
       <EmergencyModeScreen
+        onBack={() => setScreen('home')}
         onComplete={() => setScreen('action')}
       />
     )
@@ -238,8 +281,8 @@ useEffect(() => {
     if (currentDisasterKey === 'earthquake') {
       return (
         <EarthquakeActionScreen
-          onBack={() => setScreen('top')}
-          onNext={() => setScreen('shelter')}
+          onBack={() => setScreen('emergency')}
+          onNext={() => setScreen('check')}
         />
       )
     }
@@ -247,8 +290,8 @@ useEffect(() => {
     if (currentDisasterKey === 'flood') {
       return (
         <FloodActionScreen
-          onBack={() => setScreen('top')}
-          onNext={() => setScreen('shelter')}
+          onBack={() => setScreen('emergency')}
+          onNext={() => setScreen('check')}
         />
       )
     }
@@ -256,8 +299,8 @@ useEffect(() => {
     if (currentDisasterKey === 'fire') {
       return (
         <FireActionScreen
-          onBack={() => setScreen('top')}
-          onNext={() => setScreen('shelter')}
+          onBack={() => setScreen('emergency')}
+          onNext={() => setScreen('check')}
         />
       )
     }
@@ -265,7 +308,7 @@ useEffect(() => {
     return (
       <ActionGuide
         disaster={currentDisasterKey}
-        onBack={() => setScreen('top')}
+        onBack={() => setScreen('emergency')}
         onNext={() => setScreen('next')}
       />
     )
@@ -296,13 +339,26 @@ useEffect(() => {
     return (
       <SafetyCheck
         disaster={currentDisasterKey}
-        onBack={() => setScreen('shelter')}
+        onBack={() => {
+          if (currentDisasterKey === 'earthquake') {
+            setScreen('action')
+            return
+          }
+
+          setScreen('shelter')
+        }}
         onTop={(next) => {
+          if (next === 'completion') {
+            setScreen('completion')
+            return
+          }
+
           if (next === 'contact') {
             setScreen('contact')
-          } else {
-            setScreen('top')
+            return
           }
+
+          setScreen('top')
         }}
       />
     )
@@ -330,6 +386,10 @@ useEffect(() => {
   return (
     <HomeScreen
       onStartLocationCheck={startLocationCheck}
+      onStartEarthquakeDemo={() => {
+      setSelectedDisaster(disasters[0])
+      setScreen('emergency')
+      }}
       isCheckingLocation={isCheckingLocation}
       locationStatus={locationStatus}
       locationError={locationError}

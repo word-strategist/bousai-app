@@ -1,111 +1,78 @@
-import { useState } from 'react'
+import protectHeadImage from '../assets/stamps/action-protect-head.png'
+
 import '../styles/emergency.css'
 
-const earthquakeActions = [
-  {
-    alert: '緊急地震速報',
-    visual: '🙆',
-    title: '頭を守る',
-    text: (
-      <>
-        机の下・カバン・腕で
-        <br />
-        頭を守ってください
-      </>
-    ),
-    button: 'わかった',
-  },
-  {
-    alert: '揺れがおさまったら',
-    visual: '🚪',
-    title: '外へ出ない',
-    text: (
-      <>
-        ガラス・看板・ブロック塀に
-        <br />
-        近づかないでください
-      </>
-    ),
-    button: '次へ',
-  },
-  {
-    alert: '移動する前に',
-    visual: '👟',
-    title: '靴を履く',
-    text: (
-      <>
-        ガラス片や落下物で
-        <br />
-        足をケガしないように
-      </>
-    ),
-    button: '次へ',
-  },
-]
+function EmergencyModeScreen({ onBack, onComplete }) {
+  return (
+    <div className="emergency-screen">
+      {/* =========================
+          Header
+      ========================= */}
+      <header className="emergency-header">
+        <button
+          type="button"
+          className="emergency-back"
+          onClick={onBack}
+          aria-label="TOPへ戻る"
+        >
+          ‹
+        </button>
 
-function EmergencyModeScreen({ onComplete }) {
-  const [currentStep, setCurrentStep] = useState(0)
-  const action = earthquakeActions[currentStep]
-  const isLastStep = currentStep === earthquakeActions.length - 1
+        <p>地震時の行動案内</p>
 
-  const handleNext = () => {
-    if (isLastStep) {
-      onComplete()
-      return
-    }
+        <span aria-hidden="true" />
+      </header>
 
-    setCurrentStep((prev) => prev + 1)
-  }
+      {/* =========================
+          Main Action
+      ========================= */}
+      <main className="emergency-main">
+          <div className="emergency-status">
+            <span>デモ表示</span>
+            <strong className="emergency-step-count">
+              1/3
+            </strong>
+          </div>
 
-return (
-  <div className="emergency-screen">
-    <div className="emergency-content">
+          <p className="emergency-situation-text">
+            地震が起きた想定です
+          </p>
 
-      <div className="emergency-mode-top">
-        <div className="emergency-live-badge">
-          緊急モード
-        </div>
+        <section className="emergency-action-card">
+          <p className="emergency-step-label">
+            まず、今すること
+          </p>
 
-        <h1>
-          落ち着いて、
+          <h1>頭を守る</h1>
+
+          <div className="emergency-action-visual">
+            <img src={protectHeadImage} alt="" />
+          </div>
+
+          <p className="emergency-action-message">
+            頭を守り、
+            <br />
+            安全な姿勢をとる
+          </p>
+        </section>
+
+        <button
+          className="emergency-button"
+          type="button"
+          onClick={onComplete}
+        >
+          揺れがおさまるまで待つ
+        </button>
+
+        <p className="emergency-demo-note">
+          これは疑似情報を使用したデモです。
           <br />
-          順番に行動しましょう。
-        </h1>
-
-        <p>
-          今やることだけを、
-          1つずつ案内します。
+          実際の緊急地震速報や災害情報とは
+          連動していません。
         </p>
-      </div>
-
-      <div className="emergency-alert">
-        {action.alert}
-      </div>
-
-      <div className="emergency-visual">
-        <div className="emergency-person">
-          {action.visual}
-        </div>
-      </div>
-
-      <h1 className="emergency-title">
-        {action.title}
-      </h1>
-
-      <p className="emergency-text">
-        {action.text}
-      </p>
-
-      <button
-        className="emergency-button"
-        onClick={handleNext}
-      >
-        {isLastStep ? '次の行動へ進む' : action.button}
-      </button>
-
+      </main>
     </div>
-  </div>
-)
+  )
 }
 
 export default EmergencyModeScreen

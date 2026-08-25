@@ -1,66 +1,56 @@
 function CompletionScreen({ onTop }) {
-  const completedActions = [
-    '身の安全を確認',
-    '避難先を確認',
-    '家族・周囲へ連絡',
-    '公的情報を確認',
-  ]
-
   return (
     <div className="completion-screen">
+      {/* =========================
+          完了画面ヘッダー
+      ========================= */}
       <header className="completion-header">
         <p className="completion-badge">
-          完了
+          デモ終了
         </p>
 
-        <h1>ここまでできました</h1>
-
-        <p className="completion-lead">
-          安全の確保と、
-          <br />
-          必要な連絡まで完了しました
-        </p>
+        <h1>
+          ここまでです
+        </h1>
       </header>
 
+      {/* =========================
+          完了画面メイン
+      ========================= */}
       <main className="completion-main">
-        <section className="completion-status-card">
-          <div
-            className="completion-status-icon"
-            aria-hidden="true"
+        {/* =========================
+            公的機関の防災情報
+        ========================= */}
+          <a
+            className="completion-official-link"
+            href="https://www.jma.go.jp/bosai/"
+            target="_blank"
+            rel="noopener noreferrer"
           >
-            ✓
-          </div>
+            <span>公的な情報を見る</span>
+            <span aria-hidden="true">↗</span>
+          </a>
 
-          <h2>安全な場所で待機してください</h2>
-
+        {/* =========================
+            デモ版の説明
+        ========================= */}
+        <section className="completion-demo-note">
           <p>
-            自治体や気象庁などの公的情報を確認しながら、
-            周囲の安全に注意してください。
+            これはデモです。
+            <br />
+            実際の災害情報とは連動していません。
           </p>
         </section>
 
-        <section className="completion-actions-card">
-          <h2>ここまでの行動</h2>
-
-          <div className="completion-action-list">
-            {completedActions.map((action) => (
-              <div
-                className="completion-action-item"
-                key={action}
-              >
-                <span aria-hidden="true">✓</span>
-                <p>{action}</p>
-              </div>
-            ))}
-          </div>
-        </section>
-
+        {/* =========================
+            TOPへ戻る
+        ========================= */}
         <button
           className="completion-home-button"
           type="button"
           onClick={onTop}
         >
-          ホームへ戻る
+          TOPへ戻る
         </button>
       </main>
     </div>
